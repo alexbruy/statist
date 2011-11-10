@@ -1,0 +1,7 @@
+[general]
+name=Statist
+description=Calculate and show statistics for a field
+version=Version 0.2.11
+authorName=Alexander Bruy
+icon=icons/statist.png
+qgisMinimumVersion=1.0.0
