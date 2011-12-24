@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-mVersion = "0.2.13"
+mVersion = "0.2.14"
 #*****************************************************************************************************************
 # Statist
 # --------------------------------------------------
@@ -34,6 +34,9 @@ def name():
 
 def description():
 	return "Calculate and show statistics for a field"
+
+def category():
+	return "Vector"
 
 def version():
 	return mVersion

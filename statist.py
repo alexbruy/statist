@@ -94,19 +94,28 @@ class statistPlugin:
     self.aboutStatist = QAction( QCoreApplication.translate( "mnuStatist", "About..." ), self.iface.mainWindow() )
     self.aboutStatist.setIcon( QIcon( ":/icons/information.png" ) )
     self.aboutStatist.setWhatsThis( "About Statist plugin" )
-    self.iface.addPluginToMenu( "Statist", self.calcStats )
-    self.iface.addPluginToMenu( "Statist", self.aboutStatist )
-
-    # add toolbar icon
-    self.iface.addToolBarIcon( self.calcStats )
+    
+    if hasattr( self.iface, "addPluginToVectorMenu" ):
+      self.iface.addPluginToVectorMenu( QCoreApplication.translate( "Statist", "Statist" ), self.calcStats )
+      self.iface.addPluginToVectorMenu( QCoreApplication.translate( "Statist", "Statist" ), self.aboutStatist )
+      self.iface.addVectorToolBarIcon( self.calcStats )
+    else:
+      self.iface.addPluginToMenu( QCoreApplication.translate( "Statist", "Statist" ), self.calcStats )
+      self.iface.addPluginToMenu( QCoreApplication.translate( "Statist", "Statist" ), self.aboutStatist )
+      self.iface.addToolBarIcon( self.calcStats )
 
     QObject.connect( self.calcStats, SIGNAL( "triggered()" ), self.doCalcStats )
     QObject.connect( self.aboutStatist, SIGNAL( "triggered()" ), self.showAbout )
 
   def unload( self ):
-    self.iface.removeToolBarIcon( self.calcStats )
-    self.iface.removePluginMenu( "Statist", self.calcStats )
-    self.iface.removePluginMenu( "Statist", self.aboutStatist )
+    if hasattr( self.iface, "addPluginToVectorMenu" ):
+      self.iface.removeVectorToolBarIcon( self.calcStats )
+      self.iface.removePluginVectorMenu( QCoreApplication.translate( "Statist", "Statist" ), self.calcStats )
+      self.iface.removePluginVectorMenu( QCoreApplication.translate( "Statist", "Statist" ), self.aboutStatist )
+    else:
+      self.iface.removeToolBarIcon( self.calcStats )
+      self.iface.removePluginMenu( QCoreApplication.translate( "Statist", "Statist" ), self.calcStats )
+      self.iface.removePluginMenu( QCoreApplication.translate( "Statist", "Statist" ), self.aboutStatist )
 
   def showAbout( self ):
     #QMessageBox.information( self.iface.mainWindow(), self.tr( "About Statist" ), self.aboutString )

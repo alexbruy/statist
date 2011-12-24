@@ -1,7 +1,8 @@
 [general]
 name=Statist
 description=Calculate and show statistics for a field
-version=Version 0.2.13
+category=Vector
+version=Version 0.2.14
 authorName=Alexander Bruy
 icon=icons/statist.png
 qgisMinimumVersion=1.0.0
