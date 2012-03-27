@@ -40,7 +40,7 @@ clean:
 	rm -f *.pyc
 
 package:
-	cd .. && rm -f *.zip && zip -r statist.zip qconsolidate -x \*.pyc -x \*~ -x \*.git\*
+	cd .. && rm -f *.zip && zip -r statist.zip statist -x \*.pyc -x \*~ -x \*.git\*
 	mv ../statist.zip .
 
 upload:
