@@ -48,5 +48,18 @@ def icon():
   return "icons/statist.png"
 
 def classFactory( iface ):
+  import PyQt4.QtGui
+
+  wnd = iface.mainWindow()
+
+  try:
+    import matplotlib.backends.backend_qt4agg
+  except ImportError:
+    PyQt4.QtGui.QMessageBox.warning( wnd,
+                                     wnd.tr( "Error while loading plugin" ),
+                                     wnd.tr( "Could not find the matplotlib module.\nMake sure the matplotlib is installed" ) )
+
+    raise ImportError( "Missing matplotlib Python module" )
+
   from statist import StatistPlugin
   return StatistPlugin( iface )
