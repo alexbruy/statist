@@ -33,6 +33,7 @@ from qgis.core import *
 
 #import statistdialog
 from __init__ import version
+import statistdialog
 import statist_utils as utils
 
 import resources_rc
@@ -113,8 +114,8 @@ class StatistPlugin:
                            QCoreApplication.translate( "Statist", "Plugin will not run, because there is\nno vector layers in this project" ) )
       return None
 
-    #d = StatistDialog.StatistDialog( self.iface )
-    #d.exec_()
+    d = statistdialog.StatistDialog( self.iface )
+    d.exec_()
 
   def about( self ):
     dlgAbout = QDialog()

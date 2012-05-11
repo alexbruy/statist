@@ -202,7 +202,7 @@
           </widget>
          </item>
          <item row="0" column="6">
-          <widget class="QCheckBox" name="chkGrid">
+          <widget class="QCheckBox" name="chkShowGrid">
            <property name="text">
             <string>Show grid</string>
            </property>
@@ -241,7 +241,7 @@
           </widget>
          </item>
          <item row="1" column="6">
-          <widget class="QCheckBox" name="chkPlot">
+          <widget class="QCheckBox" name="chkAsPlot">
            <property name="text">
             <string>As plot</string>
            </property>

@@ -39,7 +39,7 @@ def getVectorLayerNames():
   layerNames = []
   for name, layer in layerMap.iteritems():
     if layer.type() == QgsMapLayer.VectorLayer:
-      layerlist.append( unicode( layer.name() ) )
+      layerNames.append( unicode( layer.name() ) )
   return sorted( layerNames, cmp=locale.strcoll )
 
 def getFieldNames( layer ):
