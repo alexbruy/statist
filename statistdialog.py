@@ -96,24 +96,16 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     #~ self.chkAsPlot.blockSignals( False )
 
     layer = utils.getVectorLayerByName( unicode( self.cmbLayers.currentText() ) )
+
     if layer.selectedFeatureCount() != 0:
       self.chkUseSelected.setCheckState( Qt.Checked )
     else:
       self.chkUseSelected.setCheckState( Qt.Unchecked )
 
-    fields = vLayer.dataProvider().fields()
-    fieldNames = []
     if self.chkUseTextFields.checkState():
-      for i in fields:
-        if fields[ i ].type() == QVariant.String:
-          fieldNames.append( unicode( fields[ i ].name() ) )
+      self.cmbFields.addItems( utils.getFieldNames( layer, [ QVariant.String ] ) )
     else:
-      for i in fields:
-        if fields[ i ].type() in [ QVariant.Int, QVariant.Double ]:
-          fieldNames.append( unicode( fields[ i ].name() ) )
-
-    self.cmbFields.addItems( sorted( fieldNames, cmp=locale.strcoll ) )
-    self.cmbFields.setCurrentIndex( -1 )
+      self.cmbFields.addItems( utils.getFieldNames( layer, [ QVariant.Int, QVariant.Double ] ) )
 
   def refreshPlot( self ):
     pass

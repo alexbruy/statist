@@ -42,14 +42,6 @@ def getVectorLayerNames():
       layerNames.append( unicode( layer.name() ) )
   return sorted( layerNames, cmp=locale.strcoll )
 
-def getFieldNames( layer ):
-  fieldMap = layer.dataProvider().fields()
-  fieldNames = []
-  for name, field in fieldMap.iteritems():
-    if not field.name() in fieldNames:
-      fieldNames.append( unicode( field.name() ) )
-  return sorted( layerNames, cmp=locale.strcoll )
-
 def getVectorLayerByName( layerName ):
   layerMap = QgsMapLayerRegistry.instance().mapLayers()
   for name, layer in layerMap.iteritems():
@@ -59,9 +51,17 @@ def getVectorLayerByName( layerName ):
       else:
         return None
 
+def getFieldNames( layer, fieldTypes ):
+  fieldMap = layer.pendingFields()
+  fieldNames = []
+  for idx, field in fieldMap.iteritems():
+    if field.type() in fieldTypes and not field.name() in fieldNames:
+      fieldNames.append( unicode( field.name() ) )
+  return sorted( fieldNames, cmp=locale.strcoll )
+
 def getFieldType( layer, fieldName ):
-  fields = layer.dataProvider().fields()
-  for name, field in fields.iteritems():
+  fields = layer.pendingFields()
+  for idx, field in fields.iteritems():
     if field.name() == fieldName:
       return field.typeName()
 
