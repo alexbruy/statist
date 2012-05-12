@@ -93,8 +93,8 @@ class StatistPlugin:
       self.iface.addPluginToMenu( QCoreApplication.translate( "Statist", "Statist" ), self.actionAbout )
       self.iface.addToolBarIcon( self.actionRun )
 
-    QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
-    QObject.connect( self.actionAbout, SIGNAL( "triggered()" ), self.about )
+    self.actionRun.triggered.connect( self.run )
+    self.actionAbout.triggered.connect( self.about )
 
   def unload( self ):
     if hasattr( self.iface, "addPluginToVectorMenu" ):
@@ -149,6 +149,6 @@ class StatistPlugin:
 
     btnClose = QPushButton( QApplication.translate( "Statist", "Close" ) )
     lines.addWidget( btnClose )
-    QObject.connect( btnClose, SIGNAL( "clicked()" ), dlgAbout, SLOT( "close()" ) )
+    btnClose.clicked.connect( dlgAbout.close )
 
     dlgAbout.exec_()

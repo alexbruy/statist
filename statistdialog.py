@@ -59,13 +59,14 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.layoutPlot.addWidget( self.canvas )
     self.layoutPlot.addWidget( self.mpltoolbar )
 
-    QObject.connect( self.cmbLayers, SIGNAL( "currentIndexChanged( QString )" ), self.reloadFields )
-    QObject.connect( self.chkUseTextFields, SIGNAL( "stateChanged( int )" ), self.reloadFields )
-
     self.groupBox.hide()
-    QObject.connect( self.chkShowGrid, SIGNAL( "stateChanged( int )" ), self.refreshPlot )
-    QObject.connect( self.chkAsPlot, SIGNAL( "stateChanged( int )" ), self.refreshPlot )
-    QObject.connect( self.btnRefresh, SIGNAL( "clicked()" ), self.refreshPlot )
+
+    self.cmbLayers.currentIndexChanged.connect( self.reloadFields )
+    self.chkUseTextFields.stateChanged.connect( self.reloadFields )
+
+    self.chkShowGrid.stateChanged.connect( self.refreshPlot )
+    self.chkAsPlot.stateChanged.connect( self.refreshPlot )
+    self.btnRefresh.clicked.connect( self.refreshPlot )
 
     self.manageGui()
 
@@ -108,6 +109,9 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
       self.cmbFields.addItems( utils.getFieldNames( layer, [ QVariant.Int, QVariant.Double ] ) )
 
   def refreshPlot( self ):
+    pass
+
+  def accept( self ):
     pass
 
   #~ def startCalculation( self ):
