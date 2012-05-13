@@ -41,7 +41,6 @@ import statist_utils as utils
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 from matplotlib.figure import Figure
-import matplotlib.font_manager as FontManager
 
 class StatistDialog( QDialog, Ui_StatistDialog ):
   def __init__( self, iface ):
@@ -130,7 +129,7 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
 
     self.workThread = statistthread.StatistThread( layer,
                                                    self.cmbFields.currentText(),
-                                                   self.chkUseTextFields.isChecked() )
+                                                   self.chkUseSelected.isChecked() )
     self.workThread.rangeChanged.connect( self.setProgressRange )
     self.workThread.updateProgress.connect( self.updateProgress )
     self.workThread.processFinished.connect( self.processFinished )
@@ -152,12 +151,12 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.stopProcessing()
 
     # populate table with results
-    tableData = statData[ 0 ]
+    self.tableData = statData[ 0 ]
     self.values = statData[ 1 ]
-    rowCount = len( tableData )
+    rowCount = len( self.tableData )
     self.lstStatistics.setRowCount( rowCount )
     for i in xrange( rowCount ):
-      tmp = tableData[ i ].split( ":" )
+      tmp = self.tableData[ i ].split( ":" )
       item = QTableWidgetItem( tmp[ 0 ] )
       self.lstStatistics.setItem( i, 0, item )
       item = QTableWidgetItem( tmp[ 1 ] )
@@ -228,3 +227,10 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.axes.set_xlabel( unicode( self.cmbFields.currentText() ) )
     self.figure.autofmt_xdate()
     self.canvas.draw()
+
+  def keyPressEvent( self, event ):
+    if event.modifiers() in [ Qt.ControlModifier, Qt.MetaModifier ] and event.key() == Qt.Key_C:
+      clipboard = QApplication.clipboard()
+      clipboard.setText( QStringList( self.tableData ).join( "\n" ) )
+    else:
+      QDialog.keyPressEvent( self, event )

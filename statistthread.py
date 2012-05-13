@@ -195,7 +195,6 @@ class StatistThread( QThread ):
     index = self.layer.fieldNameIndex( self.fieldName )
     self.layer.select( [ index ], QgsRectangle(), False )
 
-
     count = 0
     sumValue = 0
     minValue = 0
