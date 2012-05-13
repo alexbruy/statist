@@ -41,6 +41,7 @@ import statist_utils as utils
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 from matplotlib.figure import Figure
+from matplotlib import rcParams
 
 class StatistDialog( QDialog, Ui_StatistDialog ):
   def __init__( self, iface ):
@@ -58,6 +59,13 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.mpltoolbar.removeAction( lstActions[ 7 ] )
     self.layoutPlot.addWidget( self.canvas )
     self.layoutPlot.addWidget( self.mpltoolbar )
+
+    # and configure matplotlib params
+    rcParams['font.serif'] = "Verdana, Arial, Liberation Serif"
+    rcParams['font.sans-serif'] = "Tahoma, Arial, Liberation Sans"
+    rcParams['font.cursive'] = "Courier New, Arial, Liberation Sans"
+    rcParams['font.fantasy'] = "Comic Sans MS, Arial, Liberation Sans"
+    rcParams['font.monospace'] = "Courier New, Liberation Mono"
 
     self.groupBox.hide()
 
