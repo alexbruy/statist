@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<!DOCTYPE TS><TS version="1.1" language="fr_FR">
 <context>
     <name>Plot</name>
     <message>
         <location filename="doStatist.py" line="62"/>
         <source>Frequency distribution</source>
-        <translation>Fréquence de distribution</translation>
+        <translation type="obsolete">Fréquence de distribution</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="65"/>
         <source>Count</source>
-        <translation>Comptage</translation>
+        <translation type="obsolete">Comptage</translation>
     </message>
 </context>
 <context>
@@ -24,7 +23,7 @@ The plugin calculate statistics on selected field of vector layer
 
 Author: Alexander Bruy
 Mail: alexander.bruy@gmail.com</source>
-        <translation>Statist
+        <translation type="obsolete">Statist
 Quantum GIS Python plugin
 Le plugin calcule des statistiques sur le champ sélectionné d&apos;une couche vecteur
 
@@ -33,7 +32,7 @@ alexander.bruy@gmail.com
 Traduction : SIG974</translation>
     </message>
     <message>
-        <location filename="statist.py" line="77"/>
+        <location filename="statist.py" line="115"/>
         <source>Plugin will not run, because there is
 no vector layers in this project</source>
         <translation>Le plugin ne fonctionne pas
@@ -42,7 +41,177 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
     <message>
         <location filename="doStatist.py" line="44"/>
         <source>Couldn&apos;t import Python module &apos;matplotlib&apos; for plotting. Without it you won&apos;t be able to run Statist.</source>
-        <translation>Module &quot;matplotlib&quot; non trouvé ... le plugin ne peut pas fonctionner.</translation>
+        <translation type="obsolete">Module &quot;matplotlib&quot; non trouvé ... le plugin ne peut pas fonctionner.</translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="115"/>
+        <source>Statist: Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="74"/>
+        <source>Quantum GIS %1 detected.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="74"/>
+        <source>This version of Statist requires at least QGIS version 1.8.0
+Plugin will not be enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="110"/>
+        <source>Statist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="84"/>
+        <source>About Statist...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="126"/>
+        <source>About Statist</source>
+        <translation type="unfinished">à propos</translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="128"/>
+        <source>&lt;b&gt;Statist&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="131"/>
+        <source>Version: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="134"/>
+        <source>Provides basic statistics information on
+any (numeric or string) field of vector
+layer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="135"/>
+        <source>&lt;b&gt;Developers:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="137"/>
+        <source>&lt;b&gt;Homepage:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statist.py" line="154"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StatistDialog</name>
+    <message>
+        <location filename="statistdialog.py" line="55"/>
+        <source>Frequency distribution</source>
+        <translation type="unfinished">Fréquence de distribution</translation>
+    </message>
+    <message>
+        <location filename="statistdialog.py" line="146"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <location filename="statistdialog.py" line="234"/>
+        <source>Count</source>
+        <translation type="unfinished">Comptage</translation>
+    </message>
+    <message>
+        <location filename="statistdialog.py" line="202"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StatistThread</name>
+    <message>
+        <location filename="statistthread.py" line="175"/>
+        <source>Count:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="176"/>
+        <source>Unique values:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="177"/>
+        <source>Minimum value:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="178"/>
+        <source>Maximum value:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="179"/>
+        <source>Range:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="180"/>
+        <source>Sum:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="181"/>
+        <source>Mean value:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="182"/>
+        <source>Median value:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="183"/>
+        <source>Standard deviation:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="184"/>
+        <source>Coefficient of Variation:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="286"/>
+        <source>Minimum length:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="287"/>
+        <source>Maximum length:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="288"/>
+        <source>Mean length:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="289"/>
+        <source>Filled:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="290"/>
+        <source>Empty:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistthread.py" line="291"/>
+        <source>Total count:%1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -50,22 +219,7 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
     <message>
         <location filename="frmAbout.py" line="96"/>
         <source>About Statist</source>
-        <translation>à propos</translation>
-    </message>
-    <message>
-        <location filename="frmAbout.py" line="93"/>
-        <source>Version:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="frmAbout.py" line="94"/>
-        <source>Date:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="frmAbout.py" line="95"/>
-        <source>SVN revision:</source>
-        <translation></translation>
+        <translation type="obsolete">à propos</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="96"/>
@@ -75,27 +229,12 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
     <message>
         <location filename="frmAbout.py" line="97"/>
         <source>Contributors</source>
-        <translation>Contributeurs</translation>
+        <translation type="obsolete">Contributeurs</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="98"/>
         <source>Acknowledgements</source>
-        <translation>Remerciements</translation>
-    </message>
-    <message>
-        <location filename="doAbout.py" line="54"/>
-        <source>Version: %1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="doAbout.py" line="55"/>
-        <source>Date: %1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="doAbout.py" line="56"/>
-        <source>SVN revision: %1</source>
-        <translation></translation>
+        <translation type="obsolete">Remerciements</translation>
     </message>
 </context>
 <context>
@@ -103,22 +242,22 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
     <message>
         <location filename="doStatist.py" line="149"/>
         <source>Please specify target vector layer first</source>
-        <translation>Merci de spécifier la couche vecteur cible en premier</translation>
+        <translation type="obsolete">Merci de spécifier la couche vecteur cible en premier</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="151"/>
         <source>Please specify target field first</source>
-        <translation>Merci de spécifier le champ cible en premier</translation>
+        <translation type="obsolete">Merci de spécifier le champ cible en premier</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="166"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="246"/>
         <source>Copy</source>
-        <translation>Copier</translation>
+        <translation type="obsolete">Copier</translation>
     </message>
 </context>
 <context>
@@ -126,80 +265,75 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
     <message>
         <location filename="frmStatist.py" line="130"/>
         <source>Statist: Field statistics</source>
-        <translation>Statist : Champ</translation>
+        <translation type="obsolete">Statist : Champ</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="131"/>
         <source>Input vector layer:</source>
-        <translation>Couche vecteur en entrée :</translation>
+        <translation type="obsolete">Couche vecteur en entrée :</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="132"/>
         <source>Target field:</source>
-        <translation>Champ cible :</translation>
+        <translation type="obsolete">Champ cible :</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="133"/>
         <source>Enable statistics for text fields</source>
-        <translation>Activer les statistiques des champs de texte</translation>
+        <translation type="obsolete">Activer les statistiques des champs de texte</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="134"/>
         <source>Statistics output:</source>
-        <translation>Statistiques en sortie :</translation>
+        <translation type="obsolete">Statistiques en sortie :</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="135"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="136"/>
         <source>Parameter</source>
-        <translation>Paramètre</translation>
+        <translation type="obsolete">Paramètre</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="137"/>
         <source>Value</source>
-        <translation>Valeur</translation>
+        <translation type="obsolete">Valeur</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="138"/>
         <source>Xmin</source>
-        <translation>Xmin</translation>
+        <translation type="obsolete">Xmin</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="139"/>
         <source>Refresh</source>
-        <translation>Rafraîchir</translation>
+        <translation type="obsolete">Rafraîchir</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="140"/>
         <source>Show grid</source>
-        <translation>Montre la grille</translation>
+        <translation type="obsolete">Montre la grille</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="141"/>
         <source>Xmax</source>
-        <translation>Xmax</translation>
+        <translation type="obsolete">Xmax</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="142"/>
         <source>As plot</source>
-        <translation>Comme dessin</translation>
+        <translation type="obsolete">Comme dessin</translation>
     </message>
 </context>
 <context>
     <name>mnuStatist</name>
     <message>
-        <location filename="statist.py" line="84"/>
-        <source>Statistics</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="statist.py" line="87"/>
         <source>About...</source>
-        <translation>à propos ...</translation>
+        <translation type="obsolete">à propos ...</translation>
     </message>
 </context>
 <context>
@@ -207,77 +341,91 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
     <message>
         <location filename="doStatist.py" line="420"/>
         <source>Count:</source>
-        <translation>Comptage :</translation>
+        <translation type="obsolete">Comptage :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="351"/>
         <source>Minimum length:</source>
-        <translation>mini :</translation>
+        <translation type="obsolete">mini :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="352"/>
         <source>Maximum length:</source>
-        <translation>maxi :</translation>
+        <translation type="obsolete">maxi :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="353"/>
         <source>Mean lengtn:</source>
-        <translation>Moyenne :</translation>
+        <translation type="obsolete">Moyenne :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="354"/>
         <source>Filled:</source>
-        <translation>Remplissage :</translation>
+        <translation type="obsolete">Remplissage :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="355"/>
         <source>Empty:</source>
-        <translation>Vide :</translation>
+        <translation type="obsolete">Vide :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="422"/>
         <source>Minimum value:</source>
-        <translation>Valeur mini :</translation>
+        <translation type="obsolete">Valeur mini :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="423"/>
         <source>Maximum value:</source>
-        <translation>Valeur maxi :</translation>
+        <translation type="obsolete">Valeur maxi :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="425"/>
         <source>Sum:</source>
-        <translation>Somme :</translation>
+        <translation type="obsolete">Somme :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="426"/>
         <source>Mean value:</source>
-        <translation>Valeur moyenne :</translation>
+        <translation type="obsolete">Valeur moyenne :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="428"/>
         <source>Standard deviation:</source>
-        <translation>Ecart type :</translation>
+        <translation type="obsolete">Ecart type :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="424"/>
         <source>Swing:</source>
-        <translation>Swing :</translation>
+        <translation type="obsolete">Swing :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="427"/>
         <source>Median value:</source>
-        <translation>Valeur médiane :</translation>
+        <translation type="obsolete">Valeur médiane :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="421"/>
         <source>Unique values:</source>
-        <translation>Valeurs uniques :</translation>
+        <translation type="obsolete">Valeurs uniques :</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="429"/>
         <source>Coefficient of Variation:</source>
-        <translation>Coefficient de variation:</translation>
+        <translation type="obsolete">Coefficient de variation:</translation>
+    </message>
+</context>
+<context>
+    <name>wnd</name>
+    <message>
+        <location filename="__init__.py" line="58"/>
+        <source>Error while loading plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="__init__.py" line="58"/>
+        <source>Could not find the matplotlib module.
+Make sure the matplotlib is installed</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
