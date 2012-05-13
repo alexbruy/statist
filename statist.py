@@ -69,12 +69,12 @@ class StatistPlugin:
       QCoreApplication.installTranslator( self.translator )
 
   def initGui( self ):
-    if int( self.QgisVersion ) < 10000:
+    if int( self.QgisVersion ) < 10800:
       qgisVersion = str( self.QgisVersion[ 0 ] ) + "." + str( self.QgisVersion[ 2 ] ) + "." + str( self.QgisVersion[ 3 ] )
       QMessageBox.warning( self.iface.mainWindow(),
                            QCoreApplication.translate( "Statist", "Statist: Error" ),
-                           QCoreApplication.translate( "Statist", "Quantum GIS version detected: %1\n" ).arg( qgisVersion ) +
-                           QCoreApplication.translate( "Statist", "This version of Statist requires at least QGIS version 1.0.0\nPlugin will not be enabled." ) )
+                           QCoreApplication.translate( "Statist", "Quantum GIS %1 detected.\n" ).arg( qgisVersion ) +
+                           QCoreApplication.translate( "Statist", "This version of Statist requires at least QGIS version 1.8.0\nPlugin will not be enabled." ) )
       return None
 
     self.actionRun = QAction( QCoreApplication.translate( "Statist", "Statist" ), self.iface.mainWindow() )
