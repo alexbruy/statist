@@ -78,6 +78,7 @@ class StatistPlugin:
       return None
 
     self.actionRun = QAction( QCoreApplication.translate( "Statist", "Statist" ), self.iface.mainWindow() )
+    self.iface.registerMainWindowAction( self.actionRun, "Shift+S" )
     self.actionRun.setIcon( QIcon( ":/icons/statist.png" ) )
     self.actionRun.setWhatsThis( "Calculate statistics for field" )
     self.actionAbout = QAction( QCoreApplication.translate( "Statist", "About Statist..." ), self.iface.mainWindow() )
@@ -97,6 +98,8 @@ class StatistPlugin:
     self.actionAbout.triggered.connect( self.about )
 
   def unload( self ):
+    self.iface.unregisterMainWindowAction( self.actionRun )
+
     if hasattr( self.iface, "addPluginToVectorMenu" ):
       self.iface.removeVectorToolBarIcon( self.actionRun )
       self.iface.removePluginVectorMenu( QCoreApplication.translate( "Statist", "Statist" ), self.actionRun )
@@ -115,6 +118,7 @@ class StatistPlugin:
       return None
 
     d = statistdialog.StatistDialog( self.iface )
+    d.show()
     d.exec_()
 
   def about( self ):
