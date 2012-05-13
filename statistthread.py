@@ -288,6 +288,6 @@ class StatistThread( QThread ):
     statsText.append( self.tr( "Mean length:%1").arg( meanValue ) )
     statsText.append( self.tr( "Filled:%1").arg( countFilled ) )
     statsText.append( self.tr( "Empty:%1").arg( countEmpty ) )
-    statsText.append( self.tr( "Total count:%1").arg( count ) )
+    statsText.append( self.tr( "Count:%1").arg( count ) )
 
     return statsText, values

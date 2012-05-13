@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="ru">
+<!DOCTYPE TS>
+<TS version="2.0" language="ru">
 <context>
     <name>Plot</name>
     <message>
@@ -46,66 +47,70 @@ no vector layers in this project</source>
     <message>
         <location filename="statist.py" line="115"/>
         <source>Statist: Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Statist: Ошибка</translation>
     </message>
     <message>
         <location filename="statist.py" line="74"/>
         <source>Quantum GIS %1 detected.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружена Quantum GIS %1.
+</translation>
     </message>
     <message>
         <location filename="statist.py" line="74"/>
         <source>This version of Statist requires at least QGIS version 1.8.0
 Plugin will not be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта версия Statist требует QGIS версии 1.8.0 или старше
+Модуль не будет загружен.</translation>
     </message>
     <message>
         <location filename="statist.py" line="110"/>
         <source>Statist</source>
-        <translation type="unfinished"></translation>
+        <translation>Statist</translation>
     </message>
     <message>
         <location filename="statist.py" line="84"/>
         <source>About Statist...</source>
-        <translation type="unfinished"></translation>
+        <translation>О Statist...</translation>
     </message>
     <message>
         <location filename="statist.py" line="126"/>
         <source>About Statist</source>
-        <translation type="unfinished">О Statist</translation>
+        <translation>О Statist</translation>
     </message>
     <message>
         <location filename="statist.py" line="128"/>
         <source>&lt;b&gt;Statist&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Statist&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="statist.py" line="131"/>
         <source>Version: %1</source>
-        <translation type="unfinished">Версия: %1</translation>
+        <translation>Версия: %1</translation>
     </message>
     <message>
         <location filename="statist.py" line="134"/>
         <source>Provides basic statistics information on
 any (numeric or string) field of vector
 layer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображает базовую статистическую информацию по
+любому (числовому или сроковому) полю векторного
+слоя.</translation>
     </message>
     <message>
         <location filename="statist.py" line="135"/>
         <source>&lt;b&gt;Developers:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Разработчики:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="statist.py" line="137"/>
         <source>&lt;b&gt;Homepage:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Домашняя страница:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="statist.py" line="154"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
@@ -113,105 +118,100 @@ layer.</source>
     <message>
         <location filename="statistdialog.py" line="55"/>
         <source>Frequency distribution</source>
-        <translation type="unfinished">Частотное распределение</translation>
+        <translation>Частотное распределение</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="146"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="234"/>
         <source>Count</source>
-        <translation type="unfinished">Количество</translation>
+        <translation>Количество</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="202"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
     <name>StatistThread</name>
     <message>
-        <location filename="statistthread.py" line="175"/>
+        <location filename="statistthread.py" line="291"/>
         <source>Count:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="176"/>
         <source>Unique values:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Уникальных значений:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="177"/>
         <source>Minimum value:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальное значение:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="178"/>
         <source>Maximum value:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное значение:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="179"/>
         <source>Range:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Размах:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="180"/>
         <source>Sum:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумма:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="181"/>
         <source>Mean value:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Среднее значение:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="182"/>
         <source>Median value:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Медиана:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="183"/>
         <source>Standard deviation:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартное отклонение:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="184"/>
         <source>Coefficient of Variation:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент вариации:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="286"/>
         <source>Minimum length:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальная длина:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="287"/>
         <source>Maximum length:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальная длина:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="288"/>
         <source>Mean length:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Средняя длина:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="289"/>
         <source>Filled:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Заполненных:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="290"/>
         <source>Empty:%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="statistthread.py" line="291"/>
-        <source>Total count:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустых:%1</translation>
     </message>
 </context>
 <context>
@@ -454,13 +454,14 @@ layer.</source>
     <message>
         <location filename="__init__.py" line="58"/>
         <source>Error while loading plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при загрузке модуля</translation>
     </message>
     <message>
         <location filename="__init__.py" line="58"/>
         <source>Could not find the matplotlib module.
 Make sure the matplotlib is installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось найти пакет matplotlib.
+Убедитесь, что matplotlib установлен</translation>
     </message>
 </context>
 </TS>

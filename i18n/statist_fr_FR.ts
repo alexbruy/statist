@@ -134,7 +134,7 @@ layer.</source>
 <context>
     <name>StatistThread</name>
     <message>
-        <location filename="statistthread.py" line="175"/>
+        <location filename="statistthread.py" line="291"/>
         <source>Count:%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -206,11 +206,6 @@ layer.</source>
     <message>
         <location filename="statistthread.py" line="290"/>
         <source>Empty:%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="statistthread.py" line="291"/>
-        <source>Total count:%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
