@@ -35,6 +35,7 @@ from PyQt4.QtGui import *
 from qgis.core import *
 
 from ui_statistdialogbase import Ui_StatistDialog
+import statistthread
 import statist_utils as utils
 
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
@@ -61,6 +62,9 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
 
     self.groupBox.hide()
 
+    self.btnOk = self.buttonBox.button( QDialogButtonBox.Ok )
+    self.btnClose = self.buttonBox.button( QDialogButtonBox.Close )
+
     self.cmbLayers.currentIndexChanged.connect( self.reloadFields )
     self.chkUseTextFields.stateChanged.connect( self.reloadFields )
 
@@ -77,11 +81,10 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
   def reloadFields( self ):
     self.cmbFields.clear()
 
-    #~ self.lstStatistics.clearContents()
-    #~ self.lstStatistics.setRowCount( 0 )
-#~
-    #~ self.axes.clear()
-#~
+    self.axes.clear()
+    self.lstStatistics.clearContents()
+    self.lstStatistics.setRowCount( 0 )
+
     #~ self.groupBox.hide()
 #~
     #~ self.spnMinX.setValue( 0.0 )
@@ -89,14 +92,12 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
 #~
     #~ self.chkShowGrid.blockSignals( True )
     #~ self.chkAsPlot.blockSignals( True )
-#~
     #~ self.chkShowGrid.setCheckState( Qt.Unchecked )
     #~ self.chkAsPlot.setCheckState( Qt.Unchecked )
-#~
     #~ self.chkShowGrid.blockSignals( False )
     #~ self.chkAsPlot.blockSignals( False )
 
-    layer = utils.getVectorLayerByName( unicode( self.cmbLayers.currentText() ) )
+    layer = utils.getVectorLayerByName( self.cmbLayers.currentText() )
 
     if layer.selectedFeatureCount() != 0:
       self.chkUseSelected.setCheckState( Qt.Checked )
@@ -108,309 +109,122 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     else:
       self.cmbFields.addItems( utils.getFieldNames( layer, [ QVariant.Int, QVariant.Double ] ) )
 
-  def refreshPlot( self ):
-    pass
-
   def accept( self ):
-    pass
+    QApplication.setOverrideCursor( QCursor( Qt.WaitCursor ) )
+    self.btnOk.setEnabled( False )
 
-  #~ def startCalculation( self ):
-    #~ QObject.disconnect( self.chkGrid, SIGNAL( "stateChanged(int)" ), self.refreshPlot )
-    #~ QObject.disconnect( self.chkPlot, SIGNAL( "stateChanged(int)" ), self.refreshPlot )
-    #~ self.edMinX.setValue( 0.0 )
-    #~ self.edMaxX.setValue( 0.0 )
-    #~ self.chkGrid.setCheckState( Qt.Unchecked )
-    #~ self.chkPlot.setCheckState( Qt.Unchecked )
-    #~ self.axes.clear()
-    #~ QObject.connect( self.chkGrid, SIGNAL( "stateChanged(int)" ), self.refreshPlot )
-    #~ QObject.connect( self.chkPlot, SIGNAL( "stateChanged(int)" ), self.refreshPlot )
-#~
-    #~ if self.cmbLayers.currentText() == "":
-      #~ QMessageBox.information( self, "Statist: Error", self.tr( "Please specify target vector layer first" ) )
-    #~ elif self.cmbFields.currentText() == "":
-      #~ QMessageBox.information( self, "Statist: Error", self.tr( "Please specify target field first" ) )
-    #~ else:
-      #~ vlayer = utils.getVectorLayerByName( self.cmbLayers.currentText() )
-      #~ self.calculate( self.cmbLayers.currentText(), self.cmbFields.currentText() )
-#~
-  #~ def calculate( self, layerName, fieldName ):
-    #~ vLayer = utils.getVectorLayerByName( layerName )
-    #~ self.tblStatistics.clearContents()
-    #~ self.tblStatistics.setRowCount( 0 )
-    #~ self.threadCalc = workThread( self.iface.mainWindow(), self, vLayer, fieldName, self.chkUseSelected.checkState() )
-    #~ QObject.connect( self.threadCalc, SIGNAL( "runFinished(PyQt_PyObject)" ), self.runFinishedFromThread )
-    #~ QObject.connect( self.threadCalc, SIGNAL( "runStatus(PyQt_PyObject)" ), self.runStatusFromThread )
-    #~ QObject.connect( self.threadCalc, SIGNAL( "runRange(PyQt_PyObject)" ), self.runRangeFromThread )
-#~
-    #~ QObject.disconnect( self.btnStop, SIGNAL( "clicked()" ), self.toClipboard )
-    #~ self.btnStop.setText( self.tr( "Cancel" ) )
-    #~ QObject.connect( self.btnStop, SIGNAL("clicked()" ), self.cancelThread )
-    #~ self.btnStop.setEnabled( True )
-#~
-    #~ self.threadCalc.start()
-    #~ return True
-#~
-  #~ def toClipboard( self ):
-    #~ txt = ""
-    #~ for i in range( len( self.results ) ):
-      #~ txt += self.results[ i ] + "\n"
-    #~ clipboard = QApplication.clipboard()
-    #~ clipboard.setText( txt )
-#~
-  #~ def refreshPlot( self ):
-    #~ self.axes.clear()
-    #~ self.axes.grid( self.chkGrid.isChecked() )
-    #~ if self.edMinX.value() == self.edMaxX.value():
-      #~ # histogram
-      #~ if not self.chkPlot.isChecked():
-        #~ self.axes.hist( self.valuesX, 18, alpha=0.5, histtype = "bar" )
-      #~ # plot
-      #~ else:
-        #~ n, bins, pathes = self.axes.hist( self.valuesX, 18, alpha=0.5, histtype = "bar" )
-        #~ self.axes.clear()
-        #~ self.axes.grid( self.chkGrid.isChecked() )
-        #~ c = []
-        #~ for i in range( len( bins ) - 1 ):
-          #~ s = bins[ i + 1 ] - bins[ i ]
-          #~ c.append( bins[ i ] + (s / 2 ) )
-#~
-        #~ self.axes.plot( c, n, "ro-" )
-    #~ else:
-      #~ xRange = []
-      #~ if self.edMinX.value() > self.edMaxX.value():
-        #~ xRange.append( self.edMaxX.value() )
-        #~ xRange.append( self.edMinX.value() )
-      #~ else:
-        #~ xRange.append( self.edMinX.value() )
-        #~ xRange.append( self.edMaxX.value() )
-      #~ # histogram
-      #~ if not self.chkPlot.isChecked():
-        #~ self.axes.hist( self.valuesX, 18, xRange, alpha=0.5, histtype = "bar" )
-      #~ # plot
-      #~ else:
-        #~ n, bins, pathes = self.axes.hist( self.valuesX, 18, xRange, alpha=0.5, histtype = "bar" )
-        #~ self.axes.clear()
-        #~ self.axes.grid( self.chkGrid.isChecked() )
-        #~ c = []
-        #~ for i in range( len( bins ) - 1 ):
-          #~ s = bins[ i + 1 ] - bins[ i ]
-          #~ c.append( bins[ i ] + (s / 2 ) )
-#~
-        #~ self.axes.plot( c, n, "ro-" )
-        #~ self.axes.set_xlim( xRange[ 0 ], xRange[ 1 ] )
-    #~ self.axes.set_ylabel( self.tr( "Count" ), fontproperties = self.fp )
-    #~ field = unicode( self.cmbFields.currentText() )
-    #~ self.axes.set_xlabel( field, fontproperties = self.fp )
-    #~ self.figure.autofmt_xdate()
-    #~ self.canvas.draw()
-#~
-  #~ def cancelThread( self ):
-    #~ self.threadCalc.stop()
-#~
-  #~ def runFinishedFromThread( self, output ):
-    #~ self.threadCalc.stop()
-    #~ self.results = output[ 0 ]
-#~
-    #~ n = len( self.results )
-    #~ self.tblStatistics.setRowCount( n )
-    #~ for r in range( n ):
-      #~ tmp = self.results[ r ].split( ":" )
-      #~ item = QTableWidgetItem( tmp[ 0 ] )
-      #~ self.tblStatistics.setItem( r, 0, item )
-      #~ item = QTableWidgetItem( tmp[ 1 ] )
-      #~ self.tblStatistics.setItem( r, 1, item )
-    #~ self.tblStatistics.verticalHeader().hide()
-#~
-    #~ # enable copy to clipboard
-    #~ QObject.disconnect( self.btnStop, SIGNAL( "clicked()" ), self.cancelThread )
-    #~ self.btnStop.setText( self.tr ( "Copy" ) )
-    #~ QObject.connect( self.btnStop, SIGNAL( "clicked()" ), self.toClipboard )
-#~
-    #~ self.axes.clear()
-    #~ self.axes.grid( self.chkGrid.isChecked() )
-    #~ self.axes.set_ylabel( self.tr( "Count" ), fontproperties = self.fp )
-    #~ field = unicode( self.cmbFields.currentText() )
-    #~ self.axes.set_xlabel( field, fontproperties = self.fp )
-    #~ self.valuesX = output[ 2 ]
-    #~ self.axes.hist( self.valuesX, 18, alpha=0.5, histtype = "bar" )
-    #~ self.figure.autofmt_xdate()
-    #~ self.canvas.draw()
-#~
-    #~ self.groupBox.show()
-    #~ return True
-#~
-  #~ def runStatusFromThread( self, status ):
-    #~ self.progressBar.setValue( status )
-#~
-  #~ def runRangeFromThread( self, range_vals ):
-    #~ self.progressBar.setRange( range_vals[ 0 ], range_vals[ 1 ] )
-#~
-#~ class workThread( QThread ):
-  #~ def __init__( self, parentThread, parentObject, vlayer, fieldName, useSelection ):
-    #~ QThread.__init__( self, parentThread )
-    #~ self.parent = parentObject
-    #~ self.running = False
-    #~ self.vlayer = vlayer
-    #~ self.fieldName = fieldName
-    #~ self.useSelection = useSelection
-#~
-  #~ def run( self ):
-    #~ self.running = True
-    #~ ( lst, cnt, val ) = self.statistics( self.vlayer, self.fieldName )
-    #~ self.emit( SIGNAL( "runFinished(PyQt_PyObject)" ), ( lst, cnt, val ) )
-    #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), 0 )
-#~
-  #~ def stop( self ):
-    #~ self.running = False
-#~
-  #~ def statistics( self, vlayer, fieldName ):
-    #~ vprovider = vlayer.dataProvider()
-    #~ allAttrs = vprovider.attributeIndexes()
-    #~ vprovider.select( allAttrs )
-    #~ fields = vprovider.fields()
-    #~ index = vprovider.fieldNameIndex( fieldName )
-    #~ feat = QgsFeature()
-    #~ nVal = 0
-    #~ values = []
-    #~ first = True
-    #~ nElement = 0
-    #~ meanVal = 0
-    #~ sumVal = 0
-    #~ if utils.getFieldType( vlayer, fieldName ) in ( 'String', 'varchar', 'char', 'text' ):
-      #~ fillVal = 0
-      #~ emptyVal = 0
-      #~ #if vlayer.selectedFeatureCount() != 0:
-      #~ if self.useSelection:
-        #~ selFeat = vlayer.selectedFeatures()
-        #~ nFeat = vlayer.selectedFeatureCount()
-        #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), 0 )
-        #~ self.emit( SIGNAL( "runRange(PyQt_PyObject)" ), ( 0, nFeat ) )
-        #~ for f in selFeat:
-          #~ atMap = f.attributeMap()
-          #~ lenVal = float( len( atMap[ index ].toString() ) )
-          #~ if first:
-            #~ minVal = lenVal
-            #~ maxVal = lenVal
-            #~ first = False
-          #~ else:
-            #~ if lenVal < minVal: minVal = lenVal
-            #~ if lenVal > maxVal: maxVal = lenVal
-          #~ if lenVal != 0.00:
-            #~ fillVal += 1
-          #~ else:
-            #~ emptyVal += 1
-          #~ values.append( lenVal )
-          #~ sumVal = sumVal + lenVal
-          #~ nElement += 1
-          #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), nElement )
-      #~ else:
-        #~ nFeat = vprovider.featureCount()
-        #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), 0 )
-        #~ self.emit( SIGNAL( "runRange(PyQt_PyObject)" ), ( 0, nFeat ) )
-        #~ while vprovider.nextFeature( feat ):
-          #~ atMap = feat.attributeMap()
-          #~ lenVal = float( len( atMap[ index ].toString() ) )
-          #~ if first:
-            #~ minVal = lenVal
-            #~ maxVal = lenVal
-            #~ first = False
-          #~ else:
-            #~ if lenVal < minVal: minVal = lenVal
-            #~ if lenVal > maxVal: maxVal = lenVal
-          #~ if lenVal != 0.00:
-            #~ fillVal += 1
-          #~ else:
-            #~ emptyVal += 1
-          #~ values.append( lenVal )
-          #~ sumVal = sumVal + lenVal
-          #~ nElement += 1
-          #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), nElement )
-      #~ nVal= len( values )
-      #~ if nVal > 0.00:
-        #~ meanVal = sumVal / nVal
-      #~ lstStats = []
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Count:" ) + unicode( nVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Minimum length:" ) + unicode( minVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Maximum length:" ) + unicode( maxVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Mean lengtn:" ) + unicode( meanVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Filled:" ) + unicode( fillVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Empty:" ) + unicode( emptyVal ) )
-      #~ return ( lstStats, [], values )
-    #~ else:
-      #~ stdVal = 0
-      #~ cvVal = 0
-      #~ rVal = 0
-      #~ medianVal = 0
-      #~ uniqueVal = 0
-      #~ maxVal = 0.00
-      #~ minVal = 0.00
-      #~ # selection
-      #~ #if vlayer.selectedFeatureCount() != 0:
-      #~ if self.useSelection:
-        #~ selFeat = vlayer.selectedFeatures()
-        #~ uniqueVal = utils.getUniqueValsCount( vlayer, index, True )
-        #~ nFeat = vlayer.selectedFeatureCount()
-        #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), 0 )
-        #~ self.emit( SIGNAL( "runRange(PyQt_PyObject)" ), ( 0, nFeat ) )
-        #~ for f in selFeat:
-          #~ atMap = f.attributeMap()
-          #~ value = float( atMap[ index ].toDouble() [ 0 ] )
-          #~ if first:
-            #~ minVal = value
-            #~ maxVal = value
-            #~ first = False
-          #~ else:
-            #~ if value < minVal: minVal = value
-            #~ if value > maxVal: maxVal = value
-          #~ values.append( value )
-          #~ sumVal = sumVal + value
-          #~ nElement += 1
-          #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), nElement )
-      #~ else: # whole layer
-        #~ uniqueVal = utils.getUniqueValsCount( vlayer, index, False )
-        #~ nFeat = vprovider.featureCount()
-        #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), 0 )
-        #~ self.emit( SIGNAL( "runRange(PyQt_PyObject)" ), ( 0, nFeat ) )
-        #~ vprovider.select( allAttrs )
-        #~ while vprovider.nextFeature( feat ):
-          #~ atMap = feat.attributeMap()
-          #~ value = float( atMap[ index ].toDouble() [ 0 ] )
-          #~ if first:
-            #~ minVal = value
-            #~ maxVal = value
-            #~ first = False
-          #~ else:
-            #~ if value < minVal: minVal = value
-            #~ if value > maxVal: maxVal = value
-          #~ values.append( value )
-          #~ sumVal = sumVal + value
-          #~ nElement += 1
-          #~ self.emit( SIGNAL( "runStatus(PyQt_PyObject)" ), nElement )
-      #~ nVal= len( values )
-      #~ rVal = maxVal - minVal
-      #~ if nVal > 1:
-        #~ lstVal = values
-        #~ lstVal.sort()
-        #~ if ( nVal % 2 ) == 0:
-          #~ medianVal = 0.5 * ( lstVal[ ( nVal - 1 )/ 2 ] + lstVal[ ( nVal ) / 2 ] )
-        #~ else:
-          #~ medianVal = lstVal[ ( nVal + 1 ) / 2  - 1 ]
-      #~ if nVal > 0.00:
-        #~ meanVal = sumVal / nVal
-        #~ if meanVal != 0.00:
-          #~ for val in values:
-            #~ stdVal += ( ( val - meanVal ) * ( val - meanVal ) )
-          #~ stdVal = math.sqrt( stdVal / nVal )
-          #~ cvVal = stdVal / meanVal
-      #~ lstStats = []
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Count:" ) + unicode( nVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Unique values:" ) + unicode( uniqueVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Minimum value:" ) + unicode( minVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Maximum value:" ) + unicode( maxVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Swing:" ) + unicode( rVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Sum:" ) + unicode( sumVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Mean value:" ) + unicode( meanVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Median value:" ) + unicode( medianVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Standard deviation:" ) + unicode( stdVal ) )
-      #~ lstStats.append( QCoreApplication.translate( "statResult", "Coefficient of Variation:" ) + unicode( cvVal ))
-      #~ return ( lstStats, [], values )
+    self.axes.clear()
+    self.spnMinX.setValue( 0.0 )
+    self.spnMaxX.setValue( 0.0 )
+    self.lstStatistics.clearContents()
+    self.lstStatistics.setRowCount( 0 )
+
+    #~ self.chkShowGrid.blockSignals( True )
+    #~ self.chkAsPlot.blockSignals( True )
+    #~ self.chkShowGrid.setCheckState( Qt.Unchecked )
+    #~ self.chkAsPlot.setCheckState( Qt.Unchecked )
+    #~ self.chkShowGrid.blockSignals( False )
+    #~ self.chkAsPlot.blockSignals( False )
+
+    layer = utils.getVectorLayerByName( self.cmbLayers.currentText() )
+
+    self.workThread = statistthread.StatistThread( layer,
+                                                   self.cmbFields.currentText(),
+                                                   self.chkUseTextFields.isChecked() )
+    self.workThread.rangeChanged.connect( self.setProgressRange )
+    self.workThread.updateProgress.connect( self.updateProgress )
+    self.workThread.processFinished.connect( self.processFinished )
+    self.workThread.processInterrupted.connect( self.processInterrupted )
+
+    self.btnClose.setText( self.tr( "Cancel" ) )
+    #self.buttonBox.rejected.disconnect( self.reject )
+    self.btnClose.clicked.connect( self.stopProcessing )
+
+    self.workThread.start()
+
+  def setProgressRange( self, maxValue ):
+    self.progressBar.setRange( 0, maxValue )
+
+  def updateProgress( self ):
+    self.progressBar.setValue( self.progressBar.value() + 1 )
+
+  def processFinished( self, statData ):
+    self.stopProcessing()
+
+    # populate table with results
+    tableData = statData[ 0 ]
+    self.values = statData[ 1 ]
+    rowCount = len( tableData )
+    self.lstStatistics.setRowCount( rowCount )
+    for i in xrange( rowCount ):
+      tmp = tableData[ i ].split( ":" )
+      item = QTableWidgetItem( tmp[ 0 ] )
+      self.lstStatistics.setItem( i, 0, item )
+      item = QTableWidgetItem( tmp[ 1 ] )
+      self.lstStatistics.setItem( i, 1, item )
+
+    self.lstStatistics.resizeRowsToContents()
+
+    # create histogram
+    self.axes.grid( self.chkShowGrid.isChecked() )
+    self.axes.set_ylabel( unicode( self.tr( "Count" ) ) )
+    self.axes.set_xlabel( unicode( self.cmbFields.currentText() ) )
+    self.axes.hist( self.values, 18, alpha=0.5, histtype="bar" )
+    self.figure.autofmt_xdate()
+    self.canvas.draw()
+
+    self.groupBox.show()
+
+    self.restoreGui()
+
+  def processInterrupted( self ):
+    self.restoreGui()
+
+  def stopProcessing( self ):
+    if self.workThread != None:
+      self.workThread.stop()
+      self.workThread = None
+
+  def restoreGui( self ):
+    self.progressBar.setFormat( "%p%" )
+    self.progressBar.setRange( 0, 1 )
+    self.progressBar.setValue( 0 )
+
+    self.buttonBox.rejected.connect( self.reject )
+    self.btnClose.clicked.disconnect( self.stopProcessing )
+    self.btnClose.setText( self.tr( "Close" ) )
+    self.btnOk.setEnabled( True )
+    QApplication.restoreOverrideCursor()
+
+  def refreshPlot( self ):
+    self.axes.clear()
+    interval = None
+
+    if self.spnMinX.value() == self.spnMaxX.value():
+      pass
+    else:
+      interval = []
+      if self.spnMinX.value() > self.spnMaxX.value():
+        interval.append( self.spnMaxX.value() )
+        interval.append( self.spnMinX.value() )
+      else:
+        interval.append( self.spnMinX.value() )
+        interval.append( self.spnMaxX.value() )
+
+    if not self.chkAsPlot.isChecked():
+      self.axes.hist( self.values, 18, interval, alpha=0.5, histtype="bar" )
+    else:
+      n, bins, pathes = self.axes.hist( self.values, 18, interval, alpha=0.5, histtype = "bar" )
+      self.axes.clear()
+      c = []
+      for i in range( len( bins ) - 1 ):
+        s = bins[ i + 1 ] - bins[ i ]
+        c.append( bins[ i ] + (s / 2 ) )
+
+      self.axes.plot( c, n, "ro-" )
+
+    self.axes.grid( self.chkShowGrid.isChecked() )
+    self.axes.set_ylabel( unicode( self.tr( "Count" ) ) )
+    self.axes.set_xlabel( unicode( self.cmbFields.currentText() ) )
+    self.figure.autofmt_xdate()
+    self.canvas.draw()

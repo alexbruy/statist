@@ -66,10 +66,9 @@ def getFieldType( layer, fieldName ):
       return field.typeName()
 
 def getUniqueValuesCount( layer, fieldIndex, useSelection ):
-  provider = layer.dataProvider()
-  vprovider.select( [ fieldIndex ], QgsRectangle(), False )
   count = 0
   values = []
+  layer.select( [ fieldIndex ], QgsRectangle(), False )
   if useSelection:
     selection = layer.selectedFeatures()
     for f in selection:
@@ -78,7 +77,7 @@ def getUniqueValuesCount( layer, fieldIndex, useSelection ):
         count += 1
   else:
     feat = QgsFeature()
-    while vprovider.nextFeature( feat ):
+    while layer.nextFeature( feat ):
       if feat.attributeMap()[ fieldIndex ].toString() not in values:
         values.append( feat.attributeMap()[ fieldIndex ].toString() )
         count += 1
