@@ -93,13 +93,6 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.spnMinX.setValue( 0.0 )
     self.spnMaxX.setValue( 0.0 )
 
-    #~ self.chkShowGrid.blockSignals( True )
-    #~ self.chkAsPlot.blockSignals( True )
-    #~ self.chkShowGrid.setCheckState( Qt.Unchecked )
-    #~ self.chkAsPlot.setCheckState( Qt.Unchecked )
-    #~ self.chkShowGrid.blockSignals( False )
-    #~ self.chkAsPlot.blockSignals( False )
-
     layer = utils.getVectorLayerByName( self.cmbLayers.currentText() )
 
     if layer.selectedFeatureCount() != 0:
