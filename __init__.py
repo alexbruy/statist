@@ -36,10 +36,10 @@ def category():
   return "Vector"
 
 def version():
-  return "0.2.14"
+  return "1.0.0"
 
 def qgisMinimumVersion():
-  return "1.0"
+  return "1.8.0"
 
 def authorName():
   return "Alexander Bruy"

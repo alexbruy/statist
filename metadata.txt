@@ -2,7 +2,7 @@
 name = Statist
 description = Calculate and show statistics for a field
 category = Vector
-version = 0.2.14
+version = 1.0.0
 qgisMinimumVersion = 1.8.0
 
 icon = icons/statist.png
@@ -11,9 +11,9 @@ authorName = Alexander Bruy
 
 tags = vector, analysis, statistics
 
-homepage =
+homepage = http://gis-lab.info/qa/statist-eng.html
 tracker = http://hub.qgis.org/projects/statist
-repository = http://github.com/alexbruy/statist
+repository =
 
 experimental = False
 deprecated = False
