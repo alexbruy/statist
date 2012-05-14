@@ -67,8 +67,6 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     rcParams['font.fantasy'] = "Comic Sans MS, Arial, Liberation Sans"
     rcParams['font.monospace'] = "Courier New, Liberation Mono"
 
-    self.groupBox.hide()
-
     self.btnOk = self.buttonBox.button( QDialogButtonBox.Ok )
     self.btnClose = self.buttonBox.button( QDialogButtonBox.Close )
 
@@ -92,11 +90,9 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.lstStatistics.clearContents()
     self.lstStatistics.setRowCount( 0 )
 
-    #~ self.groupBox.hide()
-#~
-    #~ self.spnMinX.setValue( 0.0 )
-    #~ self.spnMaxX.setValue( 0.0 )
-#~
+    self.spnMinX.setValue( 0.0 )
+    self.spnMaxX.setValue( 0.0 )
+
     #~ self.chkShowGrid.blockSignals( True )
     #~ self.chkAsPlot.blockSignals( True )
     #~ self.chkShowGrid.setCheckState( Qt.Unchecked )
@@ -126,13 +122,6 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.lstStatistics.clearContents()
     self.lstStatistics.setRowCount( 0 )
 
-    #~ self.chkShowGrid.blockSignals( True )
-    #~ self.chkAsPlot.blockSignals( True )
-    #~ self.chkShowGrid.setCheckState( Qt.Unchecked )
-    #~ self.chkAsPlot.setCheckState( Qt.Unchecked )
-    #~ self.chkShowGrid.blockSignals( False )
-    #~ self.chkAsPlot.blockSignals( False )
-
     layer = utils.getVectorLayerByName( self.cmbLayers.currentText() )
 
     self.workThread = statistthread.StatistThread( layer,
@@ -145,6 +134,7 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
 
     self.btnClose.setText( self.tr( "Cancel" ) )
     #self.buttonBox.rejected.disconnect( self.reject )
+    QObject.disconnect( self.buttonBox, SIGNAL( "rejected()" ), self.reject )
     self.btnClose.clicked.connect( self.stopProcessing )
 
     self.workThread.start()
@@ -173,14 +163,7 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.lstStatistics.resizeRowsToContents()
 
     # create histogram
-    self.axes.grid( self.chkShowGrid.isChecked() )
-    self.axes.set_ylabel( unicode( self.tr( "Count" ) ) )
-    self.axes.set_xlabel( unicode( self.cmbFields.currentText() ) )
-    self.axes.hist( self.values, 18, alpha=0.5, histtype="bar" )
-    self.figure.autofmt_xdate()
-    self.canvas.draw()
-
-    self.groupBox.show()
+    self.refreshPlot()
 
     self.restoreGui()
 
@@ -197,7 +180,8 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.progressBar.setRange( 0, 1 )
     self.progressBar.setValue( 0 )
 
-    self.buttonBox.rejected.connect( self.reject )
+    #self.buttonBox.rejected.connect( self.reject )
+    QObject.connect( self.buttonBox, SIGNAL( "rejected()" ), self.reject )
     self.btnClose.clicked.disconnect( self.stopProcessing )
     self.btnClose.setText( self.tr( "Close" ) )
     self.btnOk.setEnabled( True )

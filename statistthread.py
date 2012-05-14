@@ -47,6 +47,7 @@ class StatistThread( QThread ):
     QThread.__init__( self, QThread.currentThread() )
     self.mutex = QMutex()
     self.stopMe = 0
+    self.interrupted = False
 
     self.layer = layer
     self.fieldName = fieldName
@@ -55,10 +56,13 @@ class StatistThread( QThread ):
   def run( self ):
     if utils.getFieldType( self.layer, self.fieldName ) in self.STRING_TYPES:
       statText, values = self.statisticsForText()
-      self.processFinished.emit( [ statText, values ] )
     else:
       statText, values = self.statisticsForNumbers()
+
+    if not self.interrupted:
       self.processFinished.emit( [ statText, values ] )
+    else:
+      self.processInterrupted.emit()
 
   def stop( self ):
     self.mutex.lock()
@@ -71,8 +75,6 @@ class StatistThread( QThread ):
     self.mutex.lock()
     self.stopMe = 0
     self.mutex.unlock()
-
-    interrupted = False
 
     index = self.layer.fieldNameIndex( self.fieldName )
     self.layer.select( [ index ], QgsRectangle(), False )
@@ -117,7 +119,7 @@ class StatistThread( QThread ):
         s = self.stopMe
         self.mutex.unlock()
         if s == 1:
-          interrupted = True
+          self.interrupted = True
           break
     else:
       count = self.layer.featureCount()
@@ -146,7 +148,7 @@ class StatistThread( QThread ):
         s = self.stopMe
         self.mutex.unlock()
         if s == 1:
-          interrupted = True
+          self.interrupted = True
           break
 
     # calculate additional values
@@ -189,8 +191,6 @@ class StatistThread( QThread ):
     self.mutex.lock()
     self.stopMe = 0
     self.mutex.unlock()
-
-    interrupted = False
 
     index = self.layer.fieldNameIndex( self.fieldName )
     self.layer.select( [ index ], QgsRectangle(), False )
@@ -238,7 +238,7 @@ class StatistThread( QThread ):
         s = self.stopMe
         self.mutex.unlock()
         if s == 1:
-          interrupted = True
+          self.interrupted = True
           break
     else:
       count = self.layer.featureCount()
@@ -273,7 +273,7 @@ class StatistThread( QThread ):
         s = self.stopMe
         self.mutex.unlock()
         if s == 1:
-          interrupted = True
+          self.interrupted = True
           break
 
     # calculate mean length if possible
