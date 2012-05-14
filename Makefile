@@ -41,7 +41,7 @@ clean:
 	rm -f *.zip
 
 package:
-	cd .. && rm -f *.zip && zip -r statist.zip statist -x \*.pyc -x \*~ -x \*.git\*
+	cd .. && rm -f *.zip && zip -r statist.zip statist -x \*.pyc \*.ts \*.ui \*.qrc \*.pro \*~ \*.git\* \*Makefile*
 	mv ../statist.zip .
 
 upload:
