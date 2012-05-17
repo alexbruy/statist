@@ -126,11 +126,13 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.workThread.processInterrupted.connect( self.processInterrupted )
 
     self.btnClose.setText( self.tr( "Cancel" ) )
-    #self.buttonBox.rejected.disconnect( self.reject )
-    QObject.disconnect( self.buttonBox, SIGNAL( "rejected()" ), self.reject )
+    self.buttonBox.rejected.disconnect( self.reject )
     self.btnClose.clicked.connect( self.stopProcessing )
 
     self.workThread.start()
+
+  def reject( self ):
+    QDialog.reject( self )
 
   def setProgressRange( self, maxValue ):
     self.progressBar.setRange( 0, maxValue )
@@ -173,8 +175,7 @@ class StatistDialog( QDialog, Ui_StatistDialog ):
     self.progressBar.setRange( 0, 1 )
     self.progressBar.setValue( 0 )
 
-    #self.buttonBox.rejected.connect( self.reject )
-    QObject.connect( self.buttonBox, SIGNAL( "rejected()" ), self.reject )
+    self.buttonBox.rejected.connect( self.reject )
     self.btnClose.clicked.disconnect( self.stopProcessing )
     self.btnClose.setText( self.tr( "Close" ) )
     self.btnOk.setEnabled( True )
