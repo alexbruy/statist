@@ -5,9 +5,10 @@ category = Vector
 version = 1.0.0
 qgisMinimumVersion = 1.8.0
 
-icon = icons/statist.png
+author = Alexander Bruy
+email = alexander.bruy@gmail.com
 
-authorName = Alexander Bruy
+icon = icons/statist.png
 
 tags = vector, analysis, statistics
 

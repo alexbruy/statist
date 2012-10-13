@@ -41,23 +41,26 @@ def version():
 def qgisMinimumVersion():
   return "1.8.0"
 
-def authorName():
+def author():
   return "Alexander Bruy"
+
+def email():
+  return "alexander.bruy@gmail.com"
 
 def icon():
   return "icons/statist.png"
 
 def classFactory( iface ):
-  import PyQt4.QtGui
+  from PyQt4.QtGui import QMessageBox
 
   wnd = iface.mainWindow()
 
   try:
     import matplotlib.backends.backend_qt4agg
   except ImportError:
-    PyQt4.QtGui.QMessageBox.warning( wnd,
-                                     wnd.tr( "Error while loading plugin" ),
-                                     wnd.tr( "Could not find the matplotlib module.\nMake sure the matplotlib is installed" ) )
+    QMessageBox.warning( wnd,
+                         wnd.tr( "Error while loading plugin" ),
+                         wnd.tr( "Could not find the matplotlib module.\nMake sure the matplotlib is installed" ) )
 
     raise ImportError( "Missing matplotlib Python module" )
 
