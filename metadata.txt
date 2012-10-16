@@ -1,20 +1,20 @@
 [general]
-name = Statist
-description = Calculate and show statistics for a field
-category = Vector
-version = 1.0.0
-qgisMinimumVersion = 1.8.0
+name=Statist
+description=Calculate and show statistics for a field
+category=Vector
+version=1.0.0
+qgisMinimumVersion=1.8.0
 
-author = Alexander Bruy
-email = alexander.bruy@gmail.com
+author=Alexander Bruy
+email=alexander.bruy@gmail.com
 
-icon = icons/statist.png
+icon=icons/statist.png
 
-tags = vector, analysis, statistics
+tags=vector, analysis, statistics
 
-homepage = http://gis-lab.info/qa/statist-eng.html
-tracker = http://hub.qgis.org/projects/statist
-repository =
+homepage=http://gis-lab.info/qa/statist-eng.html
+tracker=http://hub.qgis.org/projects/statist
+repository=
 
-experimental = False
-deprecated = False
+experimental=False
+deprecated=False
