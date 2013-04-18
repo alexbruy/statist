@@ -40,9 +40,9 @@ clean:
 	rm -f *.pyc
 	rm -f *.zip
 
-package:
+package: ts all
 	cd .. && rm -f *.zip && zip -r statist.zip statist -x \*.pyc \*.ts \*.ui \*.qrc \*.pro \*~ \*.git\* \*Makefile*
 	mv ../statist.zip .
 
-upload:
+upload: package
 	plugin_uploader.py statist.zip
