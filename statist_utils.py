@@ -39,10 +39,10 @@ def getVectorLayerNames():
   layerNames = []
   for name, layer in layerMap.iteritems():
     if layer.type() == QgsMapLayer.VectorLayer:
-      layerNames.append( unicode( layer.name() ) )
-  return sorted( layerNames, cmp=locale.strcoll )
+      layerNames.append(unicode(layer.name()))
+  return sorted(layerNames, cmp=locale.strcoll)
 
-def getVectorLayerByName( layerName ):
+def getVectorLayerByName(layerName):
   layerMap = QgsMapLayerRegistry.instance().mapLayers()
   for name, layer in layerMap.iteritems():
     if layer.type() == QgsMapLayer.VectorLayer and layer.name() == layerName:
@@ -51,34 +51,34 @@ def getVectorLayerByName( layerName ):
       else:
         return None
 
-def getFieldNames( layer, fieldTypes ):
+def getFieldNames(layer, fieldTypes):
   fieldMap = layer.pendingFields()
   fieldNames = []
   for idx, field in fieldMap.iteritems():
     if field.type() in fieldTypes and not field.name() in fieldNames:
-      fieldNames.append( unicode( field.name() ) )
-  return sorted( fieldNames, cmp=locale.strcoll )
+      fieldNames.append(unicode(field.name()))
+  return sorted(fieldNames, cmp=locale.strcoll)
 
-def getFieldType( layer, fieldName ):
+def getFieldType(layer, fieldName):
   fields = layer.pendingFields()
   for idx, field in fields.iteritems():
     if field.name() == fieldName:
       return field.typeName()
 
-def getUniqueValuesCount( layer, fieldIndex, useSelection ):
+def getUniqueValuesCount(layer, fieldIndex, useSelection):
   count = 0
   values = []
-  layer.select( [ fieldIndex ], QgsRectangle(), False )
+  layer.select([fieldIndex], QgsRectangle(), False)
   if useSelection:
     selection = layer.selectedFeatures()
     for f in selection:
-      if f.attributeMap()[ fieldIndex ].toString() not in values:
-        values.append( f.attributeMap()[ fieldIndex ].toString() )
+      if f.attributeMap()[fieldIndex].toString() not in values:
+        values.append(f.attributeMap()[fieldIndex].toString())
         count += 1
   else:
     feat = QgsFeature()
-    while layer.nextFeature( feat ):
-      if feat.attributeMap()[ fieldIndex ].toString() not in values:
-        values.append( feat.attributeMap()[ fieldIndex ].toString() )
+    while layer.nextFeature(feat):
+      if feat.attributeMap()[fieldIndex].toString() not in values:
+        values.append(feat.attributeMap()[fieldIndex].toString())
         count += 1
   return count

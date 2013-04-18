@@ -50,7 +50,7 @@ def email():
 def icon():
   return "icons/statist.png"
 
-def classFactory( iface ):
+def classFactory(iface):
   from PyQt4.QtGui import QMessageBox
 
   wnd = iface.mainWindow()
@@ -58,11 +58,12 @@ def classFactory( iface ):
   try:
     import matplotlib.backends.backend_qt4agg
   except ImportError:
-    QMessageBox.warning( wnd,
-                         wnd.tr( "Error while loading plugin" ),
-                         wnd.tr( "Could not find the matplotlib module.\nMake sure the matplotlib is installed" ) )
+    QMessageBox.warning(wnd,
+                        wnd.tr("Error while loading plugin"),
+                        wnd.tr("Could not find the matplotlib module.\nMake sure the matplotlib is installed")
+                       )
 
-    raise ImportError( "Missing matplotlib Python module" )
+    raise ImportError("Missing matplotlib Python module")
 
   from statist import StatistPlugin
-  return StatistPlugin( iface )
+  return StatistPlugin(iface)
