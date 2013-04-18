@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="uk_UA">
+<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
 <context>
     <name>Plot</name>
     <message>
@@ -33,7 +32,7 @@ Python розширення для Quantum GIS
 Зв&apos;язок: alexander.bruy@gmail.com</translation>
     </message>
     <message>
-        <location filename="statist.py" line="115"/>
+        <location filename="statist.py" line="114"/>
         <source>Plugin will not run, because there is
 no vector layers in this project</source>
         <translation>Плагін не буде запущено, оскільки
@@ -45,51 +44,51 @@ no vector layers in this project</source>
         <translation type="obsolete">Не вдається завантажити Python-модуль &apos;matplotlib&apos;. Без нього використання Statist не можливе.</translation>
     </message>
     <message>
-        <location filename="statist.py" line="115"/>
+        <location filename="statist.py" line="114"/>
         <source>Statist: Error</source>
         <translation>Statist: Помилка</translation>
     </message>
     <message>
-        <location filename="statist.py" line="74"/>
+        <location filename="statist.py" line="73"/>
         <source>Quantum GIS %1 detected.
 </source>
         <translation>Знайдено Quantum GIS %1.
 </translation>
     </message>
     <message>
-        <location filename="statist.py" line="74"/>
+        <location filename="statist.py" line="73"/>
         <source>This version of Statist requires at least QGIS version 1.8.0
 Plugin will not be enabled.</source>
         <translation>Ця версія Statist розрахована на роботу з QGIS 1.8.0 або старше
 Модуль не буде завантажено.</translation>
     </message>
     <message>
-        <location filename="statist.py" line="110"/>
+        <location filename="statist.py" line="109"/>
         <source>Statist</source>
         <translation>Statist</translation>
     </message>
     <message>
-        <location filename="statist.py" line="84"/>
+        <location filename="statist.py" line="83"/>
         <source>About Statist...</source>
         <translation>Про Statist...</translation>
     </message>
     <message>
-        <location filename="statist.py" line="126"/>
+        <location filename="statist.py" line="125"/>
         <source>About Statist</source>
         <translation>Про Statist</translation>
     </message>
     <message>
-        <location filename="statist.py" line="128"/>
+        <location filename="statist.py" line="127"/>
         <source>&lt;b&gt;Statist&lt;/b&gt;</source>
         <translation>&lt;b&gt;Statist&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="statist.py" line="131"/>
+        <location filename="statist.py" line="130"/>
         <source>Version: %1</source>
         <translation>Версія: %1</translation>
     </message>
     <message>
-        <location filename="statist.py" line="134"/>
+        <location filename="statist.py" line="133"/>
         <source>Provides basic statistics information on
 any (numeric or string) field of vector
 layer.</source>
@@ -98,17 +97,17 @@ layer.</source>
 векторного шару.</translation>
     </message>
     <message>
-        <location filename="statist.py" line="135"/>
+        <location filename="statist.py" line="134"/>
         <source>&lt;b&gt;Developers:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Розробники:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="statist.py" line="137"/>
+        <location filename="statist.py" line="136"/>
         <source>&lt;b&gt;Homepage:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Домашня сторінка:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="statist.py" line="154"/>
+        <location filename="statist.py" line="153"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
@@ -121,17 +120,17 @@ layer.</source>
         <translation>Частотний розподіл</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="146"/>
+        <location filename="statistdialog.py" line="132"/>
         <source>Cancel</source>
         <translation>Відмінити</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="234"/>
+        <location filename="statistdialog.py" line="218"/>
         <source>Count</source>
         <translation>Кількість</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="202"/>
+        <location filename="statistdialog.py" line="186"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
@@ -144,47 +143,47 @@ layer.</source>
         <translation>Кількість:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="176"/>
+        <location filename="statistthread.py" line="178"/>
         <source>Unique values:%1</source>
         <translation>Унікальних значень:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="177"/>
+        <location filename="statistthread.py" line="179"/>
         <source>Minimum value:%1</source>
         <translation>Мінімальне значення:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="178"/>
+        <location filename="statistthread.py" line="180"/>
         <source>Maximum value:%1</source>
         <translation>Максимальне значення:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="179"/>
+        <location filename="statistthread.py" line="181"/>
         <source>Range:%1</source>
         <translation>Розмах:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="180"/>
+        <location filename="statistthread.py" line="182"/>
         <source>Sum:%1</source>
         <translation>Сума:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="181"/>
+        <location filename="statistthread.py" line="183"/>
         <source>Mean value:%1</source>
         <translation>Середнє значення:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="182"/>
+        <location filename="statistthread.py" line="184"/>
         <source>Median value:%1</source>
         <translation>Медіана:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="183"/>
+        <location filename="statistthread.py" line="185"/>
         <source>Standard deviation:%1</source>
         <translation>Стандартне відхилення:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="184"/>
+        <location filename="statistthread.py" line="186"/>
         <source>Coefficient of Variation:%1</source>
         <translation>Коефіцієнт варіації:%1</translation>
     </message>
@@ -452,12 +451,12 @@ layer.</source>
 <context>
     <name>wnd</name>
     <message>
-        <location filename="__init__.py" line="58"/>
+        <location filename="__init__.py" line="61"/>
         <source>Error while loading plugin</source>
         <translation>Помилка завантаження модуля</translation>
     </message>
     <message>
-        <location filename="__init__.py" line="58"/>
+        <location filename="__init__.py" line="61"/>
         <source>Could not find the matplotlib module.
 Make sure the matplotlib is installed</source>
         <translation>Не вдалося знайти пакет matplotlib.
