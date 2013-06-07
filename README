@@ -1,0 +1,6 @@
+Statist
+------------------------
+Calculate and show statistics for a field.
+
+Provides basic statistics information on any (numeric or string) field of vector
+layer.
