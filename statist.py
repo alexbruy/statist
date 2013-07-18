@@ -27,15 +27,13 @@
 #******************************************************************************
 
 
-import os
-import ConfigParser
-
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from qgis.core import *
 
 import statistdialog
+import aboutdialog
 import statist_utils as utils
 
 import resources_rc
@@ -111,42 +109,5 @@ class StatistPlugin:
         d.exec_()
 
     def about(self):
-        dlgAbout = QDialog()
-        dlgAbout.setWindowTitle(QApplication.translate("Statist", "About Statist"))
-        lines = QVBoxLayout(dlgAbout)
-        title = QLabel(QApplication.translate("Statist", "<b>Statist</b>"))
-        title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        lines.addWidget(title)
-
-        cfg = ConfigParser.SafeConfigParser()
-        cfg.read(os.path.join(os.path.dirname(__file__), "metadata.txt"))
-        version = cfg.get("general", "version")
-
-        ver = QLabel(QApplication.translate("Statist", "Version: %s") % (version))
-        ver.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        lines.addWidget(ver)
-        lines.addWidget(QLabel(QApplication.translate("Statist", "Provides basic statistics information on\nany (numeric or string) field of vector\nlayer.")))
-        lines.addWidget(QLabel(QApplication.translate("Statist", "<b>Developers:</b>")))
-        lines.addWidget(QLabel("  Alexander Bruy"))
-        lines.addWidget(QLabel(QApplication.translate("Statist", "<b>Homepage:</b>")))
-
-        overrideLocale = QSettings().value("locale/overrideFlag", False)
-        if not overrideLocale:
-            localeFullName = QLocale.system().name()
-        else:
-            localeFullName = QSettings().value("locale/userLocale", "")
-
-        localeShortName = localeFullName[0:2]
-        if localeShortName in ["ru", "uk"]:
-            link = QLabel("<a href=\"http://gis-lab.info/qa/statist.html\">http://gis-lab.info/qa/statist.html</a>")
-        else:
-            link = QLabel("<a href=\"http://gis-lab.info/qa/statist-eng.html\">http://gis-lab.info/qa/statist-eng.html</a>")
-
-        link.setOpenExternalLinks(True)
-        lines.addWidget(link)
-
-        btnClose = QPushButton(QApplication.translate("Statist", "Close"))
-        lines.addWidget(btnClose)
-        btnClose.clicked.connect(dlgAbout.close)
-
-        dlgAbout.exec_()
+        d = aboutdialog.AboutDialog()
+        d.exec_()
