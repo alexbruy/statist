@@ -32,7 +32,8 @@ from PyQt4.QtGui import *
 
 from qgis.core import *
 
-from ui_statistdialogbase import Ui_StatistDialog
+from ui.ui_statistdialogbase import Ui_StatistDialog
+
 import statistthread
 import statist_utils as utils
 

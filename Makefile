@@ -1,4 +1,4 @@
-UI_PATH=.
+UI_PATH=ui
 UI_SOURCES=$(wildcard $(UI_PATH)/*.ui)
 UI_FILES=$(patsubst $(UI_PATH)/%.ui, $(UI_PATH)/ui_%.py, $(UI_SOURCES))
 
@@ -44,7 +44,7 @@ pep8:
 
 clean:
 	rm -f $(ALL_FILES)
-	rm -f *.pyc
+	find -name "*.pyc" -exec rm -f {} \;
 	rm -f *.zip
 
 package: ts all
