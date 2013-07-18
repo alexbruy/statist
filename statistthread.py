@@ -79,7 +79,6 @@ class StatistThread(QThread):
         self.mutex.unlock()
 
         index = self.layer.fieldNameIndex(self.fieldName)
-        self.layer.select([index], QgsRectangle(), False)
 
         count = 0
         rValue = 0
@@ -100,7 +99,7 @@ class StatistThread(QThread):
             count = self.layer.selectedFeatureCount()
             self.rangeChanged.emit(count)
             for f in selection:
-                value = float(f.attributeMap()[index].toDouble()[0])
+                value = float(f[index])
 
                 if isFirst:
                     minValue = value
@@ -127,9 +126,12 @@ class StatistThread(QThread):
             count = self.layer.featureCount()
             self.rangeChanged.emit(count)
 
-            ft = QgsFeature()
-            while self.layer.nextFeature(ft):
-                value = float(ft.attributeMap()[index].toDouble()[0])
+            request = QgsFeatureRequest()
+            request.setFlags(QgsFeatureRequest.NoGeometry)
+            request.setSubsetOfAttributes([index])
+
+            for f in self.layer.getFeatures(request):
+                value = float(f[index])
 
                 if isFirst:
                     minValue = value
@@ -176,16 +178,16 @@ class StatistThread(QThread):
 
         # generate output
         statsText = []
-        statsText.append(self.tr("Count:%1").arg(count))
-        statsText.append(self.tr("Unique values:%1").arg(uniqueValue))
-        statsText.append(self.tr("Minimum value:%1").arg(minValue))
-        statsText.append(self.tr("Maximum value:%1").arg(maxValue))
-        statsText.append(self.tr("Range:%1").arg(rValue))
-        statsText.append(self.tr("Sum:%1").arg(sumValue))
-        statsText.append(self.tr("Mean value:%1").arg(meanValue))
-        statsText.append(self.tr("Median value:%1").arg(medianValue))
-        statsText.append(self.tr("Standard deviation:%1").arg(stdDevValue))
-        statsText.append(self.tr("Coefficient of Variation:%1").arg(cvValue))
+        statsText.append(self.tr("Count:%d") % (count))
+        statsText.append(self.tr("Unique values:%d") % (uniqueValue))
+        statsText.append(self.tr("Minimum value:%f") % (minValue))
+        statsText.append(self.tr("Maximum value:%f") % (maxValue))
+        statsText.append(self.tr("Range:%f") % (rValue))
+        statsText.append(self.tr("Sum:%f") % (sumValue))
+        statsText.append(self.tr("Mean value:%f") % (meanValue))
+        statsText.append(self.tr("Median value:%f") % (medianValue))
+        statsText.append(self.tr("Standard deviation:%f") % (stdDevValue))
+        statsText.append(self.tr("Coefficient of Variation:%f") % (cvValue))
 
         return statsText, values
 
@@ -195,7 +197,6 @@ class StatistThread(QThread):
         self.mutex.unlock()
 
         index = self.layer.fieldNameIndex(self.fieldName)
-        self.layer.select([index], QgsRectangle(), False)
 
         count = 0
         sumValue = 0
@@ -213,7 +214,7 @@ class StatistThread(QThread):
             count = self.layer.selectedFeatureCount()
             self.rangeChanged.emit(count)
             for f in selection:
-                length = float(len(f.attributeMap()[index].toString()))
+                length = float(len(f[index]))
 
                 if isFirst:
                     minValue = length
@@ -246,9 +247,12 @@ class StatistThread(QThread):
             count = self.layer.featureCount()
             self.rangeChanged.emit(count)
 
-            ft = QgsFeature()
-            while self.layer.nextFeature(ft):
-                length = float(len(ft.attributeMap()[index].toString()))
+            request = QgsFeatureRequest()
+            request.setFlags(QgsFeatureRequest.NoGeometry)
+            request.setSubsetOfAttributes([index])
+
+            for f in self.layer.getFeatures(request):
+                length = float(len(f[index]))
 
                 if isFirst:
                     minValue = length
@@ -285,11 +289,11 @@ class StatistThread(QThread):
 
         # generate output
         statsText = []
-        statsText.append(self.tr("Minimum length:%1").arg(minValue))
-        statsText.append(self.tr("Maximum length:%1").arg(maxValue))
-        statsText.append(self.tr("Mean length:%1").arg(meanValue))
-        statsText.append(self.tr("Filled:%1").arg(countFilled))
-        statsText.append(self.tr("Empty:%1").arg(countEmpty))
-        statsText.append(self.tr("Count:%1").arg(count))
+        statsText.append(self.tr("Minimum length:%d") % (minValue))
+        statsText.append(self.tr("Maximum length:%d") % (maxValue))
+        statsText.append(self.tr("Mean length:%f") % (meanValue))
+        statsText.append(self.tr("Filled:%d") % (countFilled))
+        statsText.append(self.tr("Empty:%d") % (countEmpty))
+        statsText.append(self.tr("Count:%d") % (count))
 
         return statsText, values

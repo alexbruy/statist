@@ -51,7 +51,7 @@ class StatistPlugin:
         userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/statist"
         systemPluginPath = QgsApplication.prefixPath() + "/python/plugins/statist"
 
-        overrideLocale = QSettings().value("locale/overrideFlag", False)
+        overrideLocale = bool(QSettings().value("locale/overrideFlag", False))
         if not overrideLocale:
             localeFullName = QLocale.system().name()
         else:
@@ -70,10 +70,10 @@ class StatistPlugin:
 
     def initGui(self):
         if int(self.qgsVersion) < 10900:
-            qgisVersion = self.qgsVersion[0] + "." + self.QgisVersion[2] + "." + self.QgisVersion[3]
+            qgisVersion = self.qgsVersion[0] + "." + self.qgsVersion[2] + "." + self.qgsVersion[3]
             QMessageBox.warning(self.iface.mainWindow(),
                                 QCoreApplication.translate("Statist", "Statist: Error"),
-                                QCoreApplication.translate("Statist", "QGIS %s detected.\n") % qgisVersion +
+                                QCoreApplication.translate("Statist", "QGIS %s detected.\n") % (qgisVersion) +
                                 QCoreApplication.translate("Statist", "This version of Statist requires at least QGIS 2.0\nPlugin will not be enabled.")
                                )
             return None
@@ -103,11 +103,8 @@ class StatistPlugin:
     def run(self):
         layersCount = len(utils.getVectorLayerNames())
         if layersCount == 0:
-            QMessageBox.warning(self.iface.mainWindow(),
-                                QCoreApplication.translate("Statist", "Statist: Error"),
-                                QCoreApplication.translate("Statist", "Plugin will not run, because there is\nno vector layers in this project")
-                               )
-            return None
+            self.iface.messageBar().pushMessage(QCoreApplication.translate("Statist", "Project doesn't have any vector layers"))
+            return
 
         d = statistdialog.StatistDialog(self.iface)
         d.show()

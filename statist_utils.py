@@ -56,9 +56,9 @@ def getVectorLayerByName(layerName):
 
 
 def getFieldNames(layer, fieldTypes):
-    fieldMap = layer.pendingFields()
+    fields = layer.pendingFields()
     fieldNames = []
-    for idx, field in fieldMap.iteritems():
+    for field in fields:
         if field.type() in fieldTypes and not field.name() in fieldNames:
             fieldNames.append(unicode(field.name()))
     return sorted(fieldNames, cmp=locale.strcoll)
@@ -66,7 +66,7 @@ def getFieldNames(layer, fieldTypes):
 
 def getFieldType(layer, fieldName):
     fields = layer.pendingFields()
-    for idx, field in fields.iteritems():
+    for field in fields:
         if field.name() == fieldName:
             return field.typeName()
 
@@ -74,17 +74,15 @@ def getFieldType(layer, fieldName):
 def getUniqueValuesCount(layer, fieldIndex, useSelection):
     count = 0
     values = []
-    layer.select([fieldIndex], QgsRectangle(), False)
     if useSelection:
-        selection = layer.selectedFeatures()
-        for f in selection:
-            if f.attributeMap()[fieldIndex].toString() not in values:
-                values.append(f.attributeMap()[fieldIndex].toString())
+        for f in layer.selectedFeatures():
+            if f[fieldIndex] not in values:
+                values.append(f[fieldIndex])
                 count += 1
     else:
-        feat = QgsFeature()
-        while layer.nextFeature(feat):
-            if feat.attributeMap()[fieldIndex].toString() not in values:
-                values.append(feat.attributeMap()[fieldIndex].toString())
+        request = QgsFeatureRequest().setFlags(QgsFeatureRequest.NoGeometry)
+        for f in layer.getFeatures(request):
+            if f[fieldIndex] not in values:
+                values.append(f[fieldIndex])
                 count += 1
     return count

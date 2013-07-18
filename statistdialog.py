@@ -109,9 +109,6 @@ class StatistDialog(QDialog, Ui_StatistDialog):
             self.cmbFields.addItems(utils.getFieldNames(layer, [QVariant.Int, QVariant.Double]))
 
     def accept(self):
-        QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
-        self.btnOk.setEnabled(False)
-
         self.axes.clear()
         self.spnMinX.setValue(0.0)
         self.spnMaxX.setValue(0.0)
@@ -129,6 +126,7 @@ class StatistDialog(QDialog, Ui_StatistDialog):
         self.workThread.processFinished.connect(self.processFinished)
         self.workThread.processInterrupted.connect(self.processInterrupted)
 
+        self.btnOk.setEnabled(False)
         self.btnClose.setText(self.tr("Cancel"))
         self.buttonBox.rejected.disconnect(self.reject)
         self.btnClose.clicked.connect(self.stopProcessing)
@@ -185,7 +183,6 @@ class StatistDialog(QDialog, Ui_StatistDialog):
         self.btnClose.clicked.disconnect(self.stopProcessing)
         self.btnClose.setText(self.tr("Close"))
         self.btnOk.setEnabled(True)
-        QApplication.restoreOverrideCursor()
 
     def refreshPlot(self):
         self.axes.clear()
@@ -223,6 +220,6 @@ class StatistDialog(QDialog, Ui_StatistDialog):
     def keyPressEvent(self, event):
         if event.modifiers() in [Qt.ControlModifier, Qt.MetaModifier] and event.key() == Qt.Key_C:
             clipboard = QApplication.clipboard()
-            clipboard.setText(QStringList(self.tableData).join("\n"))
+            clipboard.setText("\n".join(self.tableData))
         else:
             QDialog.keyPressEvent(self, event)
