@@ -189,6 +189,9 @@ class StatistDialog(QDialog, Ui_StatistDialog):
         self.axes.clear()
         interval = None
 
+        if self.values is None:
+            return
+
         if self.spnMinX.value() == self.spnMaxX.value():
             pass
         else:
