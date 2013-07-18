@@ -7,7 +7,7 @@
 # Provides basic statistics information on any (numeric or string) field
 # of vector layer.
 #
-# Copyright (C) 2009 - 2012 Alexander Bruy (alexander.bruy@gmail.com)
+# Copyright (C) 2009-2013 Alexander Bruy (alexander.bruy@gmail.com)
 #
 # This source is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -26,6 +26,7 @@
 #
 #******************************************************************************
 
+
 import locale
 
 from PyQt4.QtCore import *
@@ -34,51 +35,56 @@ from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 
+
 def getVectorLayerNames():
-  layerMap = QgsMapLayerRegistry.instance().mapLayers()
-  layerNames = []
-  for name, layer in layerMap.iteritems():
-    if layer.type() == QgsMapLayer.VectorLayer:
-      layerNames.append(unicode(layer.name()))
-  return sorted(layerNames, cmp=locale.strcoll)
+    layerMap = QgsMapLayerRegistry.instance().mapLayers()
+    layerNames = []
+    for name, layer in layerMap.iteritems():
+        if layer.type() == QgsMapLayer.VectorLayer:
+            layerNames.append(unicode(layer.name()))
+    return sorted(layerNames, cmp=locale.strcoll)
+
 
 def getVectorLayerByName(layerName):
-  layerMap = QgsMapLayerRegistry.instance().mapLayers()
-  for name, layer in layerMap.iteritems():
-    if layer.type() == QgsMapLayer.VectorLayer and layer.name() == layerName:
-      if layer.isValid():
-        return layer
-      else:
-        return None
+    layerMap = QgsMapLayerRegistry.instance().mapLayers()
+    for name, layer in layerMap.iteritems():
+        if layer.type() == QgsMapLayer.VectorLayer and layer.name() == layerName:
+            if layer.isValid():
+                return layer
+            else:
+                return None
+
 
 def getFieldNames(layer, fieldTypes):
-  fieldMap = layer.pendingFields()
-  fieldNames = []
-  for idx, field in fieldMap.iteritems():
-    if field.type() in fieldTypes and not field.name() in fieldNames:
-      fieldNames.append(unicode(field.name()))
-  return sorted(fieldNames, cmp=locale.strcoll)
+    fieldMap = layer.pendingFields()
+    fieldNames = []
+    for idx, field in fieldMap.iteritems():
+        if field.type() in fieldTypes and not field.name() in fieldNames:
+            fieldNames.append(unicode(field.name()))
+    return sorted(fieldNames, cmp=locale.strcoll)
+
 
 def getFieldType(layer, fieldName):
-  fields = layer.pendingFields()
-  for idx, field in fields.iteritems():
-    if field.name() == fieldName:
-      return field.typeName()
+    fields = layer.pendingFields()
+    for idx, field in fields.iteritems():
+        if field.name() == fieldName:
+            return field.typeName()
+
 
 def getUniqueValuesCount(layer, fieldIndex, useSelection):
-  count = 0
-  values = []
-  layer.select([fieldIndex], QgsRectangle(), False)
-  if useSelection:
-    selection = layer.selectedFeatures()
-    for f in selection:
-      if f.attributeMap()[fieldIndex].toString() not in values:
-        values.append(f.attributeMap()[fieldIndex].toString())
-        count += 1
-  else:
-    feat = QgsFeature()
-    while layer.nextFeature(feat):
-      if feat.attributeMap()[fieldIndex].toString() not in values:
-        values.append(feat.attributeMap()[fieldIndex].toString())
-        count += 1
-  return count
+    count = 0
+    values = []
+    layer.select([fieldIndex], QgsRectangle(), False)
+    if useSelection:
+        selection = layer.selectedFeatures()
+        for f in selection:
+            if f.attributeMap()[fieldIndex].toString() not in values:
+                values.append(f.attributeMap()[fieldIndex].toString())
+                count += 1
+    else:
+        feat = QgsFeature()
+        while layer.nextFeature(feat):
+            if feat.attributeMap()[fieldIndex].toString() not in values:
+                values.append(feat.attributeMap()[fieldIndex].toString())
+                count += 1
+    return count
