@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="ru">
+<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="aboutdialog.py" line="53"/>
         <source>Version: %s</source>
-        <translation>Версия: %s</translation>
+        <translation>Версія: %s</translation>
     </message>
     <message>
         <location filename="aboutdialog.py" line="78"/>
@@ -16,12 +15,12 @@
             &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
             &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;
             &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Рассчитывает основные статистические показатели для любого (числового  
-или текстового) поля векторного слоя. Также отображает гистограмму частотного распределения величин.&lt;/p&gt;
-&lt;p&gt;ПРИМЕЧАНИЕ: модуль требует наличия библиотеки Python matplotlib&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Разработчики&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Домашняя страница&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Об ошибках сообщайте в &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Розраховує основні статистичні показники для будь-якого (числового  
+або текстового) поля векторного шару. Також відображає гістограму частотного розподілу величин.&lt;/p&gt;
+&lt;p&gt;ПРИМІТКА: модуль потребує наявності бібліотеки Python matplotlib.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Про помилки сповіщайте через &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -29,7 +28,7 @@
     <message>
         <location filename="ui/aboutdialogbase.ui" line="14"/>
         <source>About Statist</source>
-        <translation>О Statist</translation>
+        <translation>Про Statist</translation>
     </message>
     <message>
         <location filename="ui/aboutdialogbase.ui" line="44"/>
@@ -60,12 +59,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="doStatist.py" line="62"/>
         <source>Frequency distribution</source>
-        <translation type="obsolete">Частотное распределение</translation>
+        <translation type="obsolete">Частотний розподіл</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="65"/>
         <source>Count</source>
-        <translation type="obsolete">Количество</translation>
+        <translation type="obsolete">Кількість</translation>
     </message>
 </context>
 <context>
@@ -79,43 +78,43 @@ The plugin calculate statistics on selected field of vector layer
 Author: Alexander Bruy
 Mail: alexander.bruy@gmail.com</source>
         <translation type="obsolete">Statist
-Python расширение для Quantum GIS
-Расчитывает основные статистические показатели
-заданного поля векторного слоя
+Python розширення для Quantum GIS
+Розраховує основні статистичні показники
+вказанного поля векторного шару
 
-Автор: Александр Бруй
-Связь: alexander.bruy@gmail.com</translation>
+Автор: Олександр Бруй
+Зв&apos;язок: alexander.bruy@gmail.com</translation>
     </message>
     <message>
         <location filename="statist.py" line="114"/>
         <source>Plugin will not run, because there is
 no vector layers in this project</source>
-        <translation type="obsolete">Плагин не будет запущен, поскольку
-в проекте нет векторных слоев</translation>
+        <translation type="obsolete">Плагін не буде запущено, оскільки
+в проекті відсутні векторні шари</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="44"/>
         <source>Couldn&apos;t import Python module &apos;matplotlib&apos; for plotting. Without it you won&apos;t be able to run Statist.</source>
-        <translation type="obsolete">Не удается найти Python-модуль &apos;matplotlib&apos; для построения графиков. Без него вы не сможете использовать Statist.</translation>
+        <translation type="obsolete">Не вдається завантажити Python-модуль &apos;matplotlib&apos;. Без нього використання Statist не можливе.</translation>
     </message>
     <message>
         <location filename="statist.py" line="72"/>
         <source>Statist: Error</source>
-        <translation>Statist: Ошибка</translation>
+        <translation>Statist: Помилка</translation>
     </message>
     <message>
         <location filename="statist.py" line="73"/>
         <source>Quantum GIS %1 detected.
 </source>
-        <translation type="obsolete">Обнаружена Quantum GIS %1.
+        <translation type="obsolete">Знайдено Quantum GIS %1.
 </translation>
     </message>
     <message>
         <location filename="statist.py" line="73"/>
         <source>This version of Statist requires at least QGIS version 1.8.0
 Plugin will not be enabled.</source>
-        <translation type="obsolete">Эта версия Statist требует QGIS версии 1.8.0 или старше
-Модуль не будет загружен.</translation>
+        <translation type="obsolete">Ця версія Statist розрахована на роботу з QGIS 1.8.0 або старше
+Модуль не буде завантажено.</translation>
     </message>
     <message>
         <location filename="statist.py" line="99"/>
@@ -125,12 +124,12 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="statist.py" line="83"/>
         <source>About Statist...</source>
-        <translation>О Statist...</translation>
+        <translation>Про Statist...</translation>
     </message>
     <message>
         <location filename="statist.py" line="125"/>
         <source>About Statist</source>
-        <translation type="obsolete">О Statist</translation>
+        <translation type="obsolete">Про Statist</translation>
     </message>
     <message>
         <location filename="statist.py" line="127"/>
@@ -140,49 +139,49 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="statist.py" line="130"/>
         <source>Version: %1</source>
-        <translation type="obsolete">Версия: %1</translation>
+        <translation type="obsolete">Версія: %1</translation>
     </message>
     <message>
         <location filename="statist.py" line="133"/>
         <source>Provides basic statistics information on
 any (numeric or string) field of vector
 layer.</source>
-        <translation type="obsolete">Отображает базовую статистическую информацию по
-любому (числовому или сроковому) полю векторного
-слоя.</translation>
+        <translation type="obsolete">Показує основну статистичну інформацію по
+будь-якому (числовому або рядковому) полю
+векторного шару.</translation>
     </message>
     <message>
         <location filename="statist.py" line="134"/>
         <source>&lt;b&gt;Developers:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Разработчики:&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Розробники:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="statist.py" line="136"/>
         <source>&lt;b&gt;Homepage:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Домашняя страница:&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Домашня сторінка:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="statist.py" line="153"/>
         <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
+        <translation type="obsolete">Закрити</translation>
     </message>
     <message>
         <location filename="statist.py" line="72"/>
         <source>QGIS %s detected.
 </source>
-        <translation>Обнаружена QGIS %s.</translation>
+        <translation>Знайдено QGIS %s.</translation>
     </message>
     <message>
         <location filename="statist.py" line="72"/>
         <source>This version of Statist requires at least QGIS 2.0
 Plugin will not be enabled.</source>
-        <translation>Эта версия Statist требует QGIS версии 2.0 или старше
-Модуль не будет загружен.</translation>
+        <translation>Ця версія Statist розрахована на роботу з QGIS 2.0 або старше
+Модуль не буде завантажено.</translation>
     </message>
     <message>
         <location filename="statist.py" line="104"/>
         <source>Project doesn&apos;t have any vector layers</source>
-        <translation>Отсутствуют векторные слои</translation>
+        <translation>Відсутні векторні шари</translation>
     </message>
 </context>
 <context>
@@ -190,22 +189,22 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="statistdialog.py" line="55"/>
         <source>Frequency distribution</source>
-        <translation>Частотное распределение</translation>
+        <translation>Частотний розподіл</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="131"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Відмінити</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="219"/>
         <source>Count</source>
-        <translation>Количество</translation>
+        <translation>Кількість</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="185"/>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="14"/>
@@ -215,22 +214,22 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="ui/statistdialogbase.ui" line="38"/>
         <source>Input vector layer:</source>
-        <translation>Векторный слой:</translation>
+        <translation>Векторний шар:</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="48"/>
         <source>Use only selected features</source>
-        <translation>Использовать только выбранные объекты</translation>
+        <translation>Використовувати лише вибрані об&apos;єкти</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="55"/>
         <source>Target field:</source>
-        <translation>Целевое поле:</translation>
+        <translation>Цільове поле:</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="65"/>
         <source>Enable statistics for text fields</source>
-        <translation>Показывать текстовые поля</translation>
+        <translation>Показувати текстові поля</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="72"/>
@@ -245,22 +244,22 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="ui/statistdialogbase.ui" line="115"/>
         <source>Value</source>
-        <translation>Значение</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="183"/>
         <source>Xmin</source>
-        <translation>Xмин</translation>
+        <translation>Xмін</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="209"/>
         <source>Refresh</source>
-        <translation>Обновить</translation>
+        <translation>Оновити</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="216"/>
         <source>Show grid</source>
-        <translation>Показать сетку</translation>
+        <translation>Показати сітку</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="229"/>
@@ -270,7 +269,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="ui/statistdialogbase.ui" line="255"/>
         <source>As plot</source>
-        <translation>Как график</translation>
+        <translation>Як графік</translation>
     </message>
 </context>
 <context>
@@ -278,152 +277,152 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="statistthread.py" line="291"/>
         <source>Count:%1</source>
-        <translation type="obsolete">Количество:%1</translation>
+        <translation type="obsolete">Кількість:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="178"/>
         <source>Unique values:%1</source>
-        <translation type="obsolete">Уникальных значений:%1</translation>
+        <translation type="obsolete">Унікальних значень:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="179"/>
         <source>Minimum value:%1</source>
-        <translation type="obsolete">Минимальное значение:%1</translation>
+        <translation type="obsolete">Мінімальне значення:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="180"/>
         <source>Maximum value:%1</source>
-        <translation type="obsolete">Максимальное значение:%1</translation>
+        <translation type="obsolete">Максимальне значення:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="181"/>
         <source>Range:%1</source>
-        <translation type="obsolete">Размах:%1</translation>
+        <translation type="obsolete">Розмах:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="182"/>
         <source>Sum:%1</source>
-        <translation type="obsolete">Сумма:%1</translation>
+        <translation type="obsolete">Сума:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="183"/>
         <source>Mean value:%1</source>
-        <translation type="obsolete">Среднее значение:%1</translation>
+        <translation type="obsolete">Середнє значення:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="184"/>
         <source>Median value:%1</source>
-        <translation type="obsolete">Медиана:%1</translation>
+        <translation type="obsolete">Медіана:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="185"/>
         <source>Standard deviation:%1</source>
-        <translation type="obsolete">Стандартное отклонение:%1</translation>
+        <translation type="obsolete">Стандартне відхилення:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="186"/>
         <source>Coefficient of Variation:%1</source>
-        <translation type="obsolete">Коэффициент вариации:%1</translation>
+        <translation type="obsolete">Коефіцієнт варіації:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="286"/>
         <source>Minimum length:%1</source>
-        <translation type="obsolete">Минимальная длина:%1</translation>
+        <translation type="obsolete">Мінімальна довжина:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="287"/>
         <source>Maximum length:%1</source>
-        <translation type="obsolete">Максимальная длина:%1</translation>
+        <translation type="obsolete">Максимальна довжина:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="288"/>
         <source>Mean length:%1</source>
-        <translation type="obsolete">Средняя длина:%1</translation>
+        <translation type="obsolete">Середня довжина:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="289"/>
         <source>Filled:%1</source>
-        <translation type="obsolete">Заполненных:%1</translation>
+        <translation type="obsolete">Заповнених:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="290"/>
         <source>Empty:%1</source>
-        <translation type="obsolete">Пустых:%1</translation>
+        <translation type="obsolete">Пустих:%1</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="297"/>
         <source>Count:%d</source>
-        <translation>Количество:%d</translation>
+        <translation>Кількість:%d</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="182"/>
         <source>Unique values:%d</source>
-        <translation>Уникальных значений:%d</translation>
+        <translation>Унікальних значень:%d</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="183"/>
         <source>Minimum value:%f</source>
-        <translation>Минимальное значение:%f</translation>
+        <translation>Мінімальне значення:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="184"/>
         <source>Maximum value:%f</source>
-        <translation>Максимальное значение:%f</translation>
+        <translation>Максимальне значення:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="185"/>
         <source>Range:%f</source>
-        <translation>Размах:%f</translation>
+        <translation>Розмах:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="186"/>
         <source>Sum:%f</source>
-        <translation>Сумма:%f</translation>
+        <translation>Сума:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="187"/>
         <source>Mean value:%f</source>
-        <translation>Среднее значение:%f</translation>
+        <translation>Середнє значення:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="188"/>
         <source>Median value:%f</source>
-        <translation>Медиана:%f</translation>
+        <translation>Медіана:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="189"/>
         <source>Standard deviation:%f</source>
-        <translation>Стандартное отклонение:%f</translation>
+        <translation>Стандартне відхилення:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="190"/>
         <source>Coefficient of Variation:%f</source>
-        <translation>Коэффициент вариации:%f</translation>
+        <translation>Коефіцієнт варіації:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="292"/>
         <source>Minimum length:%d</source>
-        <translation>Минимальная длина:%d</translation>
+        <translation>Мінімальна довжина:%d</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="293"/>
         <source>Maximum length:%d</source>
-        <translation>Максимальная длина:%d</translation>
+        <translation>Максимальна довжина:%d</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="294"/>
         <source>Mean length:%f</source>
-        <translation>Средняя длина:%f</translation>
+        <translation>Середня довжина:%f</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="295"/>
         <source>Filled:%d</source>
-        <translation>Заполненных:%d</translation>
+        <translation>Заповнених:%d</translation>
     </message>
     <message>
         <location filename="statistthread.py" line="296"/>
         <source>Empty:%d</source>
-        <translation>Пустых:%d</translation>
+        <translation>Пустих:%d</translation>
     </message>
 </context>
 <context>
@@ -431,12 +430,12 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="frmAbout.py" line="96"/>
         <source>About Statist</source>
-        <translation type="obsolete">О Statist</translation>
+        <translation type="obsolete">Про Statist</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="93"/>
         <source>Version:</source>
-        <translation type="obsolete">Верcия:</translation>
+        <translation type="obsolete">Версія:</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="94"/>
@@ -446,27 +445,27 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="frmAbout.py" line="95"/>
         <source>SVN revision:</source>
-        <translation type="obsolete">Ревизия SVN:</translation>
+        <translation type="obsolete">Ревізія SVN:</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="96"/>
         <source>No logo</source>
-        <translation type="obsolete">Нет логотипа</translation>
+        <translation type="obsolete">Нема логотипу</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="97"/>
         <source>Contributors</source>
-        <translation type="obsolete">Участники</translation>
+        <translation type="obsolete">Учасники</translation>
     </message>
     <message>
         <location filename="frmAbout.py" line="98"/>
         <source>Acknowledgements</source>
-        <translation type="obsolete">Благодарности</translation>
+        <translation type="obsolete">Подяки</translation>
     </message>
     <message>
         <location filename="doAbout.py" line="54"/>
         <source>Version: %1</source>
-        <translation type="obsolete">Версия: %1</translation>
+        <translation type="obsolete">Версія: %1</translation>
     </message>
     <message>
         <location filename="doAbout.py" line="55"/>
@@ -476,7 +475,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="doAbout.py" line="56"/>
         <source>SVN revision: %1</source>
-        <translation type="obsolete">Ревизия SVN: %1</translation>
+        <translation type="obsolete">Ревізія SVN: %1</translation>
     </message>
 </context>
 <context>
@@ -484,22 +483,22 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="doStatist.py" line="149"/>
         <source>Please specify target vector layer first</source>
-        <translation type="obsolete">Пожалуйста, укажите векторный слой</translation>
+        <translation type="obsolete">Будь ласка, виберіть векторний шар</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="151"/>
         <source>Please specify target field first</source>
-        <translation type="obsolete">Пожалуйста, укажите целевое поле</translation>
+        <translation type="obsolete">Будь ласка, вкажіть цільове поле</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="166"/>
         <source>Cancel</source>
-        <translation type="obsolete">Отменить</translation>
+        <translation type="obsolete">Відмінити</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="246"/>
         <source>Copy</source>
-        <translation type="obsolete">В буфер</translation>
+        <translation type="obsolete">У буфер</translation>
     </message>
 </context>
 <context>
@@ -512,17 +511,17 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="frmStatist.py" line="131"/>
         <source>Input vector layer:</source>
-        <translation type="obsolete">Векторный слой:</translation>
+        <translation type="obsolete">Векторний шар:</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="132"/>
         <source>Target field:</source>
-        <translation type="obsolete">Целевое поле:</translation>
+        <translation type="obsolete">Цільове поле:</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="133"/>
         <source>Enable statistics for text fields</source>
-        <translation type="obsolete">Показывать текстовые поля</translation>
+        <translation type="obsolete">Показувати текстові поля</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="134"/>
@@ -532,7 +531,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="frmStatist.py" line="135"/>
         <source>Cancel</source>
-        <translation type="obsolete">Отменить</translation>
+        <translation type="obsolete">Відмінити</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="136"/>
@@ -542,22 +541,22 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="frmStatist.py" line="137"/>
         <source>Value</source>
-        <translation type="obsolete">Значение</translation>
+        <translation type="obsolete">Значення</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="138"/>
         <source>Xmin</source>
-        <translation type="obsolete">Xмин</translation>
+        <translation type="obsolete">Xмін</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="139"/>
         <source>Refresh</source>
-        <translation type="obsolete">Обновить</translation>
+        <translation type="obsolete">Оновити</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="140"/>
         <source>Show grid</source>
-        <translation type="obsolete">Показать сетку</translation>
+        <translation type="obsolete">Показати сітку</translation>
     </message>
     <message>
         <location filename="frmStatist.py" line="141"/>
@@ -567,7 +566,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="frmStatist.py" line="142"/>
         <source>As plot</source>
-        <translation type="obsolete">Как график</translation>
+        <translation type="obsolete">Як графік</translation>
     </message>
 </context>
 <context>
@@ -580,7 +579,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="statist.py" line="87"/>
         <source>About...</source>
-        <translation type="obsolete">О расширении...</translation>
+        <translation type="obsolete">Про розширення...</translation>
     </message>
 </context>
 <context>
@@ -588,77 +587,77 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="doStatist.py" line="420"/>
         <source>Count:</source>
-        <translation type="obsolete">Количество:</translation>
+        <translation type="obsolete">Кількість:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="351"/>
         <source>Minimum length:</source>
-        <translation type="obsolete">Минимальная длина:</translation>
+        <translation type="obsolete">Мінімальна довжина:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="352"/>
         <source>Maximum length:</source>
-        <translation type="obsolete">Максимальная длина:</translation>
+        <translation type="obsolete">Максимальна довжина:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="353"/>
         <source>Mean lengtn:</source>
-        <translation type="obsolete">Средняя длина:</translation>
+        <translation type="obsolete">Середня довжина:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="354"/>
         <source>Filled:</source>
-        <translation type="obsolete">Заполненных:</translation>
+        <translation type="obsolete">Заповнених:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="355"/>
         <source>Empty:</source>
-        <translation type="obsolete">Пустых:</translation>
+        <translation type="obsolete">Пустих:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="422"/>
         <source>Minimum value:</source>
-        <translation type="obsolete">Минимальное значение:</translation>
+        <translation type="obsolete">Мінімальне значення:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="423"/>
         <source>Maximum value:</source>
-        <translation type="obsolete">Максимальное значение:</translation>
+        <translation type="obsolete">Максимальне значення:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="425"/>
         <source>Sum:</source>
-        <translation type="obsolete">Сумма:</translation>
+        <translation type="obsolete">Сума:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="426"/>
         <source>Mean value:</source>
-        <translation type="obsolete">Среднее значение:</translation>
+        <translation type="obsolete">Середнє значення:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="428"/>
         <source>Standard deviation:</source>
-        <translation type="obsolete">Стандартное отклонение:</translation>
+        <translation type="obsolete">Стандартне відхилення:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="424"/>
         <source>Swing:</source>
-        <translation type="obsolete">Размах:</translation>
+        <translation type="obsolete">Розмах:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="427"/>
         <source>Median value:</source>
-        <translation type="obsolete">Медиана:</translation>
+        <translation type="obsolete">Медіана:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="421"/>
         <source>Unique values:</source>
-        <translation type="obsolete">Уникальных значений:</translation>
+        <translation type="obsolete">Унікальних значень:</translation>
     </message>
     <message>
         <location filename="doStatist.py" line="429"/>
         <source>Coefficient of Variation:</source>
-        <translation type="obsolete">Коэффициент вариации:</translation>
+        <translation type="obsolete">Коефіцієнт варіації:</translation>
     </message>
 </context>
 <context>
@@ -666,14 +665,14 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="__init__.py" line="70"/>
         <source>Error while loading plugin</source>
-        <translation>Ошибка при загрузке модуля</translation>
+        <translation>Помилка завантаження модуля</translation>
     </message>
     <message>
         <location filename="__init__.py" line="70"/>
         <source>Could not find the matplotlib module.
 Make sure the matplotlib is installed</source>
-        <translation>Не удалось найти пакет matplotlib.
-Убедитесь, что matplotlib установлен</translation>
+        <translation>Не вдалося знайти пакет matplotlib.
+Переконайтеся, що matplotlib встановлено</translation>
     </message>
 </context>
 </TS>

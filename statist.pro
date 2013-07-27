@@ -7,6 +7,6 @@ SOURCES = __init__.py \
 FORMS = ui/statistdialogbase.ui \
         ui/aboutdialogbase.ui
 
-TRANSLATIONS = i18n/statist_ru_RU.ts \
-               i18n/statist_uk_UA.ts \
-               i18n/statist_fr_FR.ts
+TRANSLATIONS = i18n/statist_ru.ts \
+               i18n/statist_uk.ts \
+               i18n/statist_fr.ts
