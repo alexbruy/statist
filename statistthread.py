@@ -99,7 +99,10 @@ class StatistThread(QThread):
             count = self.layer.selectedFeatureCount()
             self.rangeChanged.emit(count)
             for f in selection:
-                value = float(f[index])
+                if f[index]:
+                    value = float(f[index])
+                else:
+                    value = 0.0
 
                 if isFirst:
                     minValue = value
@@ -214,7 +217,10 @@ class StatistThread(QThread):
             count = self.layer.selectedFeatureCount()
             self.rangeChanged.emit(count)
             for f in selection:
-                length = float(len(f[index]))
+                if f[index]:
+                    length = float(len(f[index]))
+                else:
+                    length = 0.0
 
                 if isFirst:
                     minValue = length
