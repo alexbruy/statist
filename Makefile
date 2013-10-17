@@ -47,7 +47,7 @@ clean:
 	find -name "*.pyc" -exec rm -f {} \;
 	rm -f *.zip
 
-package: ts all
+package: clean ts all
 	cd .. && rm -f *.zip && zip -r statist.zip statist -x \*.pyc \*.ts \*.ui \*.qrc \*.pro \*~ \*.git\* \*Makefile*
 	mv ../statist.zip .
 
