@@ -134,7 +134,10 @@ class StatistThread(QThread):
             request.setSubsetOfAttributes([index])
 
             for f in self.layer.getFeatures(request):
-                value = float(f[index])
+                if f[index]:
+                    value = float(f[index])
+                else:
+                    value = 0.0
 
                 if isFirst:
                     minValue = value
@@ -258,7 +261,10 @@ class StatistThread(QThread):
             request.setSubsetOfAttributes([index])
 
             for f in self.layer.getFeatures(request):
-                length = float(len(f[index]))
+                if f[index]:
+                    length = float(len(f[index]))
+                else:
+                    length = 0.0
 
                 if isFirst:
                     minValue = length
