@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="uk_UA">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -274,12 +275,12 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="statistdialog.py" line="123"/>
         <source>No selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вибрано об&apos;єкти</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="123"/>
         <source>There is no selection in input layer. Uncheck corresponding option or select some features before running analysis</source>
-        <translation type="unfinished"></translation>
+        <translation>У векторному шарі не вибрано об&apos;єкти. Відключіть відповідну настройку або виберіть об&apos;єкти перед тим як розпочинати аналіз</translation>
     </message>
 </context>
 <context>
