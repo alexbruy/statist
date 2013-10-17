@@ -192,17 +192,17 @@ Plugin will not be enabled.</source>
         <translation>Частотний розподіл</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="131"/>
+        <location filename="statistdialog.py" line="141"/>
         <source>Cancel</source>
         <translation>Відмінити</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="219"/>
+        <location filename="statistdialog.py" line="229"/>
         <source>Count</source>
         <translation>Кількість</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="185"/>
+        <location filename="statistdialog.py" line="195"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
@@ -270,6 +270,16 @@ Plugin will not be enabled.</source>
         <location filename="ui/statistdialogbase.ui" line="255"/>
         <source>As plot</source>
         <translation>Як графік</translation>
+    </message>
+    <message>
+        <location filename="statistdialog.py" line="123"/>
+        <source>No selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statistdialog.py" line="123"/>
+        <source>There is no selection in input layer. Uncheck corresponding option or select some features before running analysis</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -350,77 +360,77 @@ Plugin will not be enabled.</source>
         <translation type="obsolete">Пустих:%1</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="297"/>
+        <location filename="statistthread.py" line="309"/>
         <source>Count:%d</source>
         <translation>Кількість:%d</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="182"/>
+        <location filename="statistthread.py" line="188"/>
         <source>Unique values:%d</source>
         <translation>Унікальних значень:%d</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="183"/>
+        <location filename="statistthread.py" line="189"/>
         <source>Minimum value:%f</source>
         <translation>Мінімальне значення:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="184"/>
+        <location filename="statistthread.py" line="190"/>
         <source>Maximum value:%f</source>
         <translation>Максимальне значення:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="185"/>
+        <location filename="statistthread.py" line="191"/>
         <source>Range:%f</source>
         <translation>Розмах:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="186"/>
+        <location filename="statistthread.py" line="192"/>
         <source>Sum:%f</source>
         <translation>Сума:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="187"/>
+        <location filename="statistthread.py" line="193"/>
         <source>Mean value:%f</source>
         <translation>Середнє значення:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="188"/>
+        <location filename="statistthread.py" line="194"/>
         <source>Median value:%f</source>
         <translation>Медіана:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="189"/>
+        <location filename="statistthread.py" line="195"/>
         <source>Standard deviation:%f</source>
         <translation>Стандартне відхилення:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="190"/>
+        <location filename="statistthread.py" line="196"/>
         <source>Coefficient of Variation:%f</source>
         <translation>Коефіцієнт варіації:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="292"/>
+        <location filename="statistthread.py" line="304"/>
         <source>Minimum length:%d</source>
         <translation>Мінімальна довжина:%d</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="293"/>
+        <location filename="statistthread.py" line="305"/>
         <source>Maximum length:%d</source>
         <translation>Максимальна довжина:%d</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="294"/>
+        <location filename="statistthread.py" line="306"/>
         <source>Mean length:%f</source>
         <translation>Середня довжина:%f</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="295"/>
+        <location filename="statistthread.py" line="307"/>
         <source>Filled:%d</source>
         <translation>Заповнених:%d</translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="296"/>
+        <location filename="statistthread.py" line="308"/>
         <source>Empty:%d</source>
         <translation>Пустих:%d</translation>
     </message>
