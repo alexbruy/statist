@@ -118,6 +118,16 @@ class StatistDialog(QDialog, Ui_StatistDialog):
 
         layer = utils.getVectorLayerByName(self.cmbLayers.currentText())
 
+        if self.chkUseSelected.isChecked() and \
+                layer.selectedFeatureCount() == 0:
+            QMessageBox.warning(self,
+                                self.tr('No selection'),
+                                self.tr('There is no selection in input '
+                                        'layer. Uncheck corresponding option '
+                                        'or select some features before '
+                                        'running analysis'))
+            return
+
         self.workThread = statistthread.StatistThread(layer,
                                                       self.cmbFields.currentText(),
                                                       self.chkUseSelected.isChecked()
