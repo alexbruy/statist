@@ -52,7 +52,6 @@ class StatistDialog(QDialog, Ui_StatistDialog):
         # add matplotlib figure to dialog
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
-        self.figure.suptitle(self.tr("Frequency distribution"))
         self.canvas = FigureCanvas(self.figure)
         self.mpltoolbar = NavigationToolbar(self.canvas, self.widgetPlot)
         lstActions = self.mpltoolbar.actions()
@@ -80,6 +79,7 @@ class StatistDialog(QDialog, Ui_StatistDialog):
         self.btnRefresh.clicked.connect(self.refreshPlot)
 
         self.manageGui()
+        self.axes.set_title(self.tr("Frequency distribution"))
 
     def manageGui(self):
         self.cmbLayers.clear()
@@ -197,6 +197,7 @@ class StatistDialog(QDialog, Ui_StatistDialog):
 
     def refreshPlot(self):
         self.axes.clear()
+        self.axes.set_title(self.tr("Frequency distribution"))
         interval = None
 
         if self.values is None:
