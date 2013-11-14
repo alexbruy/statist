@@ -133,7 +133,7 @@ Plugin will not be enabled.</source>
 <context>
     <name>StatistDialog</name>
     <message>
-        <location filename="statistdialog.py" line="55"/>
+        <location filename="statistdialog.py" line="200"/>
         <source>Frequency distribution</source>
         <translation type="unfinished">Fréquence de distribution</translation>
     </message>
@@ -143,7 +143,7 @@ Plugin will not be enabled.</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="229"/>
+        <location filename="statistdialog.py" line="230"/>
         <source>Count</source>
         <translation type="unfinished">Comptage</translation>
     </message>

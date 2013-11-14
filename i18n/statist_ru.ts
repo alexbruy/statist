@@ -187,7 +187,7 @@ Plugin will not be enabled.</source>
 <context>
     <name>StatistDialog</name>
     <message>
-        <location filename="statistdialog.py" line="55"/>
+        <location filename="statistdialog.py" line="200"/>
         <source>Frequency distribution</source>
         <translation>Частотное распределение</translation>
     </message>
@@ -197,7 +197,7 @@ Plugin will not be enabled.</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="229"/>
+        <location filename="statistdialog.py" line="230"/>
         <source>Count</source>
         <translation>Количество</translation>
     </message>
