@@ -14,7 +14,7 @@ tags=vector,analysis,statistics
 
 homepage=http://hub.qgis.org/projects/statist/
 tracker=http://hub.qgis.org/projects/statist/issues
-repository=https://github.com/alexbruy/Statist
+repository=https://github.com/alexbruy/statist
 
 experimental=False
 deprecated=False
