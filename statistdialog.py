@@ -37,10 +37,16 @@ from ui.ui_statistdialogbase import Ui_StatistDialog
 import statistthread
 import statist_utils as utils
 
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
-from matplotlib.figure import Figure
+import matplotlib
 from matplotlib import rcParams
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+
+version = matplotlib.__version__.split('.')
+if int(version[0]) >= 1 and int(version[1]) >= 5:
+    from matplotlib.backends.backend_qt4agg import NavigationToolbar2Qt as NavigationToolbar
+else:
+    from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 
 
 class StatistDialog(QDialog, Ui_StatistDialog):
