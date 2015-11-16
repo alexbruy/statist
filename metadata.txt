@@ -1,6 +1,7 @@
 [general]
 name=Statist
 description=Calculate and show statistics for a field
+about=Calculate and show statistics for a field
 category=Vector
 version=1.1.4
 qgisMinimumVersion=2.0
