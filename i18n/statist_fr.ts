@@ -9,12 +9,7 @@
     </message>
     <message>
         <location filename="aboutdialog.py" line="78"/>
-        <source>&lt;p&gt;Provides basic statistics information on any (numeric 
-            or string) field of vector layer. Also shows frequency distribution.&lt;/p&gt;
-            &lt;p&gt;NOTE: plugin requires matplotlib Python library&lt;/p&gt;
-            &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
-            &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;
-            &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
+        <source>&lt;p&gt;Provides basic statistics information on any (numeric             or string) field of vector layer. Also shows frequency distribution.&lt;/p&gt;            &lt;p&gt;NOTE: plugin requires matplotlib Python library&lt;/p&gt;            &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;            &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;            &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -133,22 +128,22 @@ Plugin will not be enabled.</source>
 <context>
     <name>StatistDialog</name>
     <message>
-        <location filename="statistdialog.py" line="200"/>
+        <location filename="statistdialog.py" line="206"/>
         <source>Frequency distribution</source>
         <translation type="unfinished">Fréquence de distribution</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="141"/>
+        <location filename="statistdialog.py" line="147"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="230"/>
+        <location filename="statistdialog.py" line="236"/>
         <source>Count</source>
         <translation type="unfinished">Comptage</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="195"/>
+        <location filename="statistdialog.py" line="201"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -218,12 +213,12 @@ Plugin will not be enabled.</source>
         <translation type="unfinished">Comme dessin</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="123"/>
+        <location filename="statistdialog.py" line="129"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="123"/>
+        <location filename="statistdialog.py" line="129"/>
         <source>There is no selection in input layer. Uncheck corresponding option or select some features before running analysis</source>
         <translation type="unfinished"></translation>
     </message>

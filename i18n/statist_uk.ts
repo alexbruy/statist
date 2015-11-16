@@ -15,12 +15,17 @@
             &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
             &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;
             &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Розраховує основні статистичні показники для будь-якого (числового  
+        <translation type="obsolete">&lt;p&gt;Розраховує основні статистичні показники для будь-якого (числового  
 або текстового) поля векторного шару. Також відображає гістограму частотного розподілу величин.&lt;/p&gt;
 &lt;p&gt;ПРИМІТКА: модуль потребує наявності бібліотеки Python matplotlib.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Про помилки сповіщайте через &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="aboutdialog.py" line="78"/>
+        <source>&lt;p&gt;Provides basic statistics information on any (numeric             or string) field of vector layer. Also shows frequency distribution.&lt;/p&gt;            &lt;p&gt;NOTE: plugin requires matplotlib Python library&lt;/p&gt;            &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;            &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;            &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -187,22 +192,22 @@ Plugin will not be enabled.</source>
 <context>
     <name>StatistDialog</name>
     <message>
-        <location filename="statistdialog.py" line="200"/>
+        <location filename="statistdialog.py" line="206"/>
         <source>Frequency distribution</source>
         <translation>Частотний розподіл</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="141"/>
+        <location filename="statistdialog.py" line="147"/>
         <source>Cancel</source>
         <translation>Відмінити</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="230"/>
+        <location filename="statistdialog.py" line="236"/>
         <source>Count</source>
         <translation>Кількість</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="195"/>
+        <location filename="statistdialog.py" line="201"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
@@ -272,12 +277,12 @@ Plugin will not be enabled.</source>
         <translation>Як графік</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="123"/>
+        <location filename="statistdialog.py" line="129"/>
         <source>No selection</source>
         <translation>Не вибрано об&apos;єкти</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="123"/>
+        <location filename="statistdialog.py" line="129"/>
         <source>There is no selection in input layer. Uncheck corresponding option or select some features before running analysis</source>
         <translation>У векторному шарі не вибрано об&apos;єкти. Відключіть відповідну настройку або виберіть об&apos;єкти перед тим як розпочинати аналіз</translation>
     </message>
