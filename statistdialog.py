@@ -44,7 +44,7 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 
 version = matplotlib.__version__.split('.')
 if int(version[0]) >= 1 and int(version[1]) >= 5:
-    from matplotlib.backends.backend_qt4agg import NavigationToolbar2Qt as NavigationToolbar
+    from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 else:
     from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 
