@@ -1,41 +1,35 @@
 # -*- coding: utf-8 -*-
 
-#******************************************************************************
-#
-# Statist
-# ---------------------------------------------------------
-# Provides basic statistics information on any (numeric or string) field
-# of vector layer.
-#
-# Copyright (C) 2009-2013 Alexander Bruy (alexander.bruy@gmail.com)
-#
-# This source is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation, either version 2 of the License, or (at your option)
-# any later version.
-#
-# This code is distributed in the hope that it will be useful, but WITHOUT ANY
-# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-# details.
-#
-# A copy of the GNU General Public License is available on the World Wide Web
-# at <http://www.gnu.org/licenses/>. You can also obtain it by writing
-# to the Free Software Foundation, 51 Franklin Street, Suite 500 Boston,
-# MA 02110-1335 USA.
-#
-#******************************************************************************
+"""
+***************************************************************************
+    statistdialog.py
+    ---------------------
+    Date                 : June 2009
+    Copyright            : (C) 2009-2015 by Alexander Bruy
+    Email                : alexander dot bruy at gmail dot com
+***************************************************************************
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+***************************************************************************
+"""
 
+__author__ = 'Alexander Bruy'
+__date__ = 'June 2009'
+__copyright__ = '(C) 2009-2015, Alexander Bruy'
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+# This will get replaced with a git SHA1 when you do a git archive
 
-from qgis.core import *
+__revision__ = '$Format:%H$'
 
-from ui.ui_statistdialogbase import Ui_StatistDialog
+import os
 
-import statistthread
-import statist_utils as utils
+from PyQt4 import uic
+from PyQt4.QtCore import Qt, QVariant
+from PyQt4.QtGui import QMessageBox, QDialog, QDialogButtonBox, QTableWidgetItem
 
 import matplotlib
 from matplotlib import rcParams
@@ -48,12 +42,21 @@ if int(version[0]) >= 1 and int(version[1]) >= 5:
 else:
     from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 
+from statist.statistthread import StatistThread
+import statist.statist_utils as utils
 
-class StatistDialog(QDialog, Ui_StatistDialog):
-    def __init__(self, iface):
-        QDialog.__init__(self)
-        self.iface = iface
+
+pluginPath = os.path.split(os.path.dirname(__file__))[0]
+WIDGET, BASE = uic.loadUiType(
+    os.path.join(pluginPath, 'ui', 'statistdialogbase.ui'))
+
+
+class StatistDialog(BASE, WIDGET):
+    def __init__(self, iface, parent=None):
+        super(StatistDialog, self).__init__(parent)
         self.setupUi(self)
+
+        self.iface = iface
 
         # add matplotlib figure to dialog
         self.figure = Figure()
@@ -134,10 +137,10 @@ class StatistDialog(QDialog, Ui_StatistDialog):
                                         'running analysis'))
             return
 
-        self.workThread = statistthread.StatistThread(layer,
-                                                      self.cmbFields.currentText(),
-                                                      self.chkUseSelected.isChecked()
-                                                     )
+        self.workThread = StatistThread(layer,
+                                        self.cmbFields.currentText(),
+                                        self.chkUseSelected.isChecked()
+                                       )
         self.workThread.rangeChanged.connect(self.setProgressRange)
         self.workThread.updateProgress.connect(self.updateProgress)
         self.workThread.processFinished.connect(self.processFinished)
