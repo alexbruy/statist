@@ -31,7 +31,7 @@ from PyQt4.QtCore import pyqtSignal, QThread, QMutex
 
 from qgis.core import QgsFeatureRequest
 
-import statist.statist_utils as utils
+from statist.statist_utils import *
 
 
 class StatistThread(QThread):
@@ -53,7 +53,7 @@ class StatistThread(QThread):
         self.useSelection = useSelection
 
     def run(self):
-        if utils.getFieldType(self.layer, self.fieldName) in self.STRING_TYPES:
+        if self.getFieldType() in self.STRING_TYPES:
             statText, values = self.statisticsForText()
         else:
             statText, values = self.statisticsForNumbers()
@@ -160,7 +160,7 @@ class StatistThread(QThread):
 
         # calculate additional values
         rValue = maxValue - minValue
-        uniqueValue = utils.getUniqueValuesCount(self.layer, index, self.useSelection)
+        uniqueValue = getUniqueValuesCount(self.layer, index, self.useSelection)
 
         if count > 0:
             meanValue = sumValue / count
@@ -306,3 +306,20 @@ class StatistThread(QThread):
         statsText.append(self.tr("Count:%d") % (count))
 
         return statsText, values
+
+    def getUniqueValuesCount(self):
+        if self.useSelection:
+            values = []
+            idx = self.layer.fieldNameIndex(self.fieldName)
+            for f in self.layer.selectedFeatures():
+                if f[idx] not in values:
+                    values.append(f[fieldIndex])
+            return len(values)
+        else:
+            return len(layer.uniqueValues(fieldIndex))
+
+    def getFieldType(self):
+        fields = self.layer.pendingFields()
+        for field in fields:
+            if field.name() == self.fieldName:
+                return field.typeName()

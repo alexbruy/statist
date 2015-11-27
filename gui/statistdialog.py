@@ -42,8 +42,9 @@ if int(version[0]) >= 1 and int(version[1]) >= 5:
 else:
     from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 
+from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel
+
 from statist.statistthread import StatistThread
-import statist.statist_utils as utils
 
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
@@ -80,25 +81,18 @@ class StatistDialog(BASE, WIDGET):
         self.btnOk = self.buttonBox.button(QDialogButtonBox.Ok)
         self.btnClose = self.buttonBox.button(QDialogButtonBox.Close)
 
-        self.cmbLayers.currentIndexChanged.connect(self.reloadFields)
-        self.chkUseTextFields.stateChanged.connect(self.reloadFields)
+        self.chkShowTextFields.stateChanged.connect(self.reloadFields)
 
         self.chkShowGrid.stateChanged.connect(self.refreshPlot)
         self.chkAsPlot.stateChanged.connect(self.refreshPlot)
         self.btnRefresh.clicked.connect(self.refreshPlot)
 
-        self.manageGui()
         self.axes.set_title(self.tr("Frequency distribution"))
 
-    def manageGui(self):
-        self.cmbLayers.clear()
-        self.cmbLayers.addItems(utils.getVectorLayerNames())
-
+        self.cmbLayer.setFilters(QgsMapLayerProxyModel.VectorLayer)
         self.btnRefresh.setEnabled(False)
 
     def reloadFields(self):
-        self.cmbFields.clear()
-
         self.axes.clear()
         self.lstStatistics.clearContents()
         self.lstStatistics.setRowCount(0)
@@ -106,17 +100,19 @@ class StatistDialog(BASE, WIDGET):
         self.spnMinX.setValue(0.0)
         self.spnMaxX.setValue(0.0)
 
-        layer = utils.getVectorLayerByName(self.cmbLayers.currentText())
+        layer = self.cmbLayer.currentLayer()
 
         if layer.selectedFeatureCount() != 0:
             self.chkUseSelected.setCheckState(Qt.Checked)
         else:
             self.chkUseSelected.setCheckState(Qt.Unchecked)
 
-        if self.chkUseTextFields.checkState():
-            self.cmbFields.addItems(utils.getFieldNames(layer, [QVariant.String]))
+        if self.chkShowTextFields.checkState():
+            self.cmbField.setFilters(QgsFieldProxyModel.Numeric | QgsFieldProxyModel.String)
         else:
-            self.cmbFields.addItems(utils.getFieldNames(layer, [QVariant.Int, QVariant.Double]))
+            self.cmbField.setFilters(QgsFieldProxyModel.Numeric)
+
+        self.cmbField.setLayer(layer)
 
     def accept(self):
         self.axes.clear()
@@ -125,7 +121,7 @@ class StatistDialog(BASE, WIDGET):
         self.lstStatistics.clearContents()
         self.lstStatistics.setRowCount(0)
 
-        layer = utils.getVectorLayerByName(self.cmbLayers.currentText())
+        layer = self.cmbLayer.currentLayer()
 
         if self.chkUseSelected.isChecked() and \
                 layer.selectedFeatureCount() == 0:
@@ -138,7 +134,7 @@ class StatistDialog(BASE, WIDGET):
             return
 
         self.workThread = StatistThread(layer,
-                                        self.cmbFields.currentText(),
+                                        self.cmbField.currentField(),
                                         self.chkUseSelected.isChecked()
                                        )
         self.workThread.rangeChanged.connect(self.setProgressRange)
@@ -237,7 +233,7 @@ class StatistDialog(BASE, WIDGET):
 
         self.axes.grid(self.chkShowGrid.isChecked())
         self.axes.set_ylabel(unicode(self.tr("Count")))
-        self.axes.set_xlabel(unicode(self.cmbFields.currentText()))
+        self.axes.set_xlabel(unicode(self.cmbField.currentText()))
         self.figure.autofmt_xdate()
         self.canvas.draw()
 

@@ -39,41 +39,35 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QComboBox" name="cmbLayers"/>
-      </item>
-      <item row="1" column="0" colspan="3">
+      <item row="2" column="0" colspan="3">
        <widget class="QCheckBox" name="chkUseSelected">
         <property name="text">
          <string>Use only selected features</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Target field:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QComboBox" name="cmbFields"/>
-      </item>
-      <item row="3" column="0" colspan="3">
-       <widget class="QCheckBox" name="chkUseTextFields">
+      <item row="4" column="0" colspan="3">
+       <widget class="QCheckBox" name="chkShowTextFields">
         <property name="text">
-         <string>Enable statistics for text fields</string>
+         <string>Show text fields</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="3">
+      <item row="5" column="0" colspan="3">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Statistics output:</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="3">
+      <item row="6" column="0" colspan="3">
        <widget class="QTableWidget" name="lstStatistics">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -117,7 +111,7 @@
         </column>
        </widget>
       </item>
-      <item row="6" column="0" colspan="3">
+      <item row="7" column="0" colspan="3">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QProgressBar" name="progressBar">
@@ -137,6 +131,12 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QgsMapLayerComboBox" name="cmbLayer"/>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QgsFieldComboBox" name="cmbField"/>
       </item>
      </layout>
     </widget>
@@ -277,6 +277,18 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsFieldComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsfieldcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
