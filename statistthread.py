@@ -31,8 +31,6 @@ from PyQt4.QtCore import pyqtSignal, QThread, QMutex
 
 from qgis.core import QgsFeatureRequest
 
-from statist.statist_utils import *
-
 
 class StatistThread(QThread):
     rangeChanged = pyqtSignal(int)
