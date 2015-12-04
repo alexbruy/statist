@@ -28,7 +28,7 @@ __revision__ = '$Format:%H$'
 import os
 
 from PyQt4 import uic
-from PyQt4.QtCore import Qt, QVariant
+from PyQt4.QtCore import Qt, QThread
 from PyQt4.QtGui import QMessageBox, QDialog, QDialogButtonBox, QTableWidgetItem
 
 import matplotlib
@@ -44,7 +44,7 @@ else:
 
 from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel
 
-from statist.statistthread import StatistThread
+from statist.statisticscalcalculator import StatisticsCalculator
 
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
@@ -59,6 +59,9 @@ class StatistDialog(BASE, WIDGET):
 
         self.iface = iface
 
+        self.thread = QThread()
+        self.calculator = StatisticsCalculator()
+
         # add matplotlib figure to dialog
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
@@ -70,13 +73,11 @@ class StatistDialog(BASE, WIDGET):
         self.layoutPlot.addWidget(self.mpltoolbar)
 
         # and configure matplotlib params
-        rcParams["font.serif"] = "Verdana, Arial, Liberation Serif"
-        rcParams["font.sans-serif"] = "Tahoma, Arial, Liberation Sans"
-        rcParams["font.cursive"] = "Courier New, Arial, Liberation Sans"
-        rcParams["font.fantasy"] = "Comic Sans MS, Arial, Liberation Sans"
-        rcParams["font.monospace"] = "Courier New, Liberation Mono"
-
-        self.values = None
+        rcParams['font.serif'] = 'Verdana, Arial, Liberation Serif'
+        rcParams['font.sans-serif'] = 'Tahoma, Arial, Liberation Sans'
+        rcParams['font.cursive'] = 'Courier New, Arial, Liberation Sans'
+        rcParams['font.fantasy'] = 'Comic Sans MS, Arial, Liberation Sans'
+        rcParams['font.monospace'] = 'Courier New, Liberation Mono'
 
         self.btnOk = self.buttonBox.button(QDialogButtonBox.Ok)
         self.btnClose = self.buttonBox.button(QDialogButtonBox.Close)
@@ -87,9 +88,16 @@ class StatistDialog(BASE, WIDGET):
         self.chkAsPlot.stateChanged.connect(self.refreshPlot)
         self.btnRefresh.clicked.connect(self.refreshPlot)
 
-        self.axes.set_title(self.tr("Frequency distribution"))
+        self.calculator.moveToThread(self.thread)
+        self.calculator.calculated.connect(self.thread.quit)
+        self.calculator.calculated.connect(self.processFinished)
+
+        self.thread.started.connect(self.calculator.calculate)
+
+        self.axes.set_title(self.tr('Frequency distribution'))
 
         self.cmbLayer.setFilters(QgsMapLayerProxyModel.VectorLayer)
+        self.cmbField.setLayer(self.cmbLayer.currentLayer())
         self.btnRefresh.setEnabled(False)
 
     def reloadFields(self):
@@ -133,41 +141,23 @@ class StatistDialog(BASE, WIDGET):
                                         'running analysis'))
             return
 
-        self.workThread = StatistThread(layer,
-                                        self.cmbField.currentField(),
-                                        self.chkUseSelected.isChecked()
-                                       )
-        self.workThread.rangeChanged.connect(self.setProgressRange)
-        self.workThread.updateProgress.connect(self.updateProgress)
-        self.workThread.processFinished.connect(self.processFinished)
-        self.workThread.processInterrupted.connect(self.processInterrupted)
+        self.calculator.setLayer(layer)
+        self.calculator.setField(self.cmbField.currentField())
+        self.calculator.setSelectedOnly(self.chkUseSelected.isChecked())
 
         self.btnOk.setEnabled(False)
-        self.btnClose.setText(self.tr("Cancel"))
-        self.buttonBox.rejected.disconnect(self.reject)
-        self.btnClose.clicked.connect(self.stopProcessing)
+        self.btnClose.setEnabled(False)
 
-        self.workThread.start()
+        self.thread.start()
 
     def reject(self):
         QDialog.reject(self)
 
-    def setProgressRange(self, maxValue):
-        self.progressBar.setRange(0, maxValue)
-
-    def updateProgress(self):
-        self.progressBar.setValue(self.progressBar.value() + 1)
-
-    def processFinished(self, statData):
-        self.stopProcessing()
-
-        # populate table with results
-        self.tableData = statData[0]
-        self.values = statData[1]
-        rowCount = len(self.tableData)
+    def processFinished(self):
+        rowCount = len(self.calculator.data)
         self.lstStatistics.setRowCount(rowCount)
         for i in xrange(rowCount):
-            tmp = self.tableData[i].split(":")
+            tmp = self.calculator.data[i].split(':')
             item = QTableWidgetItem(tmp[0])
             self.lstStatistics.setItem(i, 0, item)
             item = QTableWidgetItem(tmp[1])
@@ -175,37 +165,18 @@ class StatistDialog(BASE, WIDGET):
 
         self.lstStatistics.resizeRowsToContents()
 
-        self.btnRefresh.setEnabled(True)
-
-        # create histogram
         self.refreshPlot()
 
-        self.restoreGui()
-
-    def processInterrupted(self):
-        self.restoreGui()
-
-    def stopProcessing(self):
-        if self.workThread is not None:
-            self.workThread.stop()
-            self.workThread = None
-
-    def restoreGui(self):
-        self.progressBar.setFormat("%p%")
-        self.progressBar.setRange(0, 1)
-        self.progressBar.setValue(0)
-
-        self.buttonBox.rejected.connect(self.reject)
-        self.btnClose.clicked.disconnect(self.stopProcessing)
-        self.btnClose.setText(self.tr("Close"))
+        self.btnRefresh.setEnabled(True)
         self.btnOk.setEnabled(True)
+        self.btnClose.setEnabled(True)
 
     def refreshPlot(self):
         self.axes.clear()
-        self.axes.set_title(self.tr("Frequency distribution"))
+        self.axes.set_title(self.tr('Frequency distribution'))
         interval = None
 
-        if self.values is None:
+        if len(self.calculator.values) == 0:
             return
 
         if self.spnMinX.value() == self.spnMaxX.value():
@@ -220,26 +191,26 @@ class StatistDialog(BASE, WIDGET):
                 interval.append(self.spnMaxX.value())
 
         if not self.chkAsPlot.isChecked():
-            self.axes.hist(self.values, 18, interval, alpha=0.5, histtype="bar")
+            self.axes.hist(self.calculator.values, 18, interval, alpha=0.5, histtype='bar')
         else:
-            n, bins, pathes = self.axes.hist(self.values, 18, interval, alpha=0.5, histtype="bar")
+            n, bins, pathes = self.axes.hist(self.calculator.values, 18, interval, alpha=0.5, histtype='bar')
             self.axes.clear()
             c = []
             for i in range(len(bins) - 1):
                 s = bins[i + 1] - bins[i]
                 c.append(bins[i] + (s / 2))
 
-            self.axes.plot(c, n, "ro-")
+            self.axes.plot(c, n, 'ro-')
 
         self.axes.grid(self.chkShowGrid.isChecked())
-        self.axes.set_ylabel(unicode(self.tr("Count")))
-        self.axes.set_xlabel(unicode(self.cmbField.currentText()))
+        self.axes.set_ylabel(self.tr('Count'))
+        self.axes.set_xlabel(self.cmbField.currentText())
         self.figure.autofmt_xdate()
         self.canvas.draw()
 
     def keyPressEvent(self, event):
         if event.modifiers() in [Qt.ControlModifier, Qt.MetaModifier] and event.key() == Qt.Key_C:
             clipboard = QApplication.clipboard()
-            clipboard.setText("\n".join(self.tableData))
+            clipboard.setText('\n'.join(self.tableData))
         else:
             QDialog.keyPressEvent(self, event)
