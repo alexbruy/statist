@@ -97,10 +97,11 @@ class StatisticsCalculator(QObject):
     def _isTextField(self):
         idx = self.layer.fieldNameIndex(self.fieldName)
         fields = self.layer.pendingFields()
-        if fields[idx].typeName().lower() in  ['string', 'varchar', 'char', 'text']:
+        if fields[idx].typeName().lower() in ['string', 'varchar', 'char', 'text']:
             return True
         else:
             return False
+
 
 class TextStatisticalSummary:
     def __init__(self):
