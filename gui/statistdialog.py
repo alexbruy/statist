@@ -42,7 +42,7 @@ if int(version[0]) >= 1 and int(version[1]) >= 5:
 else:
     from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 
-from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel
+from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel, QgsMessageBar
 
 from statist.statisticscalcalculator import StatisticsCalculator
 
@@ -133,12 +133,10 @@ class StatistDialog(BASE, WIDGET):
 
         if self.chkUseSelected.isChecked() and \
                 layer.selectedFeatureCount() == 0:
-            QMessageBox.warning(self,
-                                self.tr('No selection'),
-                                self.tr('There is no selection in input '
-                                        'layer. Uncheck corresponding option '
-                                        'or select some features before '
-                                        'running analysis'))
+            QgsMessageBar.pushWarning(self.tr('No selection'),
+                self.tr('There is no selection in the input layer. Uncheck '
+                        'corresponding option or select some features before '
+                        'running analysis'))
             return
 
         self.calculator.setLayer(layer)
