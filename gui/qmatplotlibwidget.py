@@ -54,7 +54,7 @@ class QMatplotlibCanvas(FigureCanvas):
         self.parent = parent
 
         self.figure = Figure()
-        self.axes = self.figure.add_subplot(111)
+        self.ax = self.figure.add_subplot(111)
 
         FigureCanvas.__init__(self, self.figure)
         FigureCanvas.setSizePolicy(
@@ -76,7 +76,7 @@ class QMatplotlibWidget(QWidget):
         QWidget.__init__(self, parent)
 
         self.canvas = QMatplotlibCanvas()
-        self.axes = self.canvas.axes
+        self.ax = self.canvas.ax
         self.figure = self.canvas.figure
         self.toolBar = NavigationToolbar(self.canvas, self)
 
@@ -105,7 +105,11 @@ class QMatplotlibWidget(QWidget):
         self.toolBar.insertSeparator(self.toolBar.actions()[8])
 
     def toggleGrid(self):
-        self.axes.grid()
+        self.ax.grid()
         self.canvas.draw()
 
-        print self.toolBar.actions()
+    def clear(self):
+        self.ax.clear()
+
+    def setTitle(self, title):
+        self.ax.set_title(title)

@@ -29,7 +29,7 @@ import os
 
 from PyQt4 import uic
 from PyQt4.QtCore import Qt, QThread
-from PyQt4.QtGui import QMessageBox, QDialog, QDialogButtonBox, QTableWidgetItem
+from PyQt4.QtGui import QMessageBox, QDialog, QDialogButtonBox, QTableWidgetItem, QApplication
 
 from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel, QgsMessageBar
 
@@ -51,6 +51,8 @@ class StatistDialog(BASE, WIDGET):
         self.thread = QThread()
         self.calculator = StatisticsCalculator()
 
+        self.mplWidget.setTitle(self.tr('Frequency distribution'))
+
         self.btnOk = self.buttonBox.button(QDialogButtonBox.Ok)
         self.btnClose = self.buttonBox.button(QDialogButtonBox.Close)
 
@@ -65,13 +67,12 @@ class StatistDialog(BASE, WIDGET):
 
         self.cmbField.setLayer(self.cmbLayer.currentLayer())
 
-    def reloadFields(self):
-        #self.axes.clear()
-        #self.tblStatistics.clearContents()
-        self.tblStatistics.setRowCount(0)
+        self.cmbLayer.layerChanged.connect(self.resetGui)
+        self.cmbLayer.layerChanged.connect(self.cmbField.setLayer)
 
-        layer = self.cmbLayer.currentLayer()
-        self.cmbField.setLayer(layer)
+    def resetGui(self, layer):
+        self.mplWidget.clear()
+        self.tblStatistics.setRowCount(0)
 
         if layer.selectedFeatureCount() != 0:
             self.chkSelectedOnly.setChecked(True)
@@ -79,10 +80,6 @@ class StatistDialog(BASE, WIDGET):
             self.chkSelectedOnly.setChecked(False)
 
     def accept(self):
-        #self.axes.clear()
-        #self.spnMinX.setValue(0.0)
-        #self.spnMaxX.setValue(0.0)
-        #self.lstStatistics.clearContents()
         self.tblStatistics.setRowCount(0)
 
         layer = self.cmbLayer.currentLayer()
@@ -125,8 +122,8 @@ class StatistDialog(BASE, WIDGET):
         self.btnClose.setEnabled(True)
 
     def refreshPlot(self):
-        #self.axes.clear()
-        #self.axes.set_title(self.tr('Frequency distribution'))
+        self.mplWidget.clear()
+        self.mplWidget.setTitle(self.tr('Frequency distribution'))
         #interval = None
 
         #if len(self.calculator.values) == 0:
@@ -161,7 +158,7 @@ class StatistDialog(BASE, WIDGET):
         #self.figure.autofmt_xdate()
         #self.canvas.draw()
 
-        self.mplWidget.axes.hist(self.calculator.values, 18, alpha=0.5, histtype='bar')
+        self.mplWidget.ax.hist(self.calculator.values, 18, alpha=0.5, histtype='bar')
         self.mplWidget.canvas.draw()
 
 
