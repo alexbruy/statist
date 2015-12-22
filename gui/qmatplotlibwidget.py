@@ -25,8 +25,10 @@ __copyright__ = '(C) 2014-2015, Alexander Bruy'
 
 __revision__ = '$Format:%H$'
 
+import os
+
 from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QWidget, QVBoxLayout, QSizePolicy, QPalette
+from PyQt4.QtGui import QWidget, QVBoxLayout, QSizePolicy, QPalette, QAction, QIcon
 
 import matplotlib
 mplVersion = matplotlib.__version__.split('.')
@@ -42,6 +44,9 @@ else:
         NavigationToolbar2QTAgg as NavigationToolbar
 from matplotlib.figure import Figure
 from matplotlib import rcParams
+
+
+pluginPath = os.path.split(os.path.dirname(__file__))[0]
 
 
 class QMatplotlibCanvas(FigureCanvas):
@@ -73,7 +78,7 @@ class QMatplotlibWidget(QWidget):
         self.canvas = QMatplotlibCanvas()
         self.axes = self.canvas.axes
         self.figure = self.canvas.figure
-        self.toolbar = NavigationToolbar(self.canvas, self)
+        self.toolBar = NavigationToolbar(self.canvas, self)
 
         bgColor = self.palette().color(QPalette.Background).name()
         self.figure.set_facecolor(bgColor)
@@ -83,9 +88,24 @@ class QMatplotlibWidget(QWidget):
         self.layout.setMargin(0)
 
         self.layout.addWidget(self.canvas)
-        self.layout.addWidget(self.toolbar)
+        self.layout.addWidget(self.toolBar)
         self.setLayout(self.layout)
+
+        self._setupToolbar()
+
+    def _setupToolbar(self):
+        self.actionToggleGrid = QAction(self.tr('Toggle grid'), self.toolBar)
+        self.actionToggleGrid.setIcon(
+            QIcon(os.path.join(pluginPath, 'icons', 'toggleGrid.svg')))
+        self.actionToggleGrid.setCheckable(True)
+
+        self.actionToggleGrid.triggered.connect(self.toggleGrid)
+
+        self.toolBar.insertAction(self.toolBar.actions()[7], self.actionToggleGrid)
+        self.toolBar.insertSeparator(self.toolBar.actions()[8])
 
     def toggleGrid(self):
         self.axes.grid()
         self.canvas.draw()
+
+        print self.toolBar.actions()

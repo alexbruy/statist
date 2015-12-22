@@ -65,8 +65,6 @@ class StatistDialog(BASE, WIDGET):
 
         self.cmbField.setLayer(self.cmbLayer.currentLayer())
 
-        self.pushButton.clicked.connect(self.mplWidget.toggleGrid)
-
     def reloadFields(self):
         #self.axes.clear()
         #self.tblStatistics.clearContents()
