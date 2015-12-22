@@ -110,6 +110,7 @@ class QMatplotlibWidget(QWidget):
 
     def clear(self):
         self.ax.clear()
+        self.canvas.draw()
 
     def setTitle(self, title):
         self.ax.set_title(title)
