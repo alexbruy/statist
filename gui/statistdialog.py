@@ -71,7 +71,7 @@ class StatistDialog(BASE, WIDGET):
         self.cmbLayer.layerChanged.connect(self.cmbField.setLayer)
 
     def resetGui(self, layer):
-        self.mplWidget.clear()
+        self._resetPlot()
         self.tblStatistics.setRowCount(0)
 
         if layer.selectedFeatureCount() != 0:
@@ -122,12 +122,10 @@ class StatistDialog(BASE, WIDGET):
         self.btnClose.setEnabled(True)
 
     def refreshPlot(self):
-        self.mplWidget.clear()
-        self.mplWidget.setTitle(self.tr('Frequency distribution'))
-        #interval = None
+        self._resetPlot()
 
-        #if len(self.calculator.values) == 0:
-        #    return
+        if len(self.calculator.values) == 0:
+            return
 
         #if self.spnMinX.value() == self.spnMaxX.value():
         #    pass
@@ -152,15 +150,11 @@ class StatistDialog(BASE, WIDGET):
 
         #    self.axes.plot(c, n, 'ro-')
 
-        #self.axes.grid(self.chkShowGrid.isChecked())
-        #self.axes.set_ylabel(self.tr('Count'))
-        #self.axes.set_xlabel(self.cmbField.currentText())
-        #self.figure.autofmt_xdate()
-        #self.canvas.draw()
-
         self.mplWidget.ax.hist(self.calculator.values, 18, alpha=0.5, histtype='bar')
+        self.mplWidget.setXAxisCaption(self.cmbField.currentText())
+        self.mplWidget.setYAxisCaption(self.tr('Count'))
+        self.mplWidget.alignLabels()
         self.mplWidget.canvas.draw()
-
 
     def keyPressEvent(self, event):
         if event.modifiers() in [Qt.ControlModifier, Qt.MetaModifier] and event.key() == Qt.Key_C:
@@ -168,3 +162,7 @@ class StatistDialog(BASE, WIDGET):
             clipboard.setText('\n'.join(self.calculator.data))
         else:
             QDialog.keyPressEvent(self, event)
+
+    def _resetPlot(self):
+        self.mplWidget.clear()
+        self.mplWidget.setTitle(self.tr('Frequency distribution'))

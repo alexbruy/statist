@@ -108,9 +108,18 @@ class QMatplotlibWidget(QWidget):
         self.ax.grid()
         self.canvas.draw()
 
+    def alignLabels(self):
+        self.figure.autofmt_xdate()
+
     def clear(self):
         self.ax.clear()
         self.canvas.draw()
 
-    def setTitle(self, title):
-        self.ax.set_title(title)
+    def setTitle(self, text):
+        self.ax.set_title(text)
+
+    def setXAxisCaption(self, text):
+        self.ax.set_xlabel(text)
+
+    def setYAxisCaption(self, text):
+        self.ax.set_ylabel(text)
