@@ -27,14 +27,17 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4 import uic
-from PyQt4.QtCore import Qt, QThread
-from PyQt4.QtGui import QMessageBox, QDialog, QDialogButtonBox, QTableWidgetItem, QApplication
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import Qt, QThread
+from qgis.PyQt.QtWidgets import (QMessageBox,
+                                 QDialog,
+                                 QDialogButtonBox,
+                                 QTableWidgetItem,
+                                 QApplication)
 
 from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel, QgsMessageBar
 
 from statist.statisticscalcalculator import StatisticsCalculator
-
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 WIDGET, BASE = uic.loadUiType(

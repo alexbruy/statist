@@ -26,7 +26,7 @@ __copyright__ = '(C) 2015, Alexander Bruy'
 __revision__ = '$Format:%H$'
 
 
-from PyQt4.QtCore import pyqtSignal, QObject
+from qgis.PyQt.QtCore import pyqtSignal, QObject
 
 from qgis.core import QgsStatisticalSummary
 

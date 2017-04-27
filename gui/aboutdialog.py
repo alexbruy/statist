@@ -29,11 +29,10 @@ __revision__ = '$Format:%H$'
 import os
 import ConfigParser
 
-from PyQt4 import uic
-from PyQt4.QtCore import QUrl, QSettings, QLocale
-from PyQt4.QtGui import (QDialogButtonBox, QTextDocument, QPixmap, QDialog,
-    QDesktopServices)
-
+from qgis.PyQt import uic
+from qgis.PyQt.QtGui import QTextDocument, QPixmap, QDesktopServices
+from qgis.PyQt.QtCore import QUrl, QSettings, QLocale
+from qgis.PyQt.QtWidgets import QDialogButtonBox, QDialog
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 WIDGET, BASE = uic.loadUiType(

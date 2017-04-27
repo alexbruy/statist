@@ -30,10 +30,9 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4.QtCore import (QCoreApplication, QSettings, QLocale, QTranslator)
-from PyQt4.QtGui import (QMessageBox, QAction, QIcon, QMenu)
-
-from qgis.core import QGis
+from qgis.PyQt.QtCore import (QCoreApplication, QSettings, QLocale, QTranslator)
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QMessageBox, QAction, QMenu
 
 from statist.gui.statistdialog import StatistDialog
 from statist.gui.aboutdialog import AboutDialog
@@ -45,8 +44,6 @@ pluginPath = os.path.dirname(__file__)
 class StatistPlugin:
     def __init__(self, iface):
         self.iface = iface
-
-        self.qgsVersion = unicode(QGis.QGIS_VERSION_INT)
 
         overrideLocale = QSettings().value('locale/overrideFlag', False, bool)
         if not overrideLocale:
@@ -62,15 +59,6 @@ class StatistPlugin:
             QCoreApplication.installTranslator(self.translator)
 
     def initGui(self):
-        if int(self.qgsVersion) < 20000:
-            qgisVersion = '{}.{}.{}'.format(
-                self.qgsVersion[0], self.qgsVersion[2], self.qgsVersion[3])
-            QMessageBox.warning(self.iface.mainWindow(), 'Statist',
-                self.tr('QGIS {} detected.\nThis version of Statist '
-                        'requires at least QGIS 2.0. Plugin will not be '
-                        'enabled.'.format(qgisVersion)))
-            return None
-
         self.actionRun = QAction(
             self.tr('Statist'), self.iface.mainWindow())
         self.actionRun.setIcon(

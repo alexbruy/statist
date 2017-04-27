@@ -27,8 +27,9 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QWidget, QVBoxLayout, QSizePolicy, QPalette, QAction, QIcon
+from qgis.PyQt.QtGui import QPalette, QIcon
+from qgis.PyQt.QtCore import Qt
+from qgis.PyQt.QtWidget import QWidget, QVBoxLayout, QSizePolicy, QAction
 
 import matplotlib
 mplVersion = matplotlib.__version__.split('.')
