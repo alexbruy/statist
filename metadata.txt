@@ -13,8 +13,8 @@ icon=icons/statist.png
 
 tags=vector,analysis,statistics
 
-homepage=http://hub.qgis.org/projects/statist/
-tracker=http://hub.qgis.org/projects/statist/issues
+homepage=https://github.com/alexbruy/statist
+tracker=https://github.com/alexbruy/statist/issues
 repository=https://github.com/alexbruy/statist
 
 experimental=False

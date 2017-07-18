@@ -82,8 +82,8 @@ class AboutDialog(BASE, WIDGET):
             'shows frequency distribution.</p>'
             '<p><strong>Developers</strong>: Alexander Bruy</p>'
             '<p><strong>Homepage</strong>: '
-            '<a href="http://hub.qgis.org/projects/statist">'
-            'http://hub.qgis.org/projects/statist</a></p>'
+            '<a href="https://github.com/alexbruy/statist">'
+            'https://github.com/alexbruy/statist</a></p>'
             '<p>Please report bugs at '
-            '<a href="http://hub.qgis.org/projects/statist/issues">'
+            '<a href="https://github.com/alexbruy/statist/issues/">'
             'bugtracker</a>.</p>')
