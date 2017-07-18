@@ -1,3 +1,4 @@
+PLUGIN_NAME=statist
 LANG_PATH=i18n
 LANG_SOURCES=$(wildcard $(LANG_PATH)/*.ts)
 LANG_FILES=$(patsubst $(LANG_PATH)/%.ts, $(LANG_PATH)/%.qm, $(LANG_SOURCES))
@@ -27,11 +28,10 @@ pep8:
 clean:
 	rm -f $(ALL_FILES)
 	find -name "*.pyc" -exec rm -f {} \;
-	rm -f *.zip
+	rm -f ../$(PLUGIN_NAME).zip
 
 package: clean ts all
-	cd .. && rm -f *.zip && zip -r statist.zip statist -x \*.pyc \*.ts \*.ui \*.pro \*~ \*.git\* \*Makefile*
-	mv ../statist.zip .
+	cd .. && rm -f *.zip && zip -r $(PLUGIN_NAME).zip $(PLUGIN_NAME) -x \*.pyc \*.ts \*.ui \*.pro \*~ \*.git\* \*Makefile*
 
 upload: package
-	plugin_uploader.py statist.zip
+	plugin_uploader.py ../$(PLUGIN_NAME).zip
