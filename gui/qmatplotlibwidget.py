@@ -29,23 +29,19 @@ import os
 
 from qgis.PyQt.QtGui import QPalette, QIcon
 from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidget import QWidget, QVBoxLayout, QSizePolicy, QAction
+from qgis.PyQt.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QAction
 
 import matplotlib
 mplVersion = matplotlib.__version__.split('.')
 
-from matplotlib.backends.backend_qt4agg import \
-    FigureCanvasQTAgg as FigureCanvas
+from matplotlib import rcParams
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 
 if int(mplVersion[0]) >= 1 and int(mplVersion[1]) >= 4:
-    from matplotlib.backends.backend_qt4agg import \
-        NavigationToolbar2QT as NavigationToolbar
+    from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 else:
-    from matplotlib.backends.backend_qt4agg import \
-        NavigationToolbar2QTAgg as NavigationToolbar
-from matplotlib.figure import Figure
-from matplotlib import rcParams
-
+    from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 
@@ -88,8 +84,8 @@ class QMatplotlibWidget(QWidget):
         self.layout.setSpacing(2)
         self.layout.setMargin(0)
 
-        self.layout.addWidget(self.canvas)
         self.layout.addWidget(self.toolBar)
+        self.layout.addWidget(self.canvas)
         self.setLayout(self.layout)
 
         self._setupToolbar()
