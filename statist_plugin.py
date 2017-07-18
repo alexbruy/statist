@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# -*- coding: utf-8 -*-
-
 """
 ***************************************************************************
     __init__.py
@@ -66,7 +64,7 @@ class StatistPlugin:
         self.actionRun.setWhatsThis(
             self.tr('Calculate statistics for a field'))
         self.actionRun.setObjectName('runStatist')
-        self.iface.registerMainWindowAction(self.actionRun, "Shift+S")
+        self.iface.registerMainWindowAction(self.actionRun, 'Shift+S')
 
         self.actionAbout = QAction(
             self.tr('About Statist...'), self.iface.mainWindow())
