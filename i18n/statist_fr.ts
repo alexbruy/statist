@@ -3,30 +3,30 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="aboutdialog.py" line="53"/>
-        <source>Version: %s</source>
+        <location filename="../gui/aboutdialog.py" line="55"/>
+        <source>Version: {}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="aboutdialog.py" line="78"/>
-        <source>&lt;p&gt;Provides basic statistics information on any (numeric             or string) field of vector layer. Also shows frequency distribution.&lt;/p&gt;            &lt;p&gt;NOTE: plugin requires matplotlib Python library&lt;/p&gt;            &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;            &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/statist&quot;&gt;http://hub.qgis.org/projects/statist&lt;/a&gt;&lt;/p&gt;            &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/statist/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
+        <location filename="../gui/aboutdialog.py" line="79"/>
+        <source>&lt;p&gt;Provides basic statistics information on any (numeric or string) field of vector layer. Also shows frequency distribution.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;https://github.com/alexbruy/statist&quot;&gt;https://github.com/alexbruy/statist&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;https://github.com/alexbruy/statist/issues/&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="14"/>
+        <location filename="../ui/aboutdialogbase.ui" line="14"/>
         <source>About Statist</source>
         <translation type="unfinished">à propos</translation>
     </message>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="44"/>
+        <location filename="../ui/aboutdialogbase.ui" line="44"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="30"/>
+        <location filename="../ui/aboutdialogbase.ui" line="30"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -35,12 +35,42 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="67"/>
+        <location filename="../ui/statistdialogbase.ui" line="14"/>
+        <source>Statist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/statistdialogbase.ui" line="27"/>
+        <source>Layer to analyse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/statistdialogbase.ui" line="37"/>
+        <source>Use only selected features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/statistdialogbase.ui" line="47"/>
+        <source>Target field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/statistdialogbase.ui" line="70"/>
+        <source>Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/statistdialogbase.ui" line="75"/>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <location filename="../ui/aboutdialogbase.ui" line="67"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55,6 +85,14 @@ p, li { white-space: pre-wrap; }
         <location filename="doStatist.py" line="65"/>
         <source>Count</source>
         <translation type="obsolete">Comptage</translation>
+    </message>
+</context>
+<context>
+    <name>QMatplotlibWidget</name>
+    <message>
+        <location filename="../gui/qmatplotlibwidget.py" line="94"/>
+        <source>Toggle grid</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -88,216 +126,220 @@ car il n&apos;y a pas de couche vectorielle dans ce projet</translation>
         <translation type="obsolete">Module &quot;matplotlib&quot; non trouvé ... le plugin ne peut pas fonctionner.</translation>
     </message>
     <message>
-        <location filename="statist.py" line="72"/>
-        <source>Statist: Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="statist.py" line="99"/>
-        <source>Statist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="statist.py" line="83"/>
-        <source>About Statist...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="statist.py" line="125"/>
         <source>About Statist</source>
         <translation type="obsolete">à propos</translation>
-    </message>
-    <message>
-        <location filename="statist.py" line="72"/>
-        <source>QGIS %s detected.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="statist.py" line="72"/>
-        <source>This version of Statist requires at least QGIS 2.0
-Plugin will not be enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="statist.py" line="104"/>
-        <source>Project doesn&apos;t have any vector layers</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StatistDialog</name>
     <message>
-        <location filename="statistdialog.py" line="206"/>
+        <location filename="../gui/statistdialog.py" line="171"/>
         <source>Frequency distribution</source>
         <translation type="unfinished">Fréquence de distribution</translation>
     </message>
     <message>
         <location filename="statistdialog.py" line="147"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="236"/>
+        <location filename="../gui/statistdialog.py" line="158"/>
         <source>Count</source>
         <translation type="unfinished">Comptage</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="201"/>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="ui/statistdialogbase.ui" line="14"/>
         <source>Statist: Field statistics</source>
-        <translation type="unfinished">Statist : Champ</translation>
+        <translation type="obsolete">Statist : Champ</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="38"/>
         <source>Input vector layer:</source>
-        <translation type="unfinished">Couche vecteur en entrée :</translation>
-    </message>
-    <message>
-        <location filename="ui/statistdialogbase.ui" line="48"/>
-        <source>Use only selected features</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Couche vecteur en entrée :</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="55"/>
         <source>Target field:</source>
-        <translation type="unfinished">Champ cible :</translation>
+        <translation type="obsolete">Champ cible :</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="65"/>
         <source>Enable statistics for text fields</source>
-        <translation type="unfinished">Activer les statistiques des champs de texte</translation>
+        <translation type="obsolete">Activer les statistiques des champs de texte</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="72"/>
         <source>Statistics output:</source>
-        <translation type="unfinished">Statistiques en sortie :</translation>
+        <translation type="obsolete">Statistiques en sortie :</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="110"/>
         <source>Parameter</source>
-        <translation type="unfinished">Paramètre</translation>
+        <translation type="obsolete">Paramètre</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="115"/>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation type="obsolete">Valeur</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="183"/>
         <source>Xmin</source>
-        <translation type="unfinished">Xmin</translation>
+        <translation type="obsolete">Xmin</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="209"/>
         <source>Refresh</source>
-        <translation type="unfinished">Rafraîchir</translation>
+        <translation type="obsolete">Rafraîchir</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="216"/>
         <source>Show grid</source>
-        <translation type="unfinished">Montre la grille</translation>
+        <translation type="obsolete">Montre la grille</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="229"/>
         <source>Xmax</source>
-        <translation type="unfinished">Xmax</translation>
+        <translation type="obsolete">Xmax</translation>
     </message>
     <message>
         <location filename="ui/statistdialogbase.ui" line="255"/>
         <source>As plot</source>
-        <translation type="unfinished">Comme dessin</translation>
+        <translation type="obsolete">Comme dessin</translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="129"/>
+        <location filename="../gui/statistdialog.py" line="92"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistdialog.py" line="129"/>
-        <source>There is no selection in input layer. Uncheck corresponding option or select some features before running analysis</source>
+        <location filename="../gui/statistdialog.py" line="92"/>
+        <source>There is no selection in the input layer. Uncheck corresponding option or select some features before running analysis</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
+    <name>StatistPlugin</name>
+    <message>
+        <location filename="../statist_plugin.py" line="90"/>
+        <source>Statist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statist_plugin.py" line="64"/>
+        <source>Calculate statistics for a field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statist_plugin.py" line="69"/>
+        <source>About Statist...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statist_plugin.py" line="73"/>
+        <source>About Statist</source>
+        <translation type="unfinished">à propos</translation>
+    </message>
+</context>
+<context>
     <name>StatistThread</name>
+</context>
+<context>
+    <name>StatisticsCalculator</name>
     <message>
-        <location filename="statistthread.py" line="309"/>
-        <source>Count:%d</source>
+        <location filename="../statisticscalcalculator.py" line="78"/>
+        <source>Count:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="188"/>
-        <source>Unique values:%d</source>
+        <location filename="../statisticscalcalculator.py" line="79"/>
+        <source>Unique values:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="189"/>
-        <source>Minimum value:%f</source>
+        <location filename="../statisticscalcalculator.py" line="64"/>
+        <source>Minimum length:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="190"/>
-        <source>Maximum value:%f</source>
+        <location filename="../statisticscalcalculator.py" line="65"/>
+        <source>Maximum length:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="191"/>
-        <source>Range:%f</source>
+        <location filename="../statisticscalcalculator.py" line="66"/>
+        <source>Mean length:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="192"/>
-        <source>Sum:%f</source>
+        <location filename="../statisticscalcalculator.py" line="93"/>
+        <source>Missing (NULL) values:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="193"/>
-        <source>Mean value:%f</source>
+        <location filename="../statisticscalcalculator.py" line="80"/>
+        <source>Minimum value:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="194"/>
-        <source>Median value:%f</source>
+        <location filename="../statisticscalcalculator.py" line="81"/>
+        <source>Maximum value:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="195"/>
-        <source>Standard deviation:%f</source>
+        <location filename="../statisticscalcalculator.py" line="82"/>
+        <source>Range:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="196"/>
-        <source>Coefficient of Variation:%f</source>
+        <location filename="../statisticscalcalculator.py" line="83"/>
+        <source>Sum:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="304"/>
-        <source>Minimum length:%d</source>
+        <location filename="../statisticscalcalculator.py" line="84"/>
+        <source>Mean value:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="305"/>
-        <source>Maximum length:%d</source>
+        <location filename="../statisticscalcalculator.py" line="85"/>
+        <source>Median value:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="306"/>
-        <source>Mean length:%f</source>
+        <location filename="../statisticscalcalculator.py" line="86"/>
+        <source>Standard deviation:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="307"/>
-        <source>Filled:%d</source>
+        <location filename="../statisticscalcalculator.py" line="87"/>
+        <source>Coefficient of Variation:{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statistthread.py" line="308"/>
-        <source>Empty:%d</source>
+        <location filename="../statisticscalcalculator.py" line="88"/>
+        <source>Minority (rarest occurring value):{}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statisticscalcalculator.py" line="89"/>
+        <source>Majority (most frequently occurring value):{}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statisticscalcalculator.py" line="90"/>
+        <source>First quartile:{}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statisticscalcalculator.py" line="91"/>
+        <source>Third quartile:{}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../statisticscalcalculator.py" line="92"/>
+        <source>Interquartile Range (IQR):{}</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -503,16 +545,5 @@ Plugin will not be enabled.</source>
 </context>
 <context>
     <name>wnd</name>
-    <message>
-        <location filename="__init__.py" line="70"/>
-        <source>Error while loading plugin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="__init__.py" line="70"/>
-        <source>Could not find the matplotlib module.
-Make sure the matplotlib is installed</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>
