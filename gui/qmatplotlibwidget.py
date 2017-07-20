@@ -36,27 +36,22 @@ mplVersion = matplotlib.__version__.split('.')
 
 from matplotlib import rcParams
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-
-if int(mplVersion[0]) >= 1 and int(mplVersion[1]) >= 4:
-    from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
-else:
-    from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg, NavigationToolbar2QT
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 
 
-class QMatplotlibCanvas(FigureCanvas):
+class QMatplotlibCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None):
         self.parent = parent
 
         self.figure = Figure()
         self.ax = self.figure.add_subplot(111)
 
-        FigureCanvas.__init__(self, self.figure)
-        FigureCanvas.setSizePolicy(
+        FigureCanvasQTAgg.__init__(self, self.figure)
+        FigureCanvasQTAgg.setSizePolicy(
             self, QSizePolicy.Expanding, QSizePolicy.Expanding)
-        FigureCanvas.updateGeometry(self)
+        FigureCanvasQTAgg.updateGeometry(self)
 
         self.figure.canvas.setFocusPolicy(Qt.ClickFocus)
         self.figure.canvas.setFocus()
@@ -75,7 +70,7 @@ class QMatplotlibWidget(QWidget):
         self.canvas = QMatplotlibCanvas()
         self.ax = self.canvas.ax
         self.figure = self.canvas.figure
-        self.toolBar = NavigationToolbar(self.canvas, self)
+        self.toolBar = NavigationToolbar2QT(self.canvas, self)
 
         bgColor = self.palette().color(QPalette.Background).name()
         self.figure.set_facecolor(bgColor)
