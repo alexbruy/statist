@@ -32,6 +32,8 @@ from qgis.PyQt.QtCore import (QCoreApplication, QSettings, QLocale, QTranslator)
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QMessageBox, QAction, QMenu
 
+from qgis.core import QgsApplication
+
 from statist.gui.statistdialog import StatistDialog
 from statist.gui.aboutdialog import AboutDialog
 
@@ -69,7 +71,7 @@ class StatistPlugin:
         self.actionAbout = QAction(
             self.tr('About Statist...'), self.iface.mainWindow())
         self.actionAbout.setIcon(
-            QIcon(os.path.join(pluginPath, 'icons', 'about.png')))
+            QgsApplication.getThemeIcon('/mActionHelpContents.svg'))
         self.actionAbout.setWhatsThis(self.tr('About Statist'))
         self.actionRun.setObjectName('aboutStatist')
 
