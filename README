@@ -3,6 +3,6 @@ Statist
 Calculate and show statistics for a field.
 
 Provides basic statistics information on any (numeric or string) field of vector
-layer.
+layer. Also shows a frequency distribution histogram.
 
-This plugin requires matplotlib library.
+This plugin requires matplotlib >= 1.4.0.
