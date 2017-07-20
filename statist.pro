@@ -9,5 +9,4 @@ FORMS = ui/statistdialogbase.ui \
         ui/aboutdialogbase.ui
 
 TRANSLATIONS = i18n/statist_uk.ts \
-               i18n/statist_fr.ts \
-               i18n/statist_ru.ts
+               i18n/statist_fr.ts
