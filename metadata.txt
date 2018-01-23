@@ -4,7 +4,7 @@ description=Calculate and show statistics for a field
 about=Calculate and show statistics on any (numeric or string) field of vector layer and shows frequency distribution histogram. Needs matplotlib >= 1.4.0 to work.
 category=Vector
 version=2.0
-qgisMinimumVersion=2.18
+qgisMinimumVersion=3.0
 
 author=Alexander Bruy
 email=alexander.bruy@gmail.com
