@@ -5,7 +5,7 @@
     statistdialog.py
     ---------------------
     Date                 : June 2009
-    Copyright            : (C) 2009-2015 by Alexander Bruy
+    Copyright            : (C) 2009-2018 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'June 2009'
-__copyright__ = '(C) 2009-2015, Alexander Bruy'
+__copyright__ = '(C) 2009-2018, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -35,26 +35,24 @@ from qgis.PyQt.QtWidgets import (QMessageBox,
                                  QTableWidgetItem,
                                  QApplication)
 
-from qgis.gui import QgsMapLayerProxyModel, QgsFieldProxyModel, QgsMessageBar
+from qgis.core import QgsMapLayerProxyModel, QgsFieldProxyModel
+from qgis.gui import QgsMessageBar
 
 from statist.statisticscalcalculator import StatisticsCalculator
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
-WIDGET, BASE = uic.loadUiType(
-    os.path.join(pluginPath, 'ui', 'statistdialogbase.ui'))
+WIDGET, BASE = uic.loadUiType(os.path.join(pluginPath, "ui", "statistdialogbase.ui"))
 
 
 class StatistDialog(BASE, WIDGET):
-    def __init__(self, iface, parent=None):
+    def __init__(self, parent=None):
         super(StatistDialog, self).__init__(parent)
         self.setupUi(self)
-
-        self.iface = iface
 
         self.thread = QThread()
         self.calculator = StatisticsCalculator()
 
-        self.mplWidget.setTitle(self.tr('Frequency distribution'))
+        self.mplWidget.setTitle(self.tr("Frequency distribution"))
 
         self.btnOk = self.buttonBox.button(QDialogButtonBox.Ok)
         self.btnClose = self.buttonBox.button(QDialogButtonBox.Close)
@@ -89,10 +87,10 @@ class StatistDialog(BASE, WIDGET):
 
         if self.chkSelectedOnly.isChecked() and \
                 layer.selectedFeatureCount() == 0:
-            QgsMessageBar.pushWarning(self.tr('No selection'),
-                self.tr('There is no selection in the input layer. Uncheck '
-                        'corresponding option or select some features before '
-                        'running analysis'))
+            QgsMessageBar.pushWarning(self.tr("No selection"),
+                self.tr("There is no selection in the input layer. Uncheck "
+                        "corresponding option or select some features before "
+                        "running analysis"))
             return
 
         self.calculator.setLayer(layer)
@@ -110,8 +108,8 @@ class StatistDialog(BASE, WIDGET):
     def processFinished(self):
         rowCount = len(self.calculator.data)
         self.tblStatistics.setRowCount(rowCount)
-        for i in xrange(rowCount):
-            tmp = self.calculator.data[i].split(':')
+        for i in range(rowCount):
+            tmp = self.calculator.data[i].split(":")
             item = QTableWidgetItem(tmp[0])
             self.tblStatistics.setItem(i, 0, item)
             item = QTableWidgetItem(tmp[1])
@@ -153,19 +151,19 @@ class StatistDialog(BASE, WIDGET):
 
         #    self.axes.plot(c, n, 'ro-')
 
-        self.mplWidget.ax.hist(self.calculator.values, 18, alpha=0.5, histtype='bar')
+        self.mplWidget.axes.hist(self.calculator.values, 18, alpha=0.5, histtype="bar")
         self.mplWidget.setXAxisCaption(self.cmbField.currentText())
-        self.mplWidget.setYAxisCaption(self.tr('Count'))
+        self.mplWidget.setYAxisCaption(self.tr("Count"))
         self.mplWidget.alignLabels()
         self.mplWidget.canvas.draw()
 
     def keyPressEvent(self, event):
         if event.modifiers() in [Qt.ControlModifier, Qt.MetaModifier] and event.key() == Qt.Key_C:
             clipboard = QApplication.clipboard()
-            clipboard.setText('\n'.join(self.calculator.data))
+            clipboard.setText("\n".join(self.calculator.data))
         else:
             QDialog.keyPressEvent(self, event)
 
     def _resetPlot(self):
         self.mplWidget.clear()
-        self.mplWidget.setTitle(self.tr('Frequency distribution'))
+        self.mplWidget.setTitle(self.tr("Frequency distribution"))

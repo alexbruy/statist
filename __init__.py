@@ -5,7 +5,7 @@
     __init__.py
     ---------------------
     Date                 : June 2009
-    Copyright            : (C) 2009-2015 by Alexander Bruy
+    Copyright            : (C) 2009-2018 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,13 +19,14 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'June 2009'
-__copyright__ = '(C) 2009-2015, Alexander Bruy'
+__copyright__ = '(C) 2009-2018, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
 __revision__ = '$Format:%H$'
 
+from statist.statistplugin import StatistPlugin
+
 
 def classFactory(iface):
-    from statist.statist_plugin import StatistPlugin
     return StatistPlugin(iface)

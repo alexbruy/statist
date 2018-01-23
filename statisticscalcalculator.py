@@ -59,12 +59,12 @@ class StatisticsCalculator(QObject):
 
             self.values = stat.data
 
-            self.data.append(self.tr('Count:{}'.format(stat.count)))
-            self.data.append(self.tr('Unique values:{}'.format(stat.variety)))
-            self.data.append(self.tr('Minimum length:{}'.format(stat.min)))
-            self.data.append(self.tr('Maximum length:{}'.format(stat.max)))
-            self.data.append(self.tr('Mean length:{}'.format(stat.mean)))
-            self.data.append(self.tr('Missing (NULL) values:{}'.format(stat.nullCount)))
+            self.data.append(self.tr("Count:{}".format(stat.count)))
+            self.data.append(self.tr("Unique values:{}".format(stat.variety)))
+            self.data.append(self.tr("Minimum length:{}".format(stat.min)))
+            self.data.append(self.tr("Maximum length:{}".format(stat.max)))
+            self.data.append(self.tr("Mean length:{}".format(stat.mean)))
+            self.data.append(self.tr("Missing (NULL) values:{}".format(stat.nullCount)))
         else:
             self.values, _, nulls = self.layer.getDoubleValues(self.fieldName, self.selectedOnly)
             stat = QgsStatisticalSummary()
@@ -75,29 +75,29 @@ class StatisticsCalculator(QObject):
             else:
                 cV = 0.0
 
-            self.data.append(self.tr('Count:{}'.format(stat.count())))
-            self.data.append(self.tr('Unique values:{}'.format(stat.variety())))
-            self.data.append(self.tr('Minimum value:{}'.format(stat.min())))
-            self.data.append(self.tr('Maximum value:{}'.format(stat.max())))
-            self.data.append(self.tr('Range:{}'.format(stat.range())))
-            self.data.append(self.tr('Sum:{}'.format(stat.sum())))
-            self.data.append(self.tr('Mean value:{}'.format(stat.mean())))
-            self.data.append(self.tr('Median value:{}'.format(stat.median())))
-            self.data.append(self.tr('Standard deviation:{}'.format(stat.stDev())))
-            self.data.append(self.tr('Coefficient of Variation:{}'.format(cV)))
-            self.data.append(self.tr('Minority (rarest occurring value):{}'.format(stat.minority())))
-            self.data.append(self.tr('Majority (most frequently occurring value):{}'.format(stat.majority())))
-            self.data.append(self.tr('First quartile:{}'.format(stat.firstQuartile())))
-            self.data.append(self.tr('Third quartile:{}'.format(stat.thirdQuartile())))
-            self.data.append(self.tr('Interquartile Range (IQR):{}'.format(stat.interQuartileRange())))
-            self.data.append(self.tr('Missing (NULL) values:{}'.format(nulls)))
+            self.data.append(self.tr("Count:{}".format(stat.count())))
+            self.data.append(self.tr("Unique values:{}".format(stat.variety())))
+            self.data.append(self.tr("Minimum value:{}".format(stat.min())))
+            self.data.append(self.tr("Maximum value:{}".format(stat.max())))
+            self.data.append(self.tr("Range:{}".format(stat.range())))
+            self.data.append(self.tr("Sum:{}".format(stat.sum())))
+            self.data.append(self.tr("Mean value:{}".format(stat.mean())))
+            self.data.append(self.tr("Median value:{}".format(stat.median())))
+            self.data.append(self.tr("Standard deviation:{}".format(stat.stDev())))
+            self.data.append(self.tr("Coefficient of Variation:{}".format(cV)))
+            self.data.append(self.tr("Minority (rarest occurring value):{}".format(stat.minority())))
+            self.data.append(self.tr("Majority (most frequently occurring value):{}".format(stat.majority())))
+            self.data.append(self.tr("First quartile:{}".format(stat.firstQuartile())))
+            self.data.append(self.tr("Third quartile:{}".format(stat.thirdQuartile())))
+            self.data.append(self.tr("Interquartile Range (IQR):{}".format(stat.interQuartileRange())))
+            self.data.append(self.tr("Missing (NULL) values:{}".format(nulls)))
 
         self.calculated.emit()
 
     def _isTextField(self):
-        idx = self.layer.fieldNameIndex(self.fieldName)
-        fields = self.layer.pendingFields()
-        if fields[idx].typeName().lower() in ['string', 'varchar', 'char', 'text']:
+        idx = self.layer.fields().lookupField(self.fieldName)
+        fields = self.layer.fields()
+        if fields[idx].typeName().lower() in ["string", "varchar", "char", "text"]:
             return True
         else:
             return False

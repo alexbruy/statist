@@ -5,7 +5,7 @@
     aboutdialog.py
     ---------------------
     Date                 : July 2013
-    Copyright            : (C) 2013-2015 by Alexander Bruy
+    Copyright            : (C) 2013-2018 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,24 +19,24 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'July 2013'
-__copyright__ = '(C) 2013-2015, Alexander Bruy'
+__copyright__ = '(C) 2013-2018, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
 __revision__ = '$Format:%H$'
 
-
 import os
-import ConfigParser
+import configparser
 
 from qgis.PyQt import uic
 from qgis.PyQt.QtGui import QTextDocument, QPixmap, QDesktopServices
-from qgis.PyQt.QtCore import QUrl, QSettings, QLocale
+from qgis.PyQt.QtCore import QUrl
 from qgis.PyQt.QtWidgets import QDialogButtonBox, QDialog
 
+from qgis.core import QgsApplication
+
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
-WIDGET, BASE = uic.loadUiType(
-    os.path.join(pluginPath, 'ui', 'aboutdialogbase.ui'))
+WIDGET, BASE = uic.loadUiType(os.path.join(pluginPath, "ui", "aboutdialogbase.ui"))
 
 
 class AboutDialog(BASE, WIDGET):
@@ -46,13 +46,13 @@ class AboutDialog(BASE, WIDGET):
 
         self.btnHelp = self.buttonBox.button(QDialogButtonBox.Help)
 
-        cfg = ConfigParser.SafeConfigParser()
-        cfg.read(os.path.join(pluginPath, 'metadata.txt'))
-        version = cfg.get('general', 'version')
+        cfg = configparser.ConfigParser()
+        cfg.read(os.path.join(pluginPath, "metadata.txt"))
+        version = cfg["general"]["version"]
 
         self.lblLogo.setPixmap(
-            QPixmap(os.path.join(pluginPath, 'icons', 'statist.png')))
-        self.lblVersion.setText(self.tr('Version: {}'.format(version)))
+            QPixmap(os.path.join(pluginPath, "icons", "statist.png")))
+        self.lblVersion.setText(self.tr("Version: {}".format(version)))
 
         doc = QTextDocument()
         doc.setHtml(self.getAboutText())
@@ -62,28 +62,24 @@ class AboutDialog(BASE, WIDGET):
         self.buttonBox.helpRequested.connect(self.openHelp)
 
     def openHelp(self):
-        overrideLocale = QSettings().value('locale/overrideFlag', False, bool)
-        if not overrideLocale:
-            locale = QLocale.system().name()[:2]
-        else:
-            locale = QSettings().value('locale/userLocale', '')
+        locale = QgsApplication.locale()
 
-        if locale in ['uk']:
+        if locale in ["uk"]:
             QDesktopServices.openUrl(
-                QUrl('http://hub.qgis.org/projects/statist/wiki'))
+                QUrl("https://github.com/alexbruy/statist"))
         else:
             QDesktopServices.openUrl(
-                QUrl('http://hub.qgis.org/projects/statist/wiki'))
+                QUrl("https://github.com/alexbruy/statist"))
 
     def getAboutText(self):
         return self.tr(
-            '<p>Provides basic statistics information on any '
-            '(numeric or string) field of vector layer. Also '
-            'shows frequency distribution.</p>'
-            '<p><strong>Developers</strong>: Alexander Bruy</p>'
-            '<p><strong>Homepage</strong>: '
-            '<a href="https://github.com/alexbruy/statist">'
-            'https://github.com/alexbruy/statist</a></p>'
-            '<p>Please report bugs at '
-            '<a href="https://github.com/alexbruy/statist/issues/">'
-            'bugtracker</a>.</p>')
+            "<p>Calculates basic statistics information on any (numeric, text, "
+            "date/time) field of the vector layer. Also shows frequency "
+            "distribution.</p>"
+            "<p><strong>Developers</strong>: Alexander Bruy</p>"
+            "<p><strong>Homepage</strong>: "
+            "<a href='https://github.com/alexbruy/statist'>"
+            "https://github.com/alexbruy/statist</a></p>"
+            "<p>Please report bugs at "
+            "<a href='https://github.com/alexbruy/statist/issues/'>"
+            "bugtracker</a>.</p>")

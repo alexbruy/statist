@@ -5,7 +5,7 @@
     qmatplotlibwidget.py
     ---------------------
     Date                 : July 2014
-    Copyright            : (C) 2014-2015 by Alexander Bruy
+    Copyright            : (C) 2014-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'July 2014'
-__copyright__ = '(C) 2014-2015, Alexander Bruy'
+__copyright__ = '(C) 2014-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -31,12 +31,9 @@ from qgis.PyQt.QtGui import QPalette, QIcon
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QAction
 
-import matplotlib
-mplVersion = matplotlib.__version__.split('.')
-
 from matplotlib import rcParams
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg, NavigationToolbar2QT
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 
@@ -46,7 +43,7 @@ class QMatplotlibCanvas(FigureCanvasQTAgg):
         self.parent = parent
 
         self.figure = Figure()
-        self.ax = self.figure.add_subplot(111)
+        self.axes = self.figure.add_subplot(111)
 
         FigureCanvasQTAgg.__init__(self, self.figure)
         FigureCanvasQTAgg.setSizePolicy(
@@ -56,11 +53,11 @@ class QMatplotlibCanvas(FigureCanvasQTAgg):
         self.figure.canvas.setFocusPolicy(Qt.ClickFocus)
         self.figure.canvas.setFocus()
 
-        rcParams['font.serif'] = 'Verdana, Arial, Liberation Serif'
-        rcParams['font.sans-serif'] = 'Tahoma, Arial, Liberation Sans'
-        rcParams['font.cursive'] = 'Courier New, Arial, Liberation Sans'
-        rcParams['font.fantasy'] = 'Comic Sans MS, Arial, Liberation Sans'
-        rcParams['font.monospace'] = 'Courier New, Liberation Mono'
+        rcParams["font.serif"] = "Verdana, Arial, Liberation Serif"
+        rcParams["font.sans-serif"] = "Tahoma, Arial, Liberation Sans"
+        rcParams["font.cursive"] = "Courier New, Arial, Liberation Sans"
+        rcParams["font.fantasy"] = "Comic Sans MS, Arial, Liberation Sans"
+        rcParams["font.monospace"] = "Courier New, Liberation Mono"
 
 
 class QMatplotlibWidget(QWidget):
@@ -68,7 +65,7 @@ class QMatplotlibWidget(QWidget):
         QWidget.__init__(self, parent)
 
         self.canvas = QMatplotlibCanvas()
-        self.ax = self.canvas.ax
+        self.axes = self.canvas.axes
         self.figure = self.canvas.figure
         self.toolBar = NavigationToolbar2QT(self.canvas, self)
 
@@ -86,9 +83,9 @@ class QMatplotlibWidget(QWidget):
         self._setupToolbar()
 
     def _setupToolbar(self):
-        self.actionToggleGrid = QAction(self.tr('Toggle grid'), self.toolBar)
+        self.actionToggleGrid = QAction(self.tr("Toggle grid"), self.toolBar)
         self.actionToggleGrid.setIcon(
-            QIcon(os.path.join(pluginPath, 'icons', 'toggleGrid.svg')))
+            QIcon(os.path.join(pluginPath, "icons", "toggleGrid.svg")))
         self.actionToggleGrid.setCheckable(True)
 
         self.actionToggleGrid.triggered.connect(self.toggleGrid)
@@ -97,21 +94,21 @@ class QMatplotlibWidget(QWidget):
         self.toolBar.insertSeparator(self.toolBar.actions()[8])
 
     def toggleGrid(self):
-        self.ax.grid()
+        self.axes.grid()
         self.canvas.draw()
 
     def alignLabels(self):
         self.figure.autofmt_xdate()
 
     def clear(self):
-        self.ax.clear()
+        self.axes.clear()
         self.canvas.draw()
 
     def setTitle(self, text):
-        self.ax.set_title(text)
+        self.axes.set_title(text)
 
     def setXAxisCaption(self, text):
-        self.ax.set_xlabel(text)
+        self.axes.set_xlabel(text)
 
     def setYAxisCaption(self, text):
-        self.ax.set_ylabel(text)
+        self.axes.set_ylabel(text)
