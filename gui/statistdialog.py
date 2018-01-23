@@ -52,8 +52,6 @@ class StatistDialog(BASE, WIDGET):
         self.thread = QThread()
         self.calculator = StatisticsCalculator()
 
-        self.mplWidget.setTitle(self.tr("Frequency distribution"))
-
         self.btnOk = self.buttonBox.button(QDialogButtonBox.Ok)
         self.btnClose = self.buttonBox.button(QDialogButtonBox.Close)
 
@@ -64,12 +62,12 @@ class StatistDialog(BASE, WIDGET):
         self.thread.started.connect(self.calculator.calculate)
 
         self.cmbLayer.setFilters(QgsMapLayerProxyModel.VectorLayer)
-        self.cmbField.setFilters(QgsFieldProxyModel.Numeric | QgsFieldProxyModel.String)
-
         self.cmbField.setLayer(self.cmbLayer.currentLayer())
 
         self.cmbLayer.layerChanged.connect(self.resetGui)
         self.cmbLayer.layerChanged.connect(self.cmbField.setLayer)
+
+        self._resetPlot()
 
     def resetGui(self, layer):
         self._resetPlot()
@@ -85,8 +83,7 @@ class StatistDialog(BASE, WIDGET):
 
         layer = self.cmbLayer.currentLayer()
 
-        if self.chkSelectedOnly.isChecked() and \
-                layer.selectedFeatureCount() == 0:
+        if self.chkSelectedOnly.isChecked() and layer.selectedFeatureCount() == 0:
             QgsMessageBar.pushWarning(self.tr("No selection"),
                 self.tr("There is no selection in the input layer. Uncheck "
                         "corresponding option or select some features before "
@@ -151,7 +148,7 @@ class StatistDialog(BASE, WIDGET):
 
         #    self.axes.plot(c, n, 'ro-')
 
-        self.mplWidget.axes.hist(self.calculator.values, 18, alpha=0.5, histtype="bar")
+        self.mplWidget.axes.hist(self.calculator.values, "auto", alpha=0.5, histtype="bar")
         self.mplWidget.setXAxisCaption(self.cmbField.currentText())
         self.mplWidget.setYAxisCaption(self.tr("Count"))
         self.mplWidget.alignLabels()

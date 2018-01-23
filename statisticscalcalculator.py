@@ -26,9 +26,18 @@ __copyright__ = '(C) 2015, Alexander Bruy'
 __revision__ = '$Format:%H$'
 
 
-from qgis.PyQt.QtCore import pyqtSignal, QObject
+from qgis.PyQt.QtCore import pyqtSignal, QObject, QVariant
 
-from qgis.core import QgsStatisticalSummary
+from qgis.core import (QgsFeatureRequest,
+                       QgsStatisticalSummary,
+                       QgsStringStatisticalSummary,
+                       QgsDateTimeStatisticalSummary
+                      )
+
+UNKNOWN = -1
+NUMERIC = 0
+TEXT = 1
+DATETIME = 2
 
 
 class StatisticsCalculator(QObject):
@@ -49,97 +58,106 @@ class StatisticsCalculator(QObject):
         self.selectedOnly = selectedOnly
 
     def calculate(self):
-        self.data[:] = []
-        self.values[:] = []
-
-        if self._isTextField():
-            values, _ = self.layer.getValues(self.fieldName, self.selectedOnly)
-            stat = TextStatisticalSummary()
-            stat.calculate(values)
-
-            self.values = stat.data
-
-            self.data.append(self.tr("Count:{}".format(stat.count)))
-            self.data.append(self.tr("Unique values:{}".format(stat.variety)))
-            self.data.append(self.tr("Minimum length:{}".format(stat.min)))
-            self.data.append(self.tr("Maximum length:{}".format(stat.max)))
-            self.data.append(self.tr("Mean length:{}".format(stat.mean)))
-            self.data.append(self.tr("Missing (NULL) values:{}".format(stat.nullCount)))
+        request = QgsFeatureRequest().setFlags(QgsFeatureRequest.NoGeometry).setSubsetOfAttributes([self.fieldName], self.layer.fields())
+        if self.selectedOnly:
+            features = self.layer.getSelectedFeatures(request)
         else:
-            self.values, _, nulls = self.layer.getDoubleValues(self.fieldName, self.selectedOnly)
-            stat = QgsStatisticalSummary()
-            stat.calculate(self.values)
+            features = self.layer.getFeatures(request)
 
-            if stat.mean() != 0.0:
-                cV = stat.stDev() / stat.mean()
-            else:
-                cV = 0.0
-
-            self.data.append(self.tr("Count:{}".format(stat.count())))
-            self.data.append(self.tr("Unique values:{}".format(stat.variety())))
-            self.data.append(self.tr("Minimum value:{}".format(stat.min())))
-            self.data.append(self.tr("Maximum value:{}".format(stat.max())))
-            self.data.append(self.tr("Range:{}".format(stat.range())))
-            self.data.append(self.tr("Sum:{}".format(stat.sum())))
-            self.data.append(self.tr("Mean value:{}".format(stat.mean())))
-            self.data.append(self.tr("Median value:{}".format(stat.median())))
-            self.data.append(self.tr("Standard deviation:{}".format(stat.stDev())))
-            self.data.append(self.tr("Coefficient of Variation:{}".format(cV)))
-            self.data.append(self.tr("Minority (rarest occurring value):{}".format(stat.minority())))
-            self.data.append(self.tr("Majority (most frequently occurring value):{}".format(stat.majority())))
-            self.data.append(self.tr("First quartile:{}".format(stat.firstQuartile())))
-            self.data.append(self.tr("Third quartile:{}".format(stat.thirdQuartile())))
-            self.data.append(self.tr("Interquartile Range (IQR):{}".format(stat.interQuartileRange())))
-            self.data.append(self.tr("Missing (NULL) values:{}".format(nulls)))
+        fieldType = self._fieldType()
+        if fieldType == NUMERIC:
+            self.values, self.data = self._numericStats(features)
+        elif fieldType == TEXT:
+            self.values, self.data = self._stringStats(features)
+        elif fieldType == DATETIME:
+            dataType = self.layer.fields().field(self.fieldName).typeName().lower()
+            self.values, self.data = self._datetimeStats(features, dataType)
+        else:
+            #self.error.emit(self.tr("Unrecognized field type."))
+            return
 
         self.calculated.emit()
 
-    def _isTextField(self):
-        idx = self.layer.fields().lookupField(self.fieldName)
-        fields = self.layer.fields()
-        if fields[idx].typeName().lower() in ["string", "varchar", "char", "text"]:
-            return True
+    def _fieldType(self):
+        field = self.layer.fields().field(self.fieldName)
+        if field.type() in (QVariant.Double, QVariant.Int, QVariant.LongLong, QVariant.UInt, QVariant.ULongLong):
+            return NUMERIC
+        elif field.type() == QVariant.String:
+            return TEXT
+        elif field.type() in (QVariant.Date, QVariant.DateTime, QVariant.Time):
+            return DATETIME
         else:
-            return False
+            return UNKNOWN
 
+    def _numericStats(self, features):
+        values = []
+        stat = QgsStatisticalSummary()
+        for f in features:
+            stat.addVariant(f[self.fieldName])
+            if f[self.fieldName]:
+                values.append(f[self.fieldName])
+        stat.finalize()
 
-class TextStatisticalSummary:
-    def __init__(self):
-        self.count = 0
-        self.nullCount = 0
-        self.variety = 0
-        self.min = -1
-        self.max = -1
-        self.mean = 0.0
-        self.data = []
+        cv = stat.stDev() / stat.mean() if stat.mean() != 0 else 0
 
-    def calculate(self, values):
-        self.data[:] = []
-        total = len(values)
-        self.variety = len(set(values))
-        first = True
-        sumLength = 0
+        data = []
+        data.append(self.tr("Count:{}".format(stat.count())))
+        data.append(self.tr("Unique values:{}".format(stat.variety())))
+        data.append(self.tr("Minimum value:{}".format(stat.min())))
+        data.append(self.tr("Maximum value:{}".format(stat.max())))
+        data.append(self.tr("Range:{}".format(stat.range())))
+        data.append(self.tr("Sum:{}".format(stat.sum())))
+        data.append(self.tr("Mean value:{}".format(stat.mean())))
+        data.append(self.tr("Median value:{}".format(stat.median())))
+        data.append(self.tr("Standard deviation:{}".format(stat.stDev())))
+        data.append(self.tr("Coefficient of Variation:{}".format(cv)))
+        data.append(self.tr("Minority (rarest occurring value):{}".format(stat.minority())))
+        data.append(self.tr("Majority (most frequently occurring value):{}".format(stat.majority())))
+        data.append(self.tr("First quartile:{}".format(stat.firstQuartile())))
+        data.append(self.tr("Third quartile:{}".format(stat.thirdQuartile())))
+        data.append(self.tr("Interquartile Range (IQR):{}".format(stat.interQuartileRange())))
+        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        return values, data
 
-        for v in values:
-            if not v:
-                self.nullCount += 1
-                continue
+    def _stringStats(self, features):
+        values = []
+        stat = QgsStringStatisticalSummary()
+        for f in features:
+            stat.addValue(f[self.fieldName])
+            if f[self.fieldName]:
+                values.append(len(f[self.fieldName]))
+        stat.finalize()
 
-            length = len(v)
-            self.data.append(length)
+        data = []
+        data.append(self.tr("Count:{}".format(stat.count())))
+        data.append(self.tr("Unique values:{}".format(stat.countDistinct())))
+        data.append(self.tr("Minimum length:{}".format(stat.minLength())))
+        data.append(self.tr("Maximum length:{}".format(stat.maxLength())))
+        data.append(self.tr("Mean length:{}".format(stat.meanLength())))
+        data.append(self.tr("Filled values:{}".format(stat.count() - stat.countMissing())))
+        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        return values, data
 
-            if first:
-                self.min = length
-                self.max = length
-                first = False
+    def _datetimeStats(self, features, dataType):
+        values = []
+        stat = QgsDateTimeStatisticalSummary()
+        for f in features:
+            stat.addValue(f[self.fieldName])
+            if f[self.fieldName]:
+                if dataType == "time":
+                    values.append(f[self.fieldName].toPyTime())
+                elif dataType == "date":
+                    values.append(f[self.fieldName].toPyDate())
+                else:
+                    values.append(f[self.fieldName].toPyDateTime())
+        stat.finalize()
 
-            if length < self.min:
-                self.min = length
-            if length > self.max:
-                self.max = length
+        data = []
+        data.append(self.tr("Count:{}".format(stat.count())))
+        data.append(self.tr("Unique values:{}".format(stat.countDistinct())))
+        data.append(self.tr("Minimum:{}".format(stat.min().toString())))
+        data.append(self.tr("Maximum:{}".format(stat.max().toString())))
+        data.append(self.tr("Range (days):{}".format(stat.range().days())))
+        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        return values, data
 
-            sumLength += length
-
-        self.count = total - self.nullCount
-        if self.count > 0:
-            self.mean = float(sumLength) / self.count
