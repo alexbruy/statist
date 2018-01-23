@@ -103,20 +103,21 @@ class StatisticsCalculator(QObject):
         data = []
         data.append(self.tr("Count:{}".format(stat.count())))
         data.append(self.tr("Unique values:{}".format(stat.variety())))
-        data.append(self.tr("Minimum value:{}".format(stat.min())))
-        data.append(self.tr("Maximum value:{}".format(stat.max())))
+        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        data.append(self.tr("Filled (not NULL) values:{}".format(stat.count() - stat.countMissing())))
+        data.append(self.tr("Minimum:{}".format(stat.min())))
+        data.append(self.tr("Maximum:{}".format(stat.max())))
         data.append(self.tr("Range:{}".format(stat.range())))
         data.append(self.tr("Sum:{}".format(stat.sum())))
-        data.append(self.tr("Mean value:{}".format(stat.mean())))
-        data.append(self.tr("Median value:{}".format(stat.median())))
+        data.append(self.tr("Mean:{}".format(stat.mean())))
+        data.append(self.tr("Median:{}".format(stat.median())))
         data.append(self.tr("Standard deviation:{}".format(stat.stDev())))
-        data.append(self.tr("Coefficient of Variation:{}".format(cv)))
-        data.append(self.tr("Minority (rarest occurring value):{}".format(stat.minority())))
-        data.append(self.tr("Majority (most frequently occurring value):{}".format(stat.majority())))
+        data.append(self.tr("Coefficient of variation:{}".format(cv)))
+        data.append(self.tr("Minority (rarest occurring):{}".format(stat.minority())))
+        data.append(self.tr("Majority (most frequently occurring):{}".format(stat.majority())))
         data.append(self.tr("First quartile:{}".format(stat.firstQuartile())))
         data.append(self.tr("Third quartile:{}".format(stat.thirdQuartile())))
-        data.append(self.tr("Interquartile Range (IQR):{}".format(stat.interQuartileRange())))
-        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        data.append(self.tr("Interquartile range (IQR):{}".format(stat.interQuartileRange())))
         return values, data
 
     def _stringStats(self, features):
@@ -131,11 +132,11 @@ class StatisticsCalculator(QObject):
         data = []
         data.append(self.tr("Count:{}".format(stat.count())))
         data.append(self.tr("Unique values:{}".format(stat.countDistinct())))
+        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        data.append(self.tr("Filled (not NULL) values:{}".format(stat.count() - stat.countMissing())))
         data.append(self.tr("Minimum length:{}".format(stat.minLength())))
         data.append(self.tr("Maximum length:{}".format(stat.maxLength())))
         data.append(self.tr("Mean length:{}".format(stat.meanLength())))
-        data.append(self.tr("Filled values:{}".format(stat.count() - stat.countMissing())))
-        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
         return values, data
 
     def _datetimeStats(self, features, dataType):
@@ -155,9 +156,10 @@ class StatisticsCalculator(QObject):
         data = []
         data.append(self.tr("Count:{}".format(stat.count())))
         data.append(self.tr("Unique values:{}".format(stat.countDistinct())))
+        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
+        data.append(self.tr("Filled (not NULL) values:{}".format(stat.count() - stat.countMissing())))
         data.append(self.tr("Minimum:{}".format(stat.min().toString())))
         data.append(self.tr("Maximum:{}".format(stat.max().toString())))
         data.append(self.tr("Range (days):{}".format(stat.range().days())))
-        data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
         return values, data
 
