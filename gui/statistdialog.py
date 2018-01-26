@@ -26,9 +26,10 @@ __copyright__ = '(C) 2009-2018, Alexander Bruy'
 __revision__ = '$Format:%H$'
 
 import os
+from datetime import datetime
 
 from qgis.PyQt import uic
-from qgis.PyQt.QtCore import Qt, QThread
+from qgis.PyQt.QtCore import Qt, QThread, QVariant
 from qgis.PyQt.QtWidgets import (QMessageBox,
                                  QDialog,
                                  QDialogButtonBox,
@@ -112,43 +113,27 @@ class StatistDialog(BASE, WIDGET):
             item = QTableWidgetItem(tmp[1])
             self.tblStatistics.setItem(i, 1, item)
 
-        #self.lstStatistics.resizeRowsToContents()
-
         self.refreshPlot()
 
         self.btnOk.setEnabled(True)
         self.btnClose.setEnabled(True)
 
     def refreshPlot(self):
-        self._resetPlot()
-
         if len(self.calculator.values) == 0:
             return
 
-        #if self.spnMinX.value() == self.spnMaxX.value():
-        #    pass
-        #else:
-        #    interval = []
-        #    if self.spnMinX.value() > self.spnMaxX.value():
-        #        interval.append(self.spnMaxX.value())
-        #        interval.append(self.spnMinX.value())
-        #    else:
-        #        interval.append(self.spnMinX.value())
-        #        interval.append(self.spnMaxX.value())
+        # use correct axis formatter
+        field = self.cmbLayer.currentLayer().fields().field(self.cmbField.currentField())
+        if field.type() == QVariant.Date:
+            values = [datetime(d.year, d.month, d.day) if d else None for d in self.calculator.values]
+        elif field.type() == QVariant.DateTime:
+            values = self.calculator.values
+        elif field.type() == QVariant.Time:
+            values = [datetime.strptime(t.isoformat(), "%H:%M:%S") if t else None for t in self.calculator.values]
+        else:
+            values = self.calculator.values
 
-        #if not self.chkAsPlot.isChecked():
-        #    self.axes.hist(self.calculator.values, 18, interval, alpha=0.5, histtype='bar')
-        #else:
-        #    n, bins, pathes = self.axes.hist(self.calculator.values, 18, interval, alpha=0.5, histtype='bar')
-        #    self.axes.clear()
-        #    c = []
-        #    for i in range(len(bins) - 1):
-        #        s = bins[i + 1] - bins[i]
-        #        c.append(bins[i] + (s / 2))
-
-        #    self.axes.plot(c, n, 'ro-')
-
-        self.mplWidget.axes.hist(self.calculator.values, "auto", alpha=0.5, histtype="bar")
+        self.mplWidget.axes.hist(values, "auto", alpha=0.5, histtype="bar", color="#006BA4")
         self.mplWidget.setXAxisCaption(self.cmbField.currentText())
         self.mplWidget.setYAxisCaption(self.tr("Count"))
         self.mplWidget.alignLabels()

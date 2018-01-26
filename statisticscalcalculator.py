@@ -146,10 +146,13 @@ class StatisticsCalculator(QObject):
             stat.addValue(f[self.fieldName])
             if f[self.fieldName]:
                 if dataType == "time":
+                    fmt = "HH:mm:ss"
                     values.append(f[self.fieldName].toPyTime())
                 elif dataType == "date":
+                    fmt = "dd.MM.yyyy"
                     values.append(f[self.fieldName].toPyDate())
                 else:
+                    fmt = "dd.MM.yyyy HH:mm:ss"
                     values.append(f[self.fieldName].toPyDateTime())
         stat.finalize()
 
@@ -158,8 +161,10 @@ class StatisticsCalculator(QObject):
         data.append(self.tr("Unique values:{}".format(stat.countDistinct())))
         data.append(self.tr("Missing (NULL) values:{}".format(stat.countMissing())))
         data.append(self.tr("Filled (not NULL) values:{}".format(stat.count() - stat.countMissing())))
-        data.append(self.tr("Minimum:{}".format(stat.min().toString())))
-        data.append(self.tr("Maximum:{}".format(stat.max().toString())))
+        data.append(self.tr("Minimum:{}".format(stat.min())))
+        data.append(self.tr("Maximum:{}".format(stat.max())))
+        data.append(self.tr("Minimum:{}".format(stat.min().toString(fmt))))
+        data.append(self.tr("Maximum:{}".format(stat.max().toString(fmt))))
         data.append(self.tr("Range (days):{}".format(stat.range().days())))
         return values, data
 

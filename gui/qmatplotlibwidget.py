@@ -5,7 +5,7 @@
     qmatplotlibwidget.py
     ---------------------
     Date                 : July 2014
-    Copyright            : (C) 2014-2017 by Alexander Bruy
+    Copyright            : (C) 2014-2018 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'July 2014'
-__copyright__ = '(C) 2014-2017, Alexander Bruy'
+__copyright__ = '(C) 2014-2018, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -42,8 +42,21 @@ class QMatplotlibCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None):
         self.parent = parent
 
-        self.figure = Figure()
+        # Typically we want plot to be ~1.33x wider than tall.
+        # Common sizes: (10, 7.5) and (12, 9)
+        self.figure = Figure(figsize=(12, 9))
+
         self.axes = self.figure.add_subplot(111)
+
+        # Remove the plot frame lines. They are unnecessary chartjunk.
+        self.axes.spines["top"].set_visible(False)
+        self.axes.spines["right"].set_visible(False)
+
+        # Ensure that the axis ticks only show up on the bottom and left
+        # of the plot. Ticks on the right and top of the plot are generally
+        # unnecessary chartjunk.
+        self.axes.get_xaxis().tick_bottom()
+        self.axes.get_yaxis().tick_left()
 
         FigureCanvasQTAgg.__init__(self, self.figure)
         FigureCanvasQTAgg.setSizePolicy(
@@ -102,13 +115,21 @@ class QMatplotlibWidget(QWidget):
 
     def clear(self):
         self.axes.clear()
+        if self.actionToggleGrid.isChecked():
+            self.axes.grid()
         self.canvas.draw()
 
     def setTitle(self, text):
-        self.axes.set_title(text)
+        self.axes.set_title(text, fontsize=22)
 
     def setXAxisCaption(self, text):
-        self.axes.set_xlabel(text)
+        self.axes.set_xlabel(text, fontsize=16)
 
     def setYAxisCaption(self, text):
-        self.axes.set_ylabel(text)
+        self.axes.set_ylabel(text, fontsize=16)
+
+    def setXLimit(self, minimum, maximum):
+        self.axes.xlim(minimum, maximum)
+
+    def setYLimit(self, minimum, maximum):
+        self.axes.ylim(minimum, maximum)
