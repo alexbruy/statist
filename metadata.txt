@@ -3,7 +3,7 @@ name=Statist
 description=Calculate and show statistics for a field
 about=Calculate and show statistics on any (numeric or string) field of vector layer and shows frequency distribution histogram. Needs matplotlib >= 1.4.0 to work.
 category=Vector
-version=2.0
+version=3.0
 qgisMinimumVersion=3.0
 
 author=Alexander Bruy
@@ -17,5 +17,5 @@ homepage=https://github.com/alexbruy/statist
 tracker=https://github.com/alexbruy/statist/issues
 repository=https://github.com/alexbruy/statist
 
-experimental=False
+experimental=True
 deprecated=False
